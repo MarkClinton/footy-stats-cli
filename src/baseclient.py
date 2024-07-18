@@ -2,6 +2,7 @@
 # Basically anything needed to call the API
 
 import requests
+import io
 
 class BaseClient:
     """
@@ -21,6 +22,13 @@ class BaseClient:
             "X-Auth-Token": self.key
         }
 
-    def load_key():
-        pass
+    def load_key(self):
+        path = ".env.default"
+        try:
+            with io.open(path) as stream:
+                for line in stream:
+                    key = line.split('=')
+                    return key[1].strip()
+        except IOError as e:
+            print(e)
 
