@@ -8,4 +8,4 @@ class Main():
     def __init__(self) -> None:
 
         client = APIClient()
-        client.competitions.getCompetitionList()
+        print(client.sample_request())
