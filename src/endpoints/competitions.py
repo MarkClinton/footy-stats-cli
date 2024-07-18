@@ -4,4 +4,6 @@
 from .baseendpoint import BaseEndPoint
 
 class Competitions(BaseEndPoint):
-    pass
+    
+    def getCompetitionList(self):
+        print("getting competition list....")

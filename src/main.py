@@ -6,4 +6,7 @@ from .apiclient import APIClient
 class Main():
     
     def __init__(self) -> None:
-        print("hello")
+        print("Main")
+
+        client = APIClient()
+        client.competitions.getCompetitionList()

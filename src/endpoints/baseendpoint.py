@@ -7,4 +7,7 @@ from ..baseclient import BaseClient
 
 
 class BaseEndPoint(BaseClient):
-    pass
+    
+    def __init__(self) -> None:
+        self.client = BaseClient
+    
