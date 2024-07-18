@@ -12,5 +12,7 @@ class BaseClient:
         pass
         # Declare anything needed for the API to fundtion e.g locale, headers etc
 
-    def helloFromBase(self):
-        print("Hello From Base Client")
+    def request_header(self):
+        return {
+            "X-Auth-Token": "API_Token"
+        }
