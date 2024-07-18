@@ -8,11 +8,18 @@ class BaseClient:
     Base API Client that handles the neccessary functionality to call the API
     """
 
+    BASE_URL = "https://api.football-data.org/"
+    VERSION = "v4"
+
     def __init__(self):
-        pass
-        # Declare anything needed for the API to fundtion e.g locale, headers etc
+        self.url = self.BASE_URL + self.VERSION
+        
 
     def request_header(self):
         return {
-            "X-Auth-Token": "API_Token"
+            "X-Auth-Token": self.get_key()
         }
+
+    def get_key():
+        pass
+
