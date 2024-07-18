@@ -13,13 +13,14 @@ class BaseClient:
 
     def __init__(self):
         self.url = self.BASE_URL + self.VERSION
+        self.key = self.load_key()
         
 
     def request_header(self):
         return {
-            "X-Auth-Token": self.get_key()
+            "X-Auth-Token": self.key
         }
 
-    def get_key():
+    def load_key():
         pass
 
