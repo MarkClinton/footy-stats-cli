@@ -12,6 +12,5 @@ class APIClient(BaseClient):
     
     def __init__(self) -> None:
         super().__init__()
-        print ("API Client")
 
         self.competitions = endpoints.Competitions()
