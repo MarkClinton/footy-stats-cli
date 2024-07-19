@@ -11,7 +11,7 @@ class APIClient(BaseClient):
     for the API such as filters. 
     """
     
-    def __init__(self) -> None:
+    def __init__(self):
         """
         Doesnt accept anything now. But in the future it can accept filters for 
         API

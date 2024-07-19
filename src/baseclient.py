@@ -28,8 +28,4 @@ class BaseClient:
         return os.getenv(self.SECRET_KEY_NAME)
         # Should handle this better if the secret key is not found
 
-    def sample_request(self):
-        r = requests.get(f'{self.url}/competitions', headers=self.header)
-        return r
-
 
