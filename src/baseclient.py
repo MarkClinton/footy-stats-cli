@@ -9,7 +9,7 @@ class BaseClient:
     """
     Base API Client that handles the neccessary functionality to call the API.
     """
-
+    SECRET_KEY_NAME = "FOOTBALL_DATA_API_KEY"
     BASE_URL = "https://api.football-data.org/"
     VERSION = "/v4"
 
@@ -26,7 +26,7 @@ class BaseClient:
 
     def load_key(self):
         load_dotenv()
-        return os.getenv("FOOTBALL_DATA_API_KEY")
+        return os.getenv(self.SECRET_KEY_NAME)
 
     def sample_request(self):
         r = requests.get(f'{self.url}/competitions/PL/', headers=self.header)
