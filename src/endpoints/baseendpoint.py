@@ -21,10 +21,9 @@ class BaseEndPoint(BaseClient):
         return response
     
     @staticmethod
-    def process_response(response, name):
-        # This should just create a list of dicts with the data needed
-        r = response.json().get(name)
-
-        for i in range(len(r)):
-            print(r[i]["name"])
+    def process_response(response, data):
+        """
+        Accepts response data and the name of the object we want data for 
+        """
+        return response.json().get(data)
         
