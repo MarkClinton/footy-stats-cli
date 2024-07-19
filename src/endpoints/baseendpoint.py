@@ -10,7 +10,8 @@ from ..baseclient import BaseClient
 class BaseEndPoint(BaseClient):
     """
     BaseEndPoint() class handles all operations relating to fetching data. It
-    uses the BaseClient as the parent to fetch the credentials and url to call.
+    uses the BaseClient as the parent to fetch the header and url to build the 
+    request.
     """
     
     def __init__(self):
