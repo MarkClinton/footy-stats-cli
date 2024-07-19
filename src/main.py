@@ -4,6 +4,13 @@
 from .apiclient import APIClient
 
 class Main():
+
+    """
+    Main() class that handles the app logic. Displaying data, fetching data
+    and showing menu items.
+
+    Creates a new APIClient when intialized.
+    """
     
     def __init__(self) -> None:
 

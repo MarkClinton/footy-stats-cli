@@ -6,7 +6,7 @@ import io
 
 class BaseClient:
     """
-    Base API Client that handles the neccessary functionality to call the API
+    Base API Client that handles the neccessary functionality to call the API.
     """
 
     BASE_URL = "https://api.football-data.org/"

@@ -4,6 +4,9 @@
 from .baseendpoint import BaseEndPoint
 
 class Competitions(BaseEndPoint):
-    
+    """
+    Competitions() class handles fetching all Competition data. Uses 
+    BaseEndPoint as the parent to call the neccessary request functions.
+    """
     def getCompetitionList(self):
         print("getting competition list....")
