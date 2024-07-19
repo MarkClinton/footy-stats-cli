@@ -12,7 +12,7 @@ class Main():
     Creates a new APIClient when intialized.
     """
     
-    def __init__(self) -> None:
+    def __init__(self):
 
         client = APIClient()
-        print(client.sample_request())
+        print(client.competitions.getCompetitionList())

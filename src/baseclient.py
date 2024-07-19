@@ -17,7 +17,6 @@ class BaseClient:
         self.url = self.BASE_URL + self.VERSION
         self.key = self.load_key()
         self.header = self.request_header()
-        
 
     def request_header(self):
         return {
@@ -27,9 +26,10 @@ class BaseClient:
     def load_key(self):
         load_dotenv()
         return os.getenv(self.SECRET_KEY_NAME)
+        # Should handle this better if the secret key is not found
 
     def sample_request(self):
-        r = requests.get(f'{self.url}/competitions/PL/', headers=self.header)
+        r = requests.get(f'{self.url}/competitions', headers=self.header)
         return r
 
 

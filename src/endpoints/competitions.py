@@ -8,5 +8,9 @@ class Competitions(BaseEndPoint):
     Competitions() class handles fetching all Competition data. Uses 
     BaseEndPoint as the parent to call the neccessary request functions.
     """
+
+    COMPETITIONS_ENDPOINT = "/competitions"
+
     def getCompetitionList(self):
-        print("getting competition list....")
+        response = self.request(self.COMPETITIONS_ENDPOINT)
+        return response

@@ -3,6 +3,7 @@
 # Deals with the getting qand processing of the data
 # It uses BaseClient as the parent class to get headers for the request
 
+import requests
 from ..baseclient import BaseClient
 
 
@@ -12,6 +13,11 @@ class BaseEndPoint(BaseClient):
     uses the BaseClient as the parent to fetch the credentials and url to call.
     """
     
-    def __init__(self) -> None:
-        self.client = BaseClient
+    def __init__(self):
+        super().__init__()
+
+    def request(self, endpoint):
+        
+        r = requests.get(f'{self.url}{endpoint}', headers=self.header)
+        return r
     
