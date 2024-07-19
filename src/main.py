@@ -15,4 +15,4 @@ class Main():
     def __init__(self):
 
         client = APIClient()
-        print(client.competitions.getCompetitionList())
+        client.competitions.getCompetitionsList()

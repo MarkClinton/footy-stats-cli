@@ -17,7 +17,14 @@ class BaseEndPoint(BaseClient):
         super().__init__()
 
     def request(self, endpoint):
-        
-        r = requests.get(f'{self.url}{endpoint}', headers=self.header)
-        return r
+        response = requests.get(f'{self.url}{endpoint}', headers=self.header)
+        return response
     
+    @staticmethod
+    def process_response(response, name):
+        # This should just create a list of dicts with the data needed
+        r = response.json().get(name)
+
+        for i in range(len(r)):
+            print(r[i]["name"])
+        

@@ -11,6 +11,6 @@ class Competitions(BaseEndPoint):
 
     COMPETITIONS_ENDPOINT = "/competitions"
 
-    def getCompetitionList(self):
+    def getCompetitionsList(self):
         response = self.request(self.COMPETITIONS_ENDPOINT)
-        return response
+        self.process_response(response, "competitions")
