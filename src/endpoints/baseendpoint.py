@@ -7,18 +7,18 @@ import requests
 from ..baseclient import BaseClient
 
 
-class BaseEndPoint(BaseClient):
+class BaseEndPoint:
     """
     BaseEndPoint() class handles all operations relating to fetching data. It
     uses the BaseClient as the parent to fetch the header and url to build the 
     request.
     """
     
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent: BaseClient):
+        self.client = parent
 
     def request(self, endpoint):
-        response = requests.get(f'{self.url}{endpoint}', headers=self.header)
+        response = requests.get(f'{self.client.url}{endpoint}{self.client.league}', headers=self.client.header)
         return response
     
     @staticmethod

@@ -11,7 +11,8 @@ class APIClient(BaseClient):
     for the API such as filters. 
     """
     
-    def __init__(self):
-        super().__init__()
+    def __init__(self, league):
+        self.league = league
+        super().__init__(league)
 
-        self.competitions = endpoints.Competitions()
+        self.competitions = endpoints.Competitions(self)

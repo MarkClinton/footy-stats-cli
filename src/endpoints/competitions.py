@@ -16,9 +16,8 @@ class Competitions(BaseEndPoint):
         response = self.request(self.BASE_COMPETITIONS_ENDPOINT)
         return(self.process_response(response, "competitions"))
     
-    def get_competition_seasons(self, league):
-        adjusted_endpoint = f'{self.BASE_COMPETITIONS_ENDPOINT}{league}'
-        response = self.request(adjusted_endpoint)
+    def get_competition_seasons(self):
+        response = self.request(self.BASE_COMPETITIONS_ENDPOINT)
         return(self.clean_season_list(self.process_response(response, "seasons")))
         
     @staticmethod
@@ -29,6 +28,6 @@ class Competitions(BaseEndPoint):
         for i in range(amount):
             start_year = datetime.strptime(season_data[i]["startDate"], '%Y-%m-%d').year
             end_year =  datetime.strptime(season_data[i]["endDate"], '%Y-%m-%d').year
-            seasons.append({'year': start_year, 'season': f'{start_year}/{end_year}'})
+            seasons.append({'year': start_year, 'name': f'{start_year}/{end_year}'})
             
         return seasons
