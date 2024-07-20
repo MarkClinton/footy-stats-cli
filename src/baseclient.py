@@ -13,11 +13,12 @@ class BaseClient:
     BASE_URL = "https://api.football-data.org/"
     VERSION = "/v4"
 
-    def __init__(self, league: None):
+    def __init__(self, league: None, season: None):
         self.url = self.BASE_URL + self.VERSION 
         self.key = self.load_key()
         self.header = self.request_header()
         self.league = league
+        self.season = f'season={season}'
 
     def request_header(self):
         return {
