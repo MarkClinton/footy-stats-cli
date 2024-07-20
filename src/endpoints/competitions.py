@@ -24,8 +24,11 @@ class Competitions(BaseEndPoint):
     @staticmethod
     def clean_season_list(season_data):
         seasons = []
-        for i in range(len(season_data)):
+        amount = len(season_data) if len(season_data) < 10 else 10
+
+        for i in range(amount):
             start_year = datetime.strptime(season_data[i]["startDate"], '%Y-%m-%d').year
             end_year =  datetime.strptime(season_data[i]["endDate"], '%Y-%m-%d').year
             seasons.append({start_year: f'{start_year}/{end_year}'})
+            
         return seasons
