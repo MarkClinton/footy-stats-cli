@@ -29,6 +29,6 @@ class Competitions(BaseEndPoint):
         for i in range(amount):
             start_year = datetime.strptime(season_data[i]["startDate"], '%Y-%m-%d').year
             end_year =  datetime.strptime(season_data[i]["endDate"], '%Y-%m-%d').year
-            seasons.append({start_year: f'{start_year}/{end_year}'})
+            seasons.append({'year': start_year, 'season': f'{start_year}/{end_year}'})
             
         return seasons
