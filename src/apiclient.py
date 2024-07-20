@@ -15,4 +15,8 @@ class APIClient(BaseClient):
         self.league = league
         super().__init__(league)
 
+        # Pass the instance of APIClient to the Competitions class. Provides
+        # a reference of the instance allowing Competitions() to interact with 
+        # it.
         self.competitions = endpoints.Competitions(self)
+    

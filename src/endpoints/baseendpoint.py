@@ -15,6 +15,9 @@ class BaseEndPoint:
     """
     
     def __init__(self, parent: BaseClient):
+        # When APIClient class creates an instanse of BaseEndPoint (Competitions)
+        # it passes an instance of itself and we set self.client to the instance
+        # of BaseClient 
         self.client = parent
 
     def request(self, endpoint):
@@ -24,7 +27,7 @@ class BaseEndPoint:
     @staticmethod
     def process_response(response, data):
         """
-        Accepts response data and the name of the object we want data for 
+        Accepts response data and the name we want data for 
         """
         return response.json().get(data)
         

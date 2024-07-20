@@ -13,10 +13,12 @@ class Main():
     """
     
     def __init__(self):
+        print("Main")
 
-        client = APIClient('PL')
+        client = APIClient("PL")
         # print(client.competitions.get_competitions_list())
-        seasons = client.competitions.get_competition_seasons()
+        # seasons = client.competitions.get_competition_seasons()
+        # print(seasons)
         
         
         
