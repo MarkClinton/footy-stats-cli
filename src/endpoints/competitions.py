@@ -29,9 +29,14 @@ class Competitions(BaseEndPoint):
         teams = []
 
         for i in range(len(team_data)):
-            team = team_data[i]["name"]
+            team = {
+                "Team": team_data[i]["name"],
+                "Founded": team_data[i]["founded"],
+                "Stadium": team_data[i]["venue"],
+                "Current Manager": team_data[i]["coach"]["name"]
+            }
             teams.append(team)
-            
+
         return teams
 
     @staticmethod
