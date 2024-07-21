@@ -22,8 +22,18 @@ class Competitions(BaseEndPoint):
     
     def get_competition_teams(self):
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return(self.process_response(response, "teams"))
-        
+        return(self.clean_team_list(self.process_response(response, "teams")))
+
+    @staticmethod
+    def clean_team_list(team_data):
+        teams = []
+
+        for i in range(len(team_data)):
+            team = team_data[i]["name"]
+            teams.append(team)
+            
+        return teams
+
     @staticmethod
     def clean_season_list(season_data):
         seasons = []

@@ -17,7 +17,7 @@ class Main():
         client = APIClient("PL", "2023")
         
         teams = client.competitions.get_competition_teams()
-        # print(teams)
+        print(teams)
 
         client2 = APIClient("PL")
         # print(client.competitions.get_competition_seasons())
