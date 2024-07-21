@@ -20,9 +20,13 @@ class BaseEndPoint:
         # of BaseClient 
         self.client = parent
 
-    def request(self, endpoint):
-        # Need a better way to build urls when they include params
-        response = requests.get(f'{self.client.url}{endpoint}{self.client.league}/teams?{self.client.season}', headers=self.client.header)
+    def request(self, resource, subresource=None):
+        if(subresource):
+            uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+        else:
+            uri = (f'{self.client.url}{resource}/{self.client.league}')
+
+        response = requests.get(uri, headers=self.client.header, params=self.client.params)
         return response
     
     @staticmethod

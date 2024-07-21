@@ -10,18 +10,18 @@ class Competitions(BaseEndPoint):
     BaseEndPoint as the parent to call the neccessary request functions.
     """
 
-    BASE_COMPETITIONS_ENDPOINT = "/competitions/"
+    BASE_COMPETITIONS_RESOURCE = "competitions"
 
     def get_competitions_list(self):
-        response = self.request(self.BASE_COMPETITIONS_ENDPOINT)
+        response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.process_response(response, "competitions"))
     
     def get_competition_seasons(self):
-        response = self.request(self.BASE_COMPETITIONS_ENDPOINT)
+        response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.clean_season_list(self.process_response(response, "seasons")))
     
     def get_competition_teams(self):
-        response = self.request(self.BASE_COMPETITIONS_ENDPOINT)
+        response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         return(self.process_response(response, "teams"))
         
     @staticmethod

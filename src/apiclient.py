@@ -11,7 +11,7 @@ class APIClient(BaseClient):
     for the API such as filters. 
     """
     
-    def __init__(self, league, season):
+    def __init__(self, league, season=None):
         self.league = league
         self.season = season
         super().__init__(league, season)
