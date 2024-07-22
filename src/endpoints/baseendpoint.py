@@ -21,13 +21,15 @@ class BaseEndPoint:
         self.client = parent
 
     def request(self, resource, subresource=None):
-        if(subresource):
-            # uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
-            uri = f'{self.client.url}{resource}/{subresource}'
-        else:
-            uri = (f'{self.client.url}{resource}/{self.client.league}')
-
-        response = requests.get(uri, headers=self.client.header, params=self.client.params)
+        # if(subresource):
+        #     if(resource == "teams/57"):
+        #         uri = f'{self.client.url}{resource}/{subresource}'
+        #     else:
+        #         uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+        # else:
+        #     uri = (f'{self.client.url}{resource}/{self.client.league}')
+        uri, params = self.url_builder(resource, subresource)
+        response = requests.get(uri, headers=self.client.header, params=params)
         return response
     
     @staticmethod
@@ -36,4 +38,19 @@ class BaseEndPoint:
         Accepts response data and the name we want data for 
         """
         return response.json().get(data)
+    
+    def url_builder(self, resource, subresource):
+        # team will be replaced in the future with a BaseClient attribute
+        team = 57
+        params = {}
+        params["season"] = self.client.season
+        match(resource):
+            case "teams":
+                uri = f'{self.client.url}{resource}/{team}/{subresource}'
+                params["competition"] = self.client.league
+            case "competitions":
+                uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+
+        return [uri, params]
+
         

@@ -10,11 +10,10 @@ class Teams(BaseEndPoint):
     the parent to call the neccessary request functions.
     """
     
-    BASE_TEAMS_RESOURCE = "teams/57"
+    BASE_TEAMS_RESOURCE = "teams"
 
     def get_teams_matches(self):
         response = self.request(self.BASE_TEAMS_RESOURCE, "matches")
-        print (response.url)
         return(self.clean_matches_list(self.process_response(response, "matches")))
         
     @staticmethod
