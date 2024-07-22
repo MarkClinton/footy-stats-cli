@@ -45,6 +45,8 @@ class Competitions(BaseEndPoint):
                 "Goal Difference": s["goalDifference"]
             }
             standings.append(standing)
+        # Sort list of dict items in descending order with respect to Points value
+        list(sorted(standings, key=lambda x: x['Points'], reverse=True))
         return standings
 
     @staticmethod
