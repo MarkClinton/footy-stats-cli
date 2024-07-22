@@ -35,8 +35,10 @@ class BaseEndPoint:
                 uri = f'{self.client.url}{resource}/{team}/{subresource}'
                 params["competition"] = self.client.league
             case "competitions":
-                uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
-
+                if (subresource):
+                    uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+                else:
+                    uri = f'{self.client.url}{resource}/{self.client.league}'
         return [uri, params]
 
     @staticmethod
