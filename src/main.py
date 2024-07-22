@@ -16,12 +16,14 @@ class Main():
 
         client = APIClient("PL", "2020")
         
-        teams = client.competitions.get_competition_teams()
-        for i in teams:
+        # teams = client.competitions.get_competition_teams()
+        # for i in teams:
+        #     print(i)
+
+        standings = client.competitions.get_competition_standings()
+        for i in standings:
             print(i)
 
-        client2 = APIClient("PL")
-        # print(client.competitions.get_competition_seasons())
         
         
         
