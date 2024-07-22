@@ -13,12 +13,15 @@ class BaseClient:
     VERSION = "v4"
 
     def __init__(self, league, season=None, team=None):
-        self.url = f'{self.BASE_URL}/{self.VERSION}/'
         self.key = self.load_key()
         self.header = self.request_header()
         self.league = league
         self.season = season
         self.team = team
+
+    @property
+    def url(self):
+        return f'{self.BASE_URL}/{self.VERSION}/'
 
     def request_header(self):
         return {
