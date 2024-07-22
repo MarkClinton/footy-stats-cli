@@ -20,8 +20,8 @@ class Main():
         # for i in teams:
         #     print(i)
 
-        standings = client.competitions.get_competition_standings()
-        for i in standings:
+        test = client.competitions.get_competition_goalscorers()
+        for i in test:
             print(i)
 
         

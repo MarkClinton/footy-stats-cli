@@ -27,6 +27,26 @@ class Competitions(BaseEndPoint):
     def get_competition_standings(self):
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
         return(self.clean_standings_list(self.process_response(response, "standings")))
+    
+    def get_competition_goalscorers(self):
+        response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
+        return(self.clean_scorers_list(self.process_response(response, "scorers")))
+    
+    @staticmethod
+    def clean_scorers_list(scorers_data):
+        scorers = []
+
+        for s in scorers_data:
+            scorer = {
+                "Name": s["player"]["name"],
+                "Team": s["team"]["name"],
+                "Matches Played": s["playedMatches"],
+                "Goals": s["goals"],
+                "Assists": s["assists"],
+                "Penalties": s["penalties"]
+            }
+            scorers.append(scorer)
+        return scorers
 
     @staticmethod
     def clean_standings_list(standings_data):
