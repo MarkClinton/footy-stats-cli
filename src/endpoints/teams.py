@@ -1,7 +1,6 @@
 # This is a class that will get the Team data 
 # Only deals with the info needed to call the team endpoint
 
-from datetime import datetime
 from .baseendpoint import BaseEndPoint
 from .mixin import Mixin
 
