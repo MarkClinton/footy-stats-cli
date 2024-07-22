@@ -22,7 +22,8 @@ class BaseEndPoint:
 
     def request(self, resource, subresource=None):
         if(subresource):
-            uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+            # uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+            uri = f'{self.client.url}{resource}/{subresource}'
         else:
             uri = (f'{self.client.url}{resource}/{self.client.league}')
 

@@ -20,4 +20,5 @@ class APIClient(BaseClient):
         # a reference of the instance allowing Competitions() to interact with 
         # it.
         self.competitions = endpoints.Competitions(self)
+        self.teams = endpoints.Teams(self)
     

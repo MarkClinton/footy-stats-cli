@@ -20,7 +20,7 @@ class Main():
         # for i in teams:
         #     print(i)
 
-        test = client.competitions.get_competition_matches()
+        test = client.teams.get_teams_matches()
         for i in test:
             print(i)
 
