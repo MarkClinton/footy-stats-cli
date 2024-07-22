@@ -39,13 +39,13 @@ class Main():
             print(i)
 
         print("\n---------------\n")
-
+        client.league = "BSA"
         comp_matches = client.competitions.get_competition_matches()
         for i in comp_matches:
             print(i)
 
         print("\n---------------\n")
-
+        client.team = 1044
         matches = client.teams.get_teams_matches()
         for i in matches:
             print(i)

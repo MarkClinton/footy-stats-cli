@@ -12,9 +12,6 @@ class APIClient(BaseClient):
     """
     
     def __init__(self, league, season=None, team=None):
-        self.league = league
-        self.season = season
-        self.team = team
         super().__init__(league, season, team)
 
         # Pass the instance of APIClient to the Competitions class. Provides
@@ -22,4 +19,28 @@ class APIClient(BaseClient):
         # it.
         self.competitions = endpoints.Competitions(self)
         self.teams = endpoints.Teams(self)
+
+        @property
+        def league(self):
+            return self.league
+
+        @league.setter
+        def league(self, league):
+            self.league = league 
+
+        @property
+        def season(self):
+            return self.season
+
+        @season.setter
+        def season(self, season):
+            self.season = season 
+        
+        @property
+        def team(self):
+            return self.team
+
+        @team.setter
+        def team(self, team):
+            self.team = team 
     
