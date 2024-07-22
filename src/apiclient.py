@@ -11,10 +11,11 @@ class APIClient(BaseClient):
     for the API such as filters. 
     """
     
-    def __init__(self, league, season=None):
+    def __init__(self, league, season=None, team=None):
         self.league = league
         self.season = season
-        super().__init__(league, season)
+        self.team = team
+        super().__init__(league, season, team)
 
         # Pass the instance of APIClient to the Competitions class. Provides
         # a reference of the instance allowing Competitions() to interact with 

@@ -26,13 +26,11 @@ class BaseEndPoint:
         return response
     
     def url_builder(self, resource, subresource):
-        # team will be replaced in the future with a BaseClient attribute
-        team = 57
         params = {}
         params["season"] = self.client.season
         match(resource):
             case "teams":
-                uri = f'{self.client.url}{resource}/{team}/{subresource}'
+                uri = f'{self.client.url}{resource}/{self.client.team}/{subresource}'
                 params["competition"] = self.client.league
             case "competitions":
                 if (subresource):

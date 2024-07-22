@@ -14,7 +14,7 @@ class Main():
     
     def __init__(self):
 
-        client = APIClient("PL", "2023")
+        client = APIClient("PL", "2023", 57)
         
         seasons = client.competitions.get_competition_seasons()
         for i in seasons:
