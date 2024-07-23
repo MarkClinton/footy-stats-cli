@@ -13,7 +13,7 @@ class BaseClient:
     BASE_URL = "https://api.football-data.org/"
     VERSION = "v4"
 
-    def __init__(self, league=None, season=None, team=None):
+    def __init__(self, league: str=None, season: str=None, team: int=None):
         """
         Initialise the BaseClient with optional leage, season and team data.
 

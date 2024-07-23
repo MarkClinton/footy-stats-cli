@@ -11,7 +11,7 @@ class APIClient(BaseClient):
     for the API such as league, season and team. 
     """
     
-    def __init__(self, league, season=None, team=None):
+    def __init__(self, league: str, season: str=None, team: int=None):
         """
         Initialize the APIClient with a league to start. Optional for season and
         team.
