@@ -4,6 +4,7 @@
 import os
 from dotenv import load_dotenv
 
+
 class BaseClient:
     """
     Base API Client that handles the neccessary functionality to call the API.
@@ -70,5 +71,3 @@ class BaseClient:
         load_dotenv()
         return os.getenv(self.SECRET_KEY_NAME)
         # Should handle this better if the secret key is not found
-
-

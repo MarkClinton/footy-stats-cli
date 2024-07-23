@@ -1,10 +1,12 @@
-# The main file that deals with the overall running of the app.
-# Instantiates a new APIClient to which we can call all endpoints
+"""
+The main file that deals with the overall running of the app.
+Instantiates a new APIClient to which we can call all endpoints
+"""
 
 from .apiclient import APIClient
 
-class Main():
 
+class Main():
     """
     Main() class that handles the app logic. Displaying data, fetching data
     and showing menu items.
@@ -59,7 +61,3 @@ class Main():
         matches = client.teams.get_teams_matches()
         for i in matches:
             print(i)
-
-        
-        
-        

@@ -1,9 +1,12 @@
-# This is a class that will get the competition data 
-# Only deals with the info needed to call the competitions endpoint
+"""
+This is a class that will get the competition data 
+Only deals with the info needed to call the competitions endpoint
+"""
 
 from datetime import datetime
 from .baseendpoint import BaseEndPoint
 from .mixin import Mixin
+
 
 class Competitions(BaseEndPoint, Mixin):
     """
@@ -14,52 +17,54 @@ class Competitions(BaseEndPoint, Mixin):
     BASE_COMPETITIONS_RESOURCE = "competitions"
 
     def get_competitions_list(self):
-        """ 
-        Get a list of competitions availables 
-        """
+        """ Get a list of competitions availables """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
-        return(self.process_response(response, "competitions"))
+        return(
+            self.process_response(response, "competitions")
+        )
     
     def get_competition_seasons(self) -> list:
-        """ 
-        Get a list of seasons available for a competition
-        """
+        """  Get a list of seasons available for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
-        return(self.clean_season_list(self.process_response(response, "seasons")))
+        return(
+            self.clean_season_list(self.process_response(response, "seasons"))
+        )
     
     def get_competition_teams(self) -> list:
-        """ 
-        Get a list of teams that take part in a competition
-        """
+        """ Get a list of teams that take part in a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return(self.clean_team_list(self.process_response(response, "teams")))
+        return(
+            self.clean_team_list(self.process_response(response, "teams"))
+        )
     
     def get_competition_standings(self) -> list:
-        """ 
-        Get the league table for a competition 
-        """
+        """ Get the league table for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
-        return(self.clean_standings_list(self.process_response(response, "standings")))
+        return(
+            self.clean_standings_list(
+                self.process_response(response, "standings")
+            )
+        )
     
     def get_competition_goalscorers(self) -> list:
-        """ 
-        Get the top 10 goalscorers for a season 
-        """
+        """ Get the top 10 goalscorers for a season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
-        return(self.clean_scorers_list(self.process_response(response, "scorers")))
-    
+        return(
+            self.clean_scorers_list(self.process_response(response, "scorers"))
+        )
+
     def get_competition_matches(self) -> list:
-        """ 
-        Get all matches for a competition for a certain season 
-        """
+        """ Get all matches for a competition for a certain season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
-        return(self.clean_matches_list(self.process_response(response, "matches")))
+        return(
+            self.clean_matches_list(self.process_response(response, "matches"))
+        )
 
     @staticmethod
     def clean_scorers_list(scorers_data: list) -> list:

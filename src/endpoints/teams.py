@@ -4,6 +4,7 @@
 from .baseendpoint import BaseEndPoint
 from .mixin import Mixin
 
+
 class Teams(BaseEndPoint, Mixin):
     """
     Teams() class handles fetching all Teams data. It inherits BaseEndPoint as 
@@ -13,10 +14,9 @@ class Teams(BaseEndPoint, Mixin):
     BASE_TEAMS_RESOURCE = "teams"
 
     def get_teams_matches(self) -> list:
-        """ 
-        Get a list of all matches a team played in a given season 
-        """
+        """ Get a list of all matches a team played in a given season """
 
         response = self.request(self.BASE_TEAMS_RESOURCE, "matches")
-        return(self.clean_matches_list(self.process_response(response, "matches")))
-        
+        return(
+            self.clean_matches_list(self.process_response(response, "matches"))
+        )

@@ -21,7 +21,7 @@ class BaseEndPoint:
         :param parent: BaseClient class 
         """
         self.client = parent
-        # When APIClient class creates an instanse of BaseEndPoint (Competitions)
+        # When APIClient class creates an instanse of BaseEndPoint(Competitions)
         # it passes an instance of itself and we set self.client to the instance
         # of BaseClient 
 
@@ -48,11 +48,13 @@ class BaseEndPoint:
         params["season"] = self.client.season
         match(resource):
             case "teams":
-                uri = f'{self.client.url}{resource}/{self.client.team}/{subresource}'
+                uri = f'{self.client.url}{resource}/{self.client.team}
+                        /{subresource}'
                 params["competition"] = self.client.league
             case "competitions":
                 if (subresource):
-                    uri = f'{self.client.url}{resource}/{self.client.league}/{subresource}'
+                    uri = f'{self.client.url}{resource}/{self.client.league}
+                            /{subresource}'
                 else:
                     uri = f'{self.client.url}{resource}/{self.client.league}'
         return [uri, params]
