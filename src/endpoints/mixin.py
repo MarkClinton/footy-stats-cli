@@ -2,7 +2,16 @@ from datetime import datetime
 
 class Mixin():
 
+    """
+    A mixin class to handle common methods between endpoints
+    """
+
     def clean_matches_list(self, match_data):
+        """
+        Cleans the match data and pulls the necessary information
+
+        :param match_data: JSON object to retrieve data from
+        """
         matches = []
 
         for m in match_data:

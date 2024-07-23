@@ -15,17 +15,35 @@ class BaseEndPoint:
     """
     
     def __init__(self, parent: BaseClient):
+        """
+        Initialize the BaseEndPoint class with the BaseClient as an attribute
+
+        :param parent: BaseClient class 
+        """
+        self.client = parent
         # When APIClient class creates an instanse of BaseEndPoint (Competitions)
         # it passes an instance of itself and we set self.client to the instance
         # of BaseClient 
-        self.client = parent
 
     def request(self, resource, subresource=None):
+        """ 
+        Request and fetch data from the endpoint 
+        
+        :param resource: The endpoint to fetch data from
+        :param subresource: the name of the object in the json response
+        """
         uri, params = self.url_builder(resource, subresource)
         response = requests.get(uri, headers=self.client.header, params=params)
         return response
     
     def url_builder(self, resource, subresource):
+        """
+        Dynamically build the request needed to fetch data
+
+        :param resource: The endpoint to fetch data from
+        :param subresource: the name of the object in the json response
+        """
+        
         params = {}
         params["season"] = self.client.season
         match(resource):
@@ -42,6 +60,9 @@ class BaseEndPoint:
     @staticmethod
     def process_response(response, data):
         """
-        Accepts response data and the name we want data for 
+        Get the JSON() repsonse data
+
+        :param response: The response from the request
+        :param data: the object in the JSON 
         """
         return response.json().get(data)

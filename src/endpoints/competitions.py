@@ -14,26 +14,32 @@ class Competitions(BaseEndPoint, Mixin):
     BASE_COMPETITIONS_RESOURCE = "competitions"
 
     def get_competitions_list(self):
+        """ Get a list of competitions availables """
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.process_response(response, "competitions"))
     
     def get_competition_seasons(self):
+        """ Get a list of seasons available for a competition"""
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.clean_season_list(self.process_response(response, "seasons")))
     
     def get_competition_teams(self):
+        """ Get a list of teams that take part in a competition"""
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         return(self.clean_team_list(self.process_response(response, "teams")))
     
     def get_competition_standings(self):
+        """ Get the league table for a competition """
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
         return(self.clean_standings_list(self.process_response(response, "standings")))
     
     def get_competition_goalscorers(self):
+        """ Get the top 10 goalscorers for a season """
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
         return(self.clean_scorers_list(self.process_response(response, "scorers")))
     
     def get_competition_matches(self):
+        """ Get all matches for a competition for a certain season """
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
         return(self.clean_matches_list(self.process_response(response, "matches")))
 
