@@ -51,9 +51,6 @@ class BaseClient:
     
     @property
     def header(self):
-        return self.request_header()
-
-    def request_header(self):
         return {
             'X-Auth-Token': self.key
         }
