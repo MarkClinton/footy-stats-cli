@@ -107,7 +107,7 @@ class Competitions(BaseEndPoint, Mixin):
             }
             standings.append(standing)
         # Sort list of dict items in descending order with respect to Points value
-        list(sorted(standings, key=lambda x: x['Points'], reverse=True))
+        sorted(standings, key=lambda x: x['Points'], reverse=True)
         return standings
 
     @staticmethod
