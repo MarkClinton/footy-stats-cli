@@ -7,18 +7,30 @@ from dotenv import load_dotenv
 class BaseClient:
     """
     Base API Client that handles the neccessary functionality to call the API.
+    Holds common attrinbutes and methods to make requests.
     """
     SECRET_KEY_NAME = "FOOTBALL_DATA_API_KEY"
     BASE_URL = "https://api.football-data.org/"
     VERSION = "v4"
 
     def __init__(self, league=None, season=None, team=None):
-        self._league = league
+        """
+        Initialise the BaseClient with optional leage, season and team data.
+
+        :param league: league name or identifier
+        :param season: season year
+        :param team: team identifier
+        """
+        # Protected attributes
+        self._league = league 
         self._season = season
         self._team = team
+        # Private attribute
+        self.__key = self.load_key()
 
     @property
     def league(self):
+        """ Get or set the league """
         return self._league
     
     @league.setter
@@ -27,6 +39,7 @@ class BaseClient:
 
     @property
     def season(self):
+        """ Get or set the season """
         return self._season
     
     @season.setter
@@ -35,6 +48,7 @@ class BaseClient:
 
     @property
     def team(self):
+        """ Get or set the team """
         return self._team
     
     @team.setter
@@ -46,13 +60,10 @@ class BaseClient:
         return f'{self.BASE_URL}/{self.VERSION}/'
     
     @property
-    def key(self):
-        return self.load_key()
-    
-    @property
     def header(self):
+        """ Get the header """
         return {
-            'X-Auth-Token': self.key
+            'X-Auth-Token': self.__key
         }
 
     def load_key(self):
