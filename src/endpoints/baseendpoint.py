@@ -25,7 +25,8 @@ class BaseEndPoint:
         # it passes an instance of itself and we set self.client to the instance
         # of BaseClient 
 
-    def request(self, resource: str, subresource: str=None) -> requests.Response:
+    def request(self, resource: str, 
+                subresource: str=None) -> requests.Response:
         """ 
         Request and fetch data from the endpoint 
         
