@@ -3,7 +3,8 @@ from datetime import datetime
 class Mixin():
 
     """
-    A mixin class to handle common methods between endpoints
+    A mixin class to handle common methods between both Competitions and 
+    Team class.
     """
 
     def clean_matches_list(self, match_data) -> list:
