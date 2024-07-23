@@ -25,7 +25,7 @@ class BaseEndPoint:
         # it passes an instance of itself and we set self.client to the instance
         # of BaseClient 
 
-    def request(self, resource: str, subresource: str=None):
+    def request(self, resource: str, subresource: str=None) -> requests.Response:
         """ 
         Request and fetch data from the endpoint 
         
@@ -36,7 +36,7 @@ class BaseEndPoint:
         response = requests.get(uri, headers=self.client.header, params=params)
         return response
     
-    def url_builder(self, resource: str, subresource: str):
+    def url_builder(self, resource: str, subresource: str) -> list:
         """
         Dynamically build the request needed to fetch data
 
@@ -58,12 +58,12 @@ class BaseEndPoint:
         return [uri, params]
 
     @staticmethod
-    def process_response(response: requests.Response, data: str):
-        print(type(response))
+    def process_response(response: requests.Response, data: str) -> list:
         """
         Get the JSON() repsonse data
 
         :param response: The response from the request
         :param data: the object in the JSON 
         """
+        
         return response.json().get(data)

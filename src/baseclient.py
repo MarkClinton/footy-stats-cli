@@ -29,7 +29,7 @@ class BaseClient:
         self.__key = self.load_key()
 
     @property
-    def league(self):
+    def league(self) -> str:
         """ Get or set the league """
         return self._league
     
@@ -38,7 +38,7 @@ class BaseClient:
         self._league = league
 
     @property
-    def season(self):
+    def season(self) -> str:
         """ Get or set the season """
         return self._season
     
@@ -47,7 +47,7 @@ class BaseClient:
         self._season = season
 
     @property
-    def team(self):
+    def team(self) -> str:
         """ Get or set the team """
         return self._team
     
@@ -56,17 +56,17 @@ class BaseClient:
         self._team = team
 
     @property
-    def url(self):
+    def url(self) -> str:
         return f'{self.BASE_URL}/{self.VERSION}/'
     
     @property
-    def header(self):
+    def header(self) -> dict:
         """ Get the header """
         return {
             'X-Auth-Token': self.__key
         }
 
-    def load_key(self):
+    def load_key(self) -> str:
         load_dotenv()
         return os.getenv(self.SECRET_KEY_NAME)
         # Should handle this better if the secret key is not found

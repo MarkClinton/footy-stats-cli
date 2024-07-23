@@ -6,7 +6,7 @@ class Mixin():
     A mixin class to handle common methods between endpoints
     """
 
-    def clean_matches_list(self, match_data):
+    def clean_matches_list(self, match_data) -> list:
         """
         Cleans the match data and pulls the necessary information
 

@@ -14,37 +14,61 @@ class Competitions(BaseEndPoint, Mixin):
     BASE_COMPETITIONS_RESOURCE = "competitions"
 
     def get_competitions_list(self):
-        """ Get a list of competitions availables """
+        """ 
+        Get a list of competitions availables 
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.process_response(response, "competitions"))
     
-    def get_competition_seasons(self):
-        """ Get a list of seasons available for a competition"""
+    def get_competition_seasons(self) -> list:
+        """ 
+        Get a list of seasons available for a competition
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return(self.clean_season_list(self.process_response(response, "seasons")))
     
-    def get_competition_teams(self):
-        """ Get a list of teams that take part in a competition"""
+    def get_competition_teams(self) -> list:
+        """ 
+        Get a list of teams that take part in a competition
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         return(self.clean_team_list(self.process_response(response, "teams")))
     
-    def get_competition_standings(self):
-        """ Get the league table for a competition """
+    def get_competition_standings(self) -> list:
+        """ 
+        Get the league table for a competition 
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
         return(self.clean_standings_list(self.process_response(response, "standings")))
     
-    def get_competition_goalscorers(self):
-        """ Get the top 10 goalscorers for a season """
+    def get_competition_goalscorers(self) -> list:
+        """ 
+        Get the top 10 goalscorers for a season 
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
         return(self.clean_scorers_list(self.process_response(response, "scorers")))
     
-    def get_competition_matches(self):
-        """ Get all matches for a competition for a certain season """
+    def get_competition_matches(self) -> list:
+        """ 
+        Get all matches for a competition for a certain season 
+        """
+
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
         return(self.clean_matches_list(self.process_response(response, "matches")))
 
     @staticmethod
-    def clean_scorers_list(scorers_data):
+    def clean_scorers_list(scorers_data: list) -> list:
+        """
+        Returns a list of dicts with goalscorer data
+
+        :params scorers_data: list of  goalscorers
+        """
+
         scorers = []
 
         for s in scorers_data:
@@ -60,7 +84,13 @@ class Competitions(BaseEndPoint, Mixin):
         return scorers
 
     @staticmethod
-    def clean_standings_list(standings_data):
+    def clean_standings_list(standings_data: list) -> list:
+        """
+        Returns a list of dicts with league table data
+
+        :params standings_data: list of teams with league table data
+        """
+
         standings = []
 
         for s in standings_data[0]["table"]:
@@ -81,7 +111,13 @@ class Competitions(BaseEndPoint, Mixin):
         return standings
 
     @staticmethod
-    def clean_team_list(team_data):
+    def clean_team_list(team_data: list) -> list:
+        """
+        Returns a list of dicts with team data
+
+        :params team_data: list of teams with team data
+        """
+        
         teams = []
 
         for t in team_data:
@@ -97,7 +133,13 @@ class Competitions(BaseEndPoint, Mixin):
         return teams
 
     @staticmethod
-    def clean_season_list(season_data):
+    def clean_season_list(season_data: list) -> list:
+        """
+        Returns a list of dicts with season data
+
+        :params season_data: list of seasons with season data
+        """
+
         seasons = []
         amount = len(season_data) if len(season_data) < 10 else 10
 
