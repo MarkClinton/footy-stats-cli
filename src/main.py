@@ -5,6 +5,7 @@ Instantiates a new APIClient to which we can call all endpoints
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from .apiclient import APIClient
+from .menu import Menu
 
 
 class Main():
@@ -25,63 +26,54 @@ class Main():
             {"code": "SA", "name": "Serie A"},
         ]
 
-        options = [league["name"] for league in leagues]
-        terminal_menu = TerminalMenu(options)
-        menu_entry_index = terminal_menu.show()
-        code = leagues[menu_entry_index]["code"]
-        print(f"You have selected {code}!")
-
-        client = APIClient(code)
-        seasons = client.competitions.get_competition_seasons()
-        print(seasons)
-        season_list = [season["Name"] for season in seasons]
-        terminal_menu = TerminalMenu(season_list)
-        s = terminal_menu.show()
-        e = seasons[s]["Year"]
-        print(f"You have selected {e}!")
-        client.season = e
-        self.team(client)
-
-
-
-
-    def season(self, client):
+        title = "  Main Menu.\n  Choose your League\n  Press Q or Esc to quit. \n"
+        items = [league["name"] for league in leagues]
+        exit = False
         
-        print("\n---------------\n")
-        print("Seasons")
-        print("\n---------------\n")
-        seasons = client.competitions.get_competition_seasons()
-        print(tabulate(seasons, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
 
-    def data(self, client):
-        print("\n---------------\n")
-        print("League Standings")
-        print("\n---------------\n")
-        standings = client.competitions.get_competition_standings()
-        print(tabulate(standings, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        menu = Menu(title, items)
+        main = menu.menu()
+        main_option = main.show()
         
-        print("\n---------------\n")
-        print("Top 10 Goalscorers")
-        print("\n---------------\n")
-        scorers = client.competitions.get_competition_goalscorers()
-        print(tabulate(scorers, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        league_code = leagues[main_option]["code"]
 
-        print("\n---------------\n")
-        print("All Competition Matches")
-        print("\n---------------\n")
-        comp_matches = client.competitions.get_competition_matches()
-        print(tabulate(comp_matches, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        client = APIClient(league_code)
+        seasons = client.competitions.get_competition_seasons()
 
-    def match(self, client):
-        print("\n---------------\n")
-        print("Team Matches (Team: Arsenal)")
-        print("\n---------------\n")
-        matches = client.teams.get_teams_matches()
-        print(tabulate(matches, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        menu.main_menu_items = [season["Name"] for season in seasons]
+        menu.main_menu_title = "Leagues"
+        season = menu.menu()
+        season_option = season.show()
 
-    def team(self, client):
-        print("\n---------------\n")
-        print("Teams")
-        print("\n---------------\n")
-        teams = client.competitions.get_competition_teams()
-        print(tabulate(teams, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        client.season = seasons[season_option]["Year"]
+
+        league_options = [
+            {"code": "comp_teams", "option": "Show All Teams"},
+            {"code": "comp_standings", "option": "Show League Table"},
+            {"code": "comp_matches", "option": "Show All Results"},
+            {"code": "teams_matches", "option": "Show a Teams Results"},
+            {"code": "comp_goalscorers", "option": "Show Top 10 Goalscorers"},
+        ]
+
+        menu.main_menu_items = [l_option["option"] for l_option in league_options]
+        menu.main_menu_title = "Leagues"
+        foo = menu.menu()
+        foo_option = foo.show()
+        
+        endpoint = league_options[foo_option]["code"]
+
+        if endpoint == "comp_teams":
+            data = client.competitions.get_competition_teams()
+            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        elif endpoint == "comp_standings":
+            data = client.competitions.get_competition_standings()
+            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        elif endpoint == "comp_matches":
+            data = client.competitions.get_competition_matches()
+            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        elif endpoint == "teams_matches":
+            data = client.teams.get_teams_matches()
+            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        elif endpoint == "comp_goalscorers":
+            data = client.competitions.get_competition_goalscorers()
+            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
