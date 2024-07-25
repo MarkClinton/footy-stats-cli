@@ -69,7 +69,7 @@ class Main(Menu):
             
         if endpoint == "comp_teams":
             data = client.competitions.get_competition_teams()
-            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+            print(tabulate(data, headers="keys", colalign=("left",)))
         elif endpoint == "comp_standings":
             data = client.competitions.get_competition_standings()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
