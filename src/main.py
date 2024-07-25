@@ -26,7 +26,7 @@ class Main(Menu):
         seasons = client.competitions.get_competition_seasons()
         season_options = self.list_to_menu_options(seasons, "Name")
 
-        season_menu = self.menu(season_options, "Seasons")
+        season_menu = self.menu(season_options, self.get_season_title())
         season_sel = season_menu.show()
 
         client_season = self.get_list_option(seasons, season_sel)

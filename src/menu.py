@@ -24,7 +24,6 @@ class Menu():
         ] 
 
     def menu(self, menu_options, title):
-
         menu = TerminalMenu(
             menu_entries = menu_options,
             title = title,
@@ -40,7 +39,7 @@ class Menu():
         return [league["name"] for league in self.LEAGUES]
     
     def get_league_title(self):
-        return "Leagues"
+        return "  League Menu.\n  Select a League.\n  Press Q or Esc to quit. \n"
     
     def get_league_option(self, pos):
         return self.LEAGUES[pos]["code"]
@@ -49,7 +48,7 @@ class Menu():
         return [m["option"] for m in self.MAIN_MENU]
 
     def get_main_title(self):
-        return "Main Menu"
+        return "  Main Menu.\n  Select an Option.\n  Press Q or Esc to quit. \n"
     
     def get_main_option(self, pos):
         return self.MAIN_MENU[pos]["code"]
@@ -59,3 +58,6 @@ class Menu():
     
     def get_list_option(self, data, pos):
         return data[pos]["Year"]
+    
+    def get_season_title(self):
+        return "  Season Menu.\n  Select a Season.\n  Press Q or Esc to quit. \n"
