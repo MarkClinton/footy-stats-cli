@@ -18,31 +18,67 @@ class Main(Menu):
     
     def __init__(self):
 
+        client = APIClient("PL", "2023", 57)
+        data = client.competitions.get_competition_seasons()
+        # print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+        
+        self.test()
+
+
+    def test(self):
+
         league_menu = self.menu(self.get_league_menu(), self.get_league_title())
-        league_sel = league_menu.show()
-        league = self.get_league_option(league_sel)
-
-        client = APIClient(league)
-        seasons = client.competitions.get_competition_seasons()
-        season_options = self.list_to_menu_options(seasons, "Name")
-
-        season_menu = self.menu(season_options, self.get_season_title())
-        season_sel = season_menu.show()
-
-        client_season = self.get_list_option(seasons, season_sel)
-        client.season = client_season
-
         main_menu = self.menu(self.get_main_menu(), self.get_main_title())
-        main_sel = main_menu.show()
+        league_exit = True
+        season_exit = True
+        main_menu_exit = True
 
+
+        while league_exit:
+            league_sel = league_menu.show()
+            
+
+            if league_sel != None:
+                league = self.get_league_option(league_sel)
+                client = APIClient(league)
+                
+                while season_exit:
+                    seasons = client.competitions.get_competition_seasons()
+                    season_options = self.list_to_menu_options(seasons, "Name")
+                    season_menu = self.menu(season_options, self.get_season_title())
+
+                    season_sel = season_menu.show()
+                    
+
+                    if season_sel != None:
+                        client_season = self.get_list_option(seasons, season_sel)
+                        client.season = client_season
+
+                        while main_menu_exit:
+                            main_sel = main_menu.show()
+
+                            if main_sel != None:
+                                self.gather_info(main_sel, client)
+                                input()
+                            else:
+                                break
+                    else:
+                        break
+            else:
+                break
+
+        print("Thanks for using Foot-Stats-CLI")
+
+    def gather_info(self, main_sel, client):
         endpoint = self.get_main_option(main_sel)
-
+            
         if endpoint == "comp_teams":
             data = client.competitions.get_competition_teams()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
         elif endpoint == "comp_standings":
             data = client.competitions.get_competition_standings()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+            print("Press enter to go back to main menu")
         elif endpoint == "comp_matches":
             data = client.competitions.get_competition_matches()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
