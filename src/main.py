@@ -6,6 +6,7 @@ from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from .apiclient import APIClient
 from .menu import Menu
+from getch import pause
 
 
 class Main(Menu):
@@ -54,7 +55,7 @@ class Main(Menu):
 
                             if main_sel != None:
                                 self.gather_info(main_sel, client)
-                                input()
+                                pause("\nPress any key to go back to the main menu...")
                             else:
                                 break
                     else:
@@ -73,7 +74,6 @@ class Main(Menu):
         elif endpoint == "comp_standings":
             data = client.competitions.get_competition_standings()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-            print("Press enter to go back to main menu")
         elif endpoint == "comp_matches":
             data = client.competitions.get_competition_matches()
             print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
