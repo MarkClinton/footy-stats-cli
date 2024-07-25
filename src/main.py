@@ -23,8 +23,8 @@ class Main(Menu):
 
     def test(self):
 
-        league_menu = self.menu(self.get_league_menu(), self.get_league_title())
-        main_menu = self.menu(self.get_main_menu(), self.get_main_title())
+        league_menu = self.create_league_menu()
+        main_menu = self.create_main_menu()
         league_exit = True
         season_exit = True
         main_menu_exit = True
@@ -40,33 +40,29 @@ class Main(Menu):
                 
                 while season_exit:
                     seasons = client.competitions.get_competition_seasons()
-                    season_options = self.list_to_menu_options(seasons, "Name")
-                    season_menu = self.menu(season_options, 
-                                            self.get_season_title())
+                    season_menu = self.create_season_menu(seasons)
                     season_sel = season_menu.show()
 
                     if season_sel == None:
                         break
                     else:
-                        client_season = self.get_list_option(seasons, 
-                                                            season_sel, "Year")
+                        client_season = self.get_season_option(seasons, season_sel)
                         client.season = client_season
 
                         while main_menu_exit:
                             main_sel = main_menu.show()
+
                             if main_sel == None:
                                 break
                             elif main_sel == 3:
                                 teams = client.competitions.get_competition_teams()
-                                team_options = self.list_to_menu_options(teams, "Team")
-                                team_menu = self.menu(team_options, "Teams")
+                                team_menu = self.create_teams_menu(teams)
                                 team_sel = team_menu.show()
-                                client_team = self.get_list_option(teams, 
-                                                            team_sel, "ID")
+                                client_team = self.get_team_option(teams,team_sel)
                                 client.team = client_team
-                                data = client.teams.get_teams_matches()
-                                print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-                                pause()
+                                self.gather_info(main_sel, client)
+                                pause("\nPress any key to go back to "
+                                    "the main menu...")
                             else:
                                 self.gather_info(main_sel, client)
                                 pause("\nPress any key to go back to "
@@ -75,20 +71,18 @@ class Main(Menu):
         print("Thanks for using Foot-Stats-CLI")
 
     def gather_info(self, main_sel, client):
-        endpoint = self.get_main_option(main_sel)
+        option = self.get_main_option(main_sel)
             
-        if endpoint == "comp_teams":
+        if option == "comp_teams":
             data = client.competitions.get_competition_teams()
-            print(tabulate(data, headers="keys", colalign=("left",)))
-        elif endpoint == "comp_standings":
+        elif option == "comp_standings":
             data = client.competitions.get_competition_standings()
-            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-        elif endpoint == "comp_matches":
+        elif option == "comp_matches":
             data = client.competitions.get_competition_matches()
-            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-        elif endpoint == "teams_matches":
+        elif option == "teams_matches":
             data = client.teams.get_teams_matches()
-            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-        elif endpoint == "comp_goalscorers":
+        elif option == "comp_goalscorers":
             data = client.competitions.get_competition_goalscorers()
-            print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
+
+        print(tabulate(data, headers="keys", colalign=("left",), 
+                        tablefmt="rounded_outline"))
