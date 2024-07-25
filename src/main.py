@@ -16,12 +16,7 @@ class Main(Menu):
     Creates a new APIClient when intialized.
     """
     
-    def __init__(self):
-
-        client = APIClient("PL", "2023", 57)
-        data = client.competitions.get_competition_seasons()
-        # print(tabulate(data, headers="keys", colalign=("left",), tablefmt="rounded_outline"))
-        
+    def __init__(self):     
         self.test()
 
 
