@@ -48,7 +48,7 @@ class Menu():
         return [m["option"] for m in self.MAIN_MENU]
 
     def get_main_title(self):
-        return "  Main Menu.\n  Select an Option.\n  Press Q or Esc to quit. \n"
+        return "  Main Menu.\n  Select an Option.\n  Press Q or Esc to navigate back. \n"
     
     def get_main_option(self, pos):
         return self.MAIN_MENU[pos]["code"]
@@ -56,8 +56,8 @@ class Menu():
     def list_to_menu_options(self, data, k):
         return [d[k] for d in data]
     
-    def get_list_option(self, data, pos):
-        return data[pos]["Year"]
+    def get_list_option(self, data, pos, name):
+        return data[pos][name]
     
     def get_season_title(self):
-        return "  Season Menu.\n  Select a Season.\n  Press Q or Esc to quit. \n"
+        return "  Season Menu.\n  Select a Season.\n  Press Q or Esc to navigate back. \n"
