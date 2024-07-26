@@ -69,9 +69,9 @@ class Main(Menu, ClearDisplay):
         elif menu_sel == 3:
             if not self.show_team_menu():
                 return True
-        self.clear_display()
         self.fetch_data(menu_sel)
         pause(message)  
+        self.clear_display()
         return True   
 
     def show_team_menu(self):
