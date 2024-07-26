@@ -69,7 +69,6 @@ class Main(Menu, ClearDisplay):
         elif menu_sel == 3:
             if not self.show_team_menu():
                 return True
-        self.clear_display()
         self.fetch_data(menu_sel)
         pause(message)  
         self.clear_display()
@@ -97,8 +96,7 @@ class Main(Menu, ClearDisplay):
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
-
+        print(tabulate([], headers="firstrow"))
         print(tabulate(data, headers="keys", colalign=("left",), 
                         tablefmt="simple"))
-        data = None
-        tabulate(data, headers="firstrow")
+        
