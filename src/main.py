@@ -3,7 +3,6 @@ The main file that deals with the overall running of the app.
 Instantiates a new APIClient to which we can call all endpoints
 """
 from tabulate import tabulate
-from simple_term_menu import TerminalMenu
 from .apiclient import APIClient
 from .menu import Menu
 from getch import pause
@@ -16,73 +15,86 @@ class Main(Menu):
 
     Creates a new APIClient when intialized.
     """
-    
-    def __init__(self):     
-        self.test()
 
+    def __init__(self): 
+        # Initialize default APIClient
+        self.client = APIClient("PL")    
+        self.start()
 
-    def test(self):
+    def start(self):
+        menu_show = True
 
-        league_menu = self.create_league_menu()
-        main_menu = self.create_main_menu()
-        league_exit = True
-        season_exit = True
-        main_menu_exit = True
-
-        while league_exit:
-            league_sel = league_menu.show()
-
-            if league_sel == None:
+        while menu_show:
+            if not self.show_league_menu():
                 break
-            else:
-                league = self.get_league_option(league_sel)
-                client = APIClient(league)
-                
-                while season_exit:
-                    seasons = client.competitions.get_competition_seasons()
-                    season_menu = self.create_season_menu(seasons)
-                    season_sel = season_menu.show()
-
-                    if season_sel == None:
+            while menu_show:
+                if not self.show_season_menu():
+                    break
+                while menu_show:
+                    if not self.show_main_menu():
                         break
-                    else:
-                        client_season = self.get_season_option(seasons, season_sel)
-                        client.season = client_season
-
-                        while main_menu_exit:
-                            main_sel = main_menu.show()
-
-                            if main_sel == None:
-                                break
-                            elif main_sel == 3:
-                                teams = client.competitions.get_competition_teams()
-                                team_menu = self.create_teams_menu(teams)
-                                team_sel = team_menu.show()
-                                client_team = self.get_team_option(teams,team_sel)
-                                client.team = client_team
-                                self.gather_info(main_sel, client)
-                                pause("\nPress any key to go back to "
-                                    "the main menu...")
-                            else:
-                                self.gather_info(main_sel, client)
-                                pause("\nPress any key to go back to "
-                                    "the main menu...")
 
         print("Thanks for using Foot-Stats-CLI")
 
-    def gather_info(self, main_sel, client):
+    def show_league_menu(self):
+        league_menu = self.create_league_menu()
+        league_sel = league_menu.show()
+
+        if league_sel == None:
+            return False
+        else:
+            league = self.get_league_option(league_sel)
+            self.client = APIClient(league)
+        return True
+
+    def show_season_menu(self):
+        seasons = self.client.competitions.get_competition_seasons()
+        season_menu = self.create_season_menu(seasons)
+        season_sel = season_menu.show()
+
+        if season_sel == None:
+            return False
+        else:
+            client_season = self.get_season_option(seasons, season_sel)
+            self.client.season = client_season  
+        return True   
+
+    def show_main_menu(self):
+        message = "\nPress any key to go back to the Main Menu..."
+        main_menu = self.create_main_menu()  
+        main_sel = main_menu.show()
+
+        if main_sel == None:
+            return False
+        elif main_sel == 3:
+            self.show_team_menu()
+            self.gather_info(main_sel)
+            pause(message)
+        else:
+            self.gather_info(main_sel)
+            pause(message)  
+        return True   
+
+    def show_team_menu(self):
+        teams = self.client.competitions.get_competition_teams()
+        team_menu = self.create_team_menu(teams)
+        team_sel = team_menu.show()
+        client_team = self.get_team_option(teams,team_sel)
+        self.client.team = client_team
+
+    def gather_info(self, main_sel):
         option = self.get_main_option(main_sel)
             
         if option == "comp_teams":
-            data = client.competitions.get_competition_teams()
+            data = self.client.competitions.get_competition_teams()
         elif option == "comp_standings":
-            data = client.competitions.get_competition_standings()
+            data = self.client.competitions.get_competition_standings()
         elif option == "comp_matches":
-            data = client.competitions.get_competition_matches()
+            data = self.client.competitions.get_competition_matches()
         elif option == "teams_matches":
-            data = client.teams.get_teams_matches()
+            data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
-            data = client.competitions.get_competition_goalscorers()
+            data = self.client.competitions.get_competition_goalscorers()
 
         print(tabulate(data, headers="keys", colalign=("left",), 
                         tablefmt="rounded_outline"))

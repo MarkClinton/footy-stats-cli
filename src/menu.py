@@ -36,23 +36,23 @@ class Menu():
         return menu
     
     # League menu functionality
-    def get_league_option(self, pos):
-        return self.LEAGUES[pos]["code"]
-    
     def create_league_menu(self):
         menu_data = [league["name"] for league in self.LEAGUES]
         title = "  League Menu.\n  Select a League.\n  Press Q or Esc to quit. \n"
         return self.menu(menu_data, title)
+    
+    def get_league_option(self, pos):
+        return self.LEAGUES[pos]["code"]
 
     # Main menu functionality
-    def get_main_option(self, pos):
-        return self.MAIN_MENU[pos]["code"]
-    
     def create_main_menu(self):
         menu_data = [menu["option"] for menu in self.MAIN_MENU]
         title = "  Main Menu.\n  Select an Option.\n  Press Q or Esc to navigate back. \n"
         return self.menu(menu_data, title)
     
+    def get_main_option(self, pos):
+        return self.MAIN_MENU[pos]["code"]
+
     # Season menu functionality
     def create_season_menu(self, seasons_data):
         season_data = self.list_to_menu_options(seasons_data, "Name")
@@ -61,9 +61,9 @@ class Menu():
     
     def get_season_option(self, data, pos):
         return data[pos]["Year"]
-    
+
     # Team menu functionality
-    def create_teams_menu(self, teams_data):
+    def create_team_menu(self, teams_data):
         team_data = self.list_to_menu_options(teams_data, "Team")
         title = "  Team Menu.\n  Select a Team.\n  Press Q or Esc to navigate back. \n"
         return self.menu(team_data, title)
