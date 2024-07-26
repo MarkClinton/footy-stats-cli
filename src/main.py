@@ -64,7 +64,8 @@ class Main(Menu):
         if menu_sel == None:
             return False
         elif menu_sel == 3:
-            self.show_team_menu()
+            if not self.show_team_menu():
+                return True
         self.fetch_data(menu_sel)
         pause(message)  
         return True   
@@ -73,7 +74,10 @@ class Main(Menu):
         teams = self.client.competitions.get_list_teams()
         menu = self.create_team_menu(teams)
         menu_sel = menu.show()
+        if menu_sel == None:
+            return False
         self.client.team = self.get_team_option(teams,menu_sel)
+        return True
 
     def fetch_data(self, main_sel):
         option = self.get_main_option(main_sel)
