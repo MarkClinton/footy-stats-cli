@@ -115,7 +115,7 @@ class Menu():
                 "information on\neach option press [h]\n")
                 
         title = (f'\nCompetition: {self.league_choice}\n'
-                 f'Season: {self.season_choice}\n')
+                f'Season: {self.season_choice}\n')
 
         return self.footy_stats_logo() + about + title
     
@@ -125,7 +125,9 @@ class Menu():
         return self.footy_stats_logo() + title
     
     def end_screen_info(self):
-        pass
+        message = "\n Thanks for using Footy Stats CLI.\n"
+        
+        return self.footy_stats_logo() + message
 
 class ClearDisplay():
 

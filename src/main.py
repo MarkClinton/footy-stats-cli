@@ -34,7 +34,7 @@ class Main(Menu, ClearDisplay):
                     if not self.show_main_menu():
                         break
 
-        print("Thanks for using Footy-Stats-CLI")
+        print(self.end_screen_info())
 
     def show_league_menu(self):
         menu = self.create_league_menu()
