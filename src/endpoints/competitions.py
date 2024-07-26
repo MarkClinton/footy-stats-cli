@@ -109,7 +109,7 @@ class Competitions(BaseEndPoint, Mixin):
         for s in standings_data[0]["table"]:
             standing = {
                 "Team": s["team"]["name"],
-                "Games Played": s["playedGames"],
+                "Played": s["playedGames"],
                 "Won": s["won"],
                 "Draw": s["draw"],
                 "Lost": s["lost"],
