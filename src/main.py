@@ -69,7 +69,6 @@ class Main(Menu, ClearDisplay):
         elif menu_sel == 3:
             if not self.show_team_menu():
                 return True
-        self.clear_display()
         self.fetch_data(menu_sel)
         pause(message)  
         self.clear_display()
@@ -100,3 +99,4 @@ class Main(Menu, ClearDisplay):
 
         print(tabulate(data, headers="keys", colalign=("left",), 
                         tablefmt="simple"))
+        data = None
