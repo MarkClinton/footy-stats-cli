@@ -70,7 +70,7 @@ class Main(Menu):
         return True   
 
     def show_team_menu(self):
-        teams = self.client.competitions.get_competition_teams()
+        teams = self.client.competitions.get_list_teams()
         menu = self.create_team_menu(teams)
         menu_sel = menu.show()
         self.client.team = self.get_team_option(teams,menu_sel)
@@ -90,4 +90,4 @@ class Main(Menu):
             data = self.client.competitions.get_competition_goalscorers()
 
         print(tabulate(data, headers="keys", colalign=("left",), 
-                        tablefmt="rounded_outline"))
+                        tablefmt="simple"))

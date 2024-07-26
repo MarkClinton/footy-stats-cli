@@ -50,6 +50,14 @@ class Competitions(BaseEndPoint, Mixin):
             )
         )
     
+    def get_list_teams(self) -> list:
+        """ Get a list of dicts of teams and their ID's """
+
+        response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
+        return(
+            self.clean_team_list(self.process_response(response, "teams"))
+        )
+    
     def get_competition_goalscorers(self) -> list:
         """ Get the top 10 goalscorers for a season """
 
@@ -81,9 +89,9 @@ class Competitions(BaseEndPoint, Mixin):
                 "Name": s["player"]["name"],
                 "Team": s["team"]["name"],
                 "Matches Played": s["playedMatches"],
-                "Goals": s["goals"],
-                "Assists": s["assists"],
-                "Penalties": s["penalties"]
+                "Goals": s["goals"]
+                # "Assists": s["assists"],
+                # "Penalties": s["penalties"]
             }
             scorers.append(scorer)
         return scorers
@@ -105,10 +113,10 @@ class Competitions(BaseEndPoint, Mixin):
                 "Won": s["won"],
                 "Draw": s["draw"],
                 "Lost": s["lost"],
-                "Points": s["points"],
-                "Goals For": s["goalsFor"],
-                "Goals Against": s["goalsAgainst"],
-                "Goal Difference": s["goalDifference"]
+                "Points": s["points"]
+                # "Goals For": s["goalsFor"],
+                # "Goals Against": s["goalsAgainst"],
+                # "Goal Difference": s["goalDifference"]
             }
             standings.append(standing)
         # Sort list of dict items in descending order with respect to Points value
@@ -124,14 +132,31 @@ class Competitions(BaseEndPoint, Mixin):
         """
         
         teams = []
+        for t in team_data:
+            team = {
+                # "ID": t["id"],
+                "Team": t["name"],
+                "Founded": t["founded"],
+                "Stadium": t["venue"]
+                # "Current Manager": t["coach"]["name"]
+            }
+            teams.append(team)
 
+        return teams
+    
+    @staticmethod
+    def get_team_ids(team_data: list) -> list:
+        """
+        Returns a list of dicts with team data
+
+        :params team_data: list of teams with team data
+        """
+        
+        teams = []
         for t in team_data:
             team = {
                 "ID": t["id"],
-                "Team": t["name"],
-                "Founded": t["founded"],
-                "Stadium": t["venue"],
-                "Current Manager": t["coach"]["name"]
+                "Team": t["name"]
             }
             teams.append(team)
 
