@@ -25,8 +25,7 @@ class Main(Menu):
         menu_show = True
 
         while menu_show:
-            if not self.show_league_menu():
-                break
+            menu_show = self.show_league_menu()
             while menu_show:
                 if not self.show_season_menu():
                     break
@@ -34,57 +33,51 @@ class Main(Menu):
                     if not self.show_main_menu():
                         break
 
-        print("Thanks for using Foot-Stats-CLI")
+        print("Thanks for using Footy-Stats-CLI")
 
     def show_league_menu(self):
-        league_menu = self.create_league_menu()
-        league_sel = league_menu.show()
+        menu = self.create_league_menu()
+        menu_sel = menu.show()
 
-        if league_sel == None:
+        if menu_sel == None:
             return False
-        else:
-            league = self.get_league_option(league_sel)
-            self.client = APIClient(league)
+        league = self.get_league_option(menu_sel)
+        self.client = APIClient(league)
         return True
 
     def show_season_menu(self):
         seasons = self.client.competitions.get_competition_seasons()
-        season_menu = self.create_season_menu(seasons)
-        season_sel = season_menu.show()
+        menu = self.create_season_menu(seasons)
+        menu_sel = menu.show()
 
-        if season_sel == None:
+        if menu_sel == None:
             return False
-        else:
-            client_season = self.get_season_option(seasons, season_sel)
-            self.client.season = client_season  
+        client_season = self.get_season_option(seasons, menu_sel)
+        self.client.season = client_season  
         return True   
 
     def show_main_menu(self):
         message = "\nPress any key to go back to the Main Menu..."
-        main_menu = self.create_main_menu()  
-        main_sel = main_menu.show()
+        menu = self.create_main_menu()  
+        menu_sel = menu.show()
 
-        if main_sel == None:
+        if menu_sel == None:
             return False
-        elif main_sel == 3:
+        elif menu_sel == 3:
             self.show_team_menu()
-            self.gather_info(main_sel)
-            pause(message)
-        else:
-            self.gather_info(main_sel)
-            pause(message)  
+        self.fetch_data(menu_sel)
+        pause(message)  
         return True   
 
     def show_team_menu(self):
         teams = self.client.competitions.get_competition_teams()
-        team_menu = self.create_team_menu(teams)
-        team_sel = team_menu.show()
-        client_team = self.get_team_option(teams,team_sel)
-        self.client.team = client_team
+        menu = self.create_team_menu(teams)
+        menu_sel = menu.show()
+        self.client.team = self.get_team_option(teams,menu_sel)
 
-    def gather_info(self, main_sel):
+    def fetch_data(self, main_sel):
         option = self.get_main_option(main_sel)
-            
+
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
         elif option == "comp_standings":
