@@ -31,7 +31,6 @@ class Main(Menu, ClearDisplay):
                 if not self.show_season_menu():
                     break
                 while menu_show:
-                    self.clear_display()
                     if not self.show_main_menu():
                         break
 
@@ -43,9 +42,9 @@ class Main(Menu, ClearDisplay):
 
         if menu_sel == None:
             return False
+        
         league = self.get_league_option(menu_sel)
         self.client = APIClient(league)
-        self.league_choice = str(league)
         return True
 
     def show_season_menu(self):
@@ -55,9 +54,9 @@ class Main(Menu, ClearDisplay):
 
         if menu_sel == None:
             return False
+        
         client_season = self.get_season_option(seasons, menu_sel)
-        self.client.season = client_season  
-        self.season_choice = str(client_season)
+        self.client.season = client_season
         return True   
 
     def show_main_menu(self):
@@ -70,6 +69,7 @@ class Main(Menu, ClearDisplay):
         elif menu_sel == 3:
             if not self.show_team_menu():
                 return True
+            
         self.fetch_data(menu_sel)
         pause(message)  
         self.clear_display()

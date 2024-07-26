@@ -43,6 +43,7 @@ class Menu():
         return self.menu(menu_data, title)
     
     def get_league_option(self, pos):
+        self.league_choice = self.LEAGUES[pos]["name"]
         return self.LEAGUES[pos]["code"]
 
     # Main menu functionality
@@ -61,6 +62,7 @@ class Menu():
         return self.menu(season_data, title)
     
     def get_season_option(self, data, pos):
+        self.season_choice = data[pos]["Name"]
         return data[pos]["Year"]
 
     # Team menu functionality
@@ -111,14 +113,19 @@ class Menu():
     def main_screen_info(self):
         about = ("\nFooty Stats CLI has 5 main options to choose from. For more "
                 "information on\neach option press [h]\n")
+                
+        title = (f'\nCompetition: {self.league_choice}\n'
+                 f'Season: {self.season_choice}\n')
 
-        title = "\nSelect an option below:\n"
         return self.footy_stats_logo() + about + title
     
     def team_screen_info(self):
         title = ("\nSelect a team to view their Fixtures/Results:\n")
 
         return self.footy_stats_logo() + title
+    
+    def end_screen_info(self):
+        pass
 
 class ClearDisplay():
 
