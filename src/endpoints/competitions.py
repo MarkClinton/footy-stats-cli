@@ -55,7 +55,7 @@ class Competitions(BaseEndPoint, Mixin):
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         return(
-            self.clean_team_list(self.process_response(response, "teams"))
+            self.get_team_ids(self.process_response(response, "teams"))
         )
     
     def get_competition_goalscorers(self) -> list:
