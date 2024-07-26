@@ -90,4 +90,4 @@ class Main(Menu):
             data = self.client.competitions.get_competition_goalscorers()
 
         print(tabulate(data, headers="keys", colalign=("left",), 
-                        tablefmt="simple_outline"))
+                        tablefmt="presto"))
