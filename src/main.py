@@ -4,11 +4,11 @@ Instantiates a new APIClient to which we can call all endpoints
 """
 from tabulate import tabulate
 from .apiclient import APIClient
-from .menu import Menu
+from .menu import Menu, ClearDisplay
 from getch import pause
 
 
-class Main(Menu):
+class Main(Menu, ClearDisplay):
     """
     Main() class that handles the app logic. Displaying data, fetching data
     and showing menu items.
@@ -18,8 +18,9 @@ class Main(Menu):
 
     def __init__(self): 
         # Initialize default APIClient
-        self.client = APIClient("PL")    
+        self.client = APIClient("PL")   
         self.start()
+        
 
     def start(self):
         menu_show = True
@@ -43,6 +44,7 @@ class Main(Menu):
             return False
         league = self.get_league_option(menu_sel)
         self.client = APIClient(league)
+        self.league_choice = str(league)
         return True
 
     def show_season_menu(self):
@@ -54,6 +56,7 @@ class Main(Menu):
             return False
         client_season = self.get_season_option(seasons, menu_sel)
         self.client.season = client_season  
+        self.season_choice = str(client_season)
         return True   
 
     def show_main_menu(self):
@@ -66,6 +69,7 @@ class Main(Menu):
         elif menu_sel == 3:
             if not self.show_team_menu():
                 return True
+        self.clear_display()
         self.fetch_data(menu_sel)
         pause(message)  
         return True   
@@ -94,4 +98,4 @@ class Main(Menu):
             data = self.client.competitions.get_competition_goalscorers()
 
         print(tabulate(data, headers="keys", colalign=("left",), 
-                        tablefmt="simple_outline"))
+                        tablefmt="simple"))
