@@ -4,6 +4,7 @@ This class handles creating and displaying menu's for the end user
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 import os
+import textwrap
 
 class Menu():
 
@@ -76,23 +77,24 @@ class Menu():
         return [d[k] for d in data]
 
     def footy_stats_logo(self):
-        return """
-              ______               __            _____  __          __           ______ __     ____
-             / ____/____   ____   / /_ __  __   / ___/ / /_ ____ _ / /_ _____   / ____// /    /  _/
-            / /_   / __ \ / __ \ / __// / / /   \__ \ / __// __ `// __// ___/  / /    / /     / /  
-           / __/  / /_/ // /_/ // /_ / /_/ /   ___/ // /_ / /_/ // /_ (__  )  / /___ / /___ _/ /   
-          /_/     \____/ \____/ \__/ \__, /   /____/ \__/ \__,_/ \__//____/   \____//_____//___/   
-                                    /____/                                                         
-            """
+        heading = """
+              ______            __           _____ __        __          ________    ____
+             / ____/___  ____  / /___  __   / ___// /_____ _/ /______   / ____/ /   /  _/
+            / /_  / __ \/ __ \/ __/ / / /   \__ \/ __/ __ `/ __/ ___/  / /   / /    / /  
+           / __/ / /_/ / /_/ / /_/ /_/ /   ___/ / /_/ /_/ / /_(__  )  / /___/ /____/ /   
+          /_/    \____/\____/\__/\__, /   /____/\__/\__,_/\__/____/   \____/_____/___/   
+                                /____/                                                                                                
+        """
+        return textwrap.dedent(heading)
     
     def start_screen_info(self):
         about = ("\nFooty Stats CLI is an application for all football related "
-        "data. Using the Football-Data API\nto gather data about Leagues, "
-        "Fixtures/Results, Teams and Goalscorers.\n")
+        "data. Using the\nFootball-Data API to gather data about Leagues, "
+        "Fixtures/Results, Teams\nand Goalscorers.\n")
 
         instructions = ("\nTo navigate the app, use the keyboard. [Up/Down] on "
-                        "the keyboard moves through menu options.\n[Enter] "
-                        "selects the option. [Q/ESC] navigates to the previous"
+                        "the keyboard moves\nthrough menu options. [Enter] "
+                        "selects the option. [Q/ESC] navigates to\nthe previous"
                         " menu or quits the app.\n")
         
         title = ("\nTo get started, select the LEAGUE you want to view " 
@@ -108,7 +110,7 @@ class Menu():
     
     def main_screen_info(self):
         about = ("\nFooty Stats CLI has 5 main options to choose from. For more "
-                "information on each option press [h]\n")
+                "information on\neach option press [h]\n")
 
         title = "\nSelect an option below:\n"
         return self.footy_stats_logo() + about + title
