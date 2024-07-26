@@ -97,8 +97,12 @@ class Main(Menu, ClearDisplay):
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
-
-        table = tabulate(data, headers="keys", colalign=("left",), 
+        
+        if data:
+            table = tabulate(data, headers="keys", colalign=("left",), 
+                        tablefmt="simple")
+        else:
+            table = tabulate([], headers=["No Data Found"], 
                         tablefmt="simple")
         print(table)
         
