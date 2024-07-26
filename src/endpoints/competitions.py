@@ -134,7 +134,6 @@ class Competitions(BaseEndPoint, Mixin):
         teams = []
         for t in team_data:
             team = {
-                # "ID": t["id"],
                 "Team": t["name"],
                 "Founded": t["founded"],
                 "Stadium": t["venue"]
