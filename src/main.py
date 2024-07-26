@@ -70,6 +70,7 @@ class Main(Menu, ClearDisplay):
             if not self.show_team_menu():
                 return True
         self.fetch_data(menu_sel)
+        self.clear_display()
         pause(message)  
         self.clear_display()
         return True   
