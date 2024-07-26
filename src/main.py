@@ -100,3 +100,4 @@ class Main(Menu, ClearDisplay):
         print(tabulate(data, headers="keys", colalign=("left",), 
                         tablefmt="simple"))
         data = None
+        tabulate(data)
