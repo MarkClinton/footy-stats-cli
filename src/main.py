@@ -44,7 +44,7 @@ class Main(Menu, ClearDisplay):
             return False
         
         league = self.get_league_option(menu_sel)
-        self.client = APIClient(league)
+        self.client.league = league
         return True
 
     def show_season_menu(self):
