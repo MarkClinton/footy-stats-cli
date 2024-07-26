@@ -31,6 +31,7 @@ class Main(Menu, ClearDisplay):
                 if not self.show_season_menu():
                     break
                 while menu_show:
+                    self.clear_display()
                     if not self.show_main_menu():
                         break
 
