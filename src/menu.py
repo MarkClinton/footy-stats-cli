@@ -29,7 +29,7 @@ class Menu():
             title = title,
             menu_cursor = "> ",
             menu_cursor_style = ("fg_green", "bold"),
-            menu_highlight_style = ("bg_green", "fg_blue", "bold"),
+            menu_highlight_style = ("bg_green", "fg_yellow", "bold"),
             cycle_cursor = True,
             clear_screen = True,
         )
