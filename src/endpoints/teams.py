@@ -2,10 +2,10 @@
 # Only deals with the info needed to call the team endpoint
 
 from .baseendpoint import BaseEndPoint
-from .mixin import Mixin
+from .endpointutil import EndpointUtil
 
 
-class Teams(BaseEndPoint, Mixin):
+class Teams(BaseEndPoint, EndpointUtil):
     """
     Teams() class handles fetching all Teams data. It inherits BaseEndPoint as 
     the parent to call the neccessary request functions.

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-class Mixin():
+class EndpointUtil():
 
     """
     A mixin class to handle common methods between both Competitions and 

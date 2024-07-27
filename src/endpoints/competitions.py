@@ -5,10 +5,10 @@ Only deals with the info needed to call the competitions endpoint
 
 from datetime import datetime
 from .baseendpoint import BaseEndPoint
-from .mixin import Mixin
+from .endpointutil import EndpointUtil
 
 
-class Competitions(BaseEndPoint, Mixin):
+class Competitions(BaseEndPoint, EndpointUtil):
     """
     Competitions() class handles fetching all Competition data. Uses 
     BaseEndPoint as the parent to call the neccessary request functions.
