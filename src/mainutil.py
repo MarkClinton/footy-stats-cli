@@ -79,9 +79,11 @@ class MenuUtil():
     
     def menu_title(self, identifier):
 
+        main_menu = Menu.MAIN_MESSAGE.value.format(comp=self.league_choice, 
+                                                    season=self.season_choice)
         if identifier == "main":
             about = Menu.MAIN_ABOUT.value
-            message = Menu.MAIN_MESSAGE.value
+            message = main_menu
         elif identifier == "league":
             about = Menu.LEAGUE_ABOUT.value
             message = Menu.LEAGUE_MESSAGE.value
