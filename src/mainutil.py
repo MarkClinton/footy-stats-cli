@@ -6,7 +6,7 @@ from simple_term_menu import TerminalMenu
 import os
 import textwrap
 
-class Menu():
+class MenuUtil():
 
     LEAGUES = [
             {"code": "PL", "name": "Premier League"},

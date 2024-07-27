@@ -4,11 +4,11 @@ Instantiates a new APIClient to which we can call all endpoints
 """
 from tabulate import tabulate
 from .apiclient import APIClient
-from .menu import Menu, ClearDisplay
+from .mainutil import MenuUtil, ClearDisplay
 from getch import pause
 
 
-class Main(Menu, ClearDisplay):
+class Main(MenuUtil, ClearDisplay):
     """
     Main() class that handles the app logic. Displaying data, fetching data
     and showing menu items.
