@@ -124,7 +124,7 @@ class MenuUtil():
         as menu options.
 
         :param data: list of dict items
-        :param k: the key of the value needed
+        :param k: the key of the dict value
         """
         return [d[k] for d in data]
 
@@ -134,49 +134,70 @@ class MenuUtil():
         logo = textwrap.dedent(Menu.LOGO.value)
         message = "\n Thanks for using Footy Stats CLI.\n"
         title = logo + message
-        
+
         print(title)
     
-    def league_menu(self):
+    def league_menu(self) -> bool:
+        """ 
+        The logic for the league menu. Displays the league menu options. Logs 
+        users selection and sets the APIClient instance variable league.
+        Returns bool to let the menu know how to progress.
+        """
+
         menu = self.create_menu("league")
         menu_sel = menu.show()
-
         if menu_sel == None:
             return False
-        
+
         league = self.get_menu_option("league", menu_sel)
         self.client.league = league
         return True
 
-    def season_menu(self):
+    def season_menu(self) -> bool:
+        """ 
+        The logic for the season menu. Displays the season menu options. Logs 
+        users selection and sets the APIClient instance variable season.
+        Returns bool to let the menu know how to progress.
+        """
+                
         seasons = self.client.competitions.get_competition_seasons()
         menu = self.create_menu("season", seasons)
         menu_sel = menu.show()
-
         if menu_sel == None:
             return False
-        
+
         client_season = self.get_menu_option("season", menu_sel, seasons)
         self.client.season = client_season
         return True   
 
-    def main_menu(self):
+    def main_menu(self) -> bool:
+        """ 
+        The logic for the main menu. Displays the main menu options. Logs 
+        users selection and fetchs the data.Returns bool to let the menu 
+        know how to progress.
+        """
+                
         message = "\nPress any key to go back to the Main Menu..."
         menu = self.create_menu("main")  
         menu_sel = menu.show()
-
         if menu_sel == None:
             return False
         elif menu_sel == 3:
-            if not self.show_team_menu():
+            if not self.team_menu():
                 return True
-            
+
         self.fetch_data(menu_sel)
         pause(message)  
         self.clear_display()
         return True   
 
-    def team_menu(self):
+    def team_menu(self) -> bool:
+        """ 
+        The logic for the team menu. Displays the team menu options. Logs 
+        users selection and sets the APIClient instance variable team.
+        Returns bool to let the menu know how to progress.
+        """
+                
         teams = self.client.competitions.get_list_teams()
         menu = self.create_menu("team", teams)
         menu_sel = menu.show()
@@ -184,8 +205,13 @@ class MenuUtil():
             return False
         self.client.team = self.get_menu_option("team", menu_sel, teams)
         return True
-    
-    def fetch_data(self, main_sel):
+
+    def fetch_data(self, main_sel: str):
+        """
+        Using the MAIN_MENU list it selects the option chosen by the user
+        and fetches the data from the API. Python-tabulate is used to display
+        the data in table format.
+        """
         option = self.get_menu_option("main", main_sel)
 
         if option == "comp_teams":
@@ -198,7 +224,7 @@ class MenuUtil():
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
-        
+
         if data:
             table = tabulate(data, headers="keys", colalign=("left",), 
                         tablefmt="simple")
