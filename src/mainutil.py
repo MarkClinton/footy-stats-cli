@@ -47,7 +47,14 @@ class MenuUtil():
         )
         return menu
     
-    def create_menu(self, identifier, menu_data=None):
+    def create_menu(self, identifier: str, menu_data: str=None) -> TerminalMenu:
+        """
+        Create a TerminalMenu with the necessary menu options. Returns a 
+        Terminal Menu.
+
+        :params identifier: the name of the menu
+        :params menu_data: the data to use to populate menu
+        """
 
         match identifier:
             case "main":
@@ -62,8 +69,15 @@ class MenuUtil():
         title = self.menu_title(identifier)
         return self.menu(data, title)
     
-    def get_menu_option(self, identifier, pos, menu_data=None):
+    def get_menu_option(self, identifier: str, pos: int, 
+                        menu_data: list=None) -> str:
+        """
+        Return the users selected menu option
 
+        :param identifier: the name of the menu
+        :param pos: the position of the item in the list
+        :param menu_data: the list used to populate the menu
+        """
         match identifier:
             case "main":
                 option = self.MAIN_MENU[pos]["code"]
@@ -77,7 +91,12 @@ class MenuUtil():
                 option = menu_data[pos]["ID"]
         return option
     
-    def menu_title(self, identifier):
+    def menu_title(self, identifier: str) -> str:
+        """
+        Returns the title for a menu
+
+        :param identifier: the menu name
+        """
 
         main_menu = Menu.MAIN_MESSAGE.value.format(comp=self.league_choice, 
                                                     season=self.season_choice)
