@@ -6,6 +6,7 @@ from simple_term_menu import TerminalMenu
 import os
 import textwrap
 from getch import pause
+from .enums import Menu
 
 class MenuUtil():
     """
@@ -46,80 +47,54 @@ class MenuUtil():
         )
         return menu
     
-    # League menu functionality
-    def create_league_menu(self) -> TerminalMenu:
-        """ Creates the League Menu to display to the user """
+    def create_menu(self, identifier, menu_data=None):
 
-        menu_data = [league["name"] for league in self.LEAGUES]
-        title = self.league_screen_info()
-        return self.menu(menu_data, title)
+        match identifier:
+            case "main":
+                data = [menu["option"] for menu in self.MAIN_MENU]
+            case "league":
+                data = [league["name"] for league in self.LEAGUES]
+            case "season":
+                data = self.list_to_menu_options(menu_data, "Name")
+            case "team":
+                data = self.list_to_menu_options(menu_data, "Team")
+
+        title = self.menu_title(identifier)
+        return self.menu(data, title)
     
-    def get_league_option(self, pos: int) -> str:
-        """ 
-        Finds the code for the chosen league selection 
+    def get_menu_option(self, identifier, pos, menu_data=None):
+
+        match identifier:
+            case "main":
+                option = self.MAIN_MENU[pos]["code"]
+            case "league":
+                self.league_choice = self.LEAGUES[pos]["name"]
+                option = self.LEAGUES[pos]["code"]
+            case "season":
+                self.season_choice = menu_data[pos]["Name"]
+                option = menu_data[pos]["Year"]
+            case "team":
+                option = menu_data[pos]["ID"]
+        return option
+    
+    def menu_title(self, identifier):
+
+        if identifier == "main":
+            about = Menu.MAIN_ABOUT.value
+            message = Menu.MAIN_MESSAGE.value
+        elif identifier == "league":
+            about = Menu.LEAGUE_ABOUT.value
+            message = Menu.LEAGUE_MESSAGE.value
+        elif identifier == "season":
+            about = Menu.SEASON_ABOUT.value
+            message = Menu.SEASON_MESSAGE.value
+        elif identifier == "team":
+            about = Menu.TEAM_ABOUT.value
+            message = Menu.TEAM_MESSAGE.value
         
-        :params int: postion in the list of the chosen option
-        """
-        self.league_choice = self.LEAGUES[pos]["name"]
-        return self.LEAGUES[pos]["code"]
-
-    # Main menu functionality
-    def create_main_menu(self) -> TerminalMenu:
-        """ Creates the Main Menu to display to the user """
-
-        menu_data = [menu["option"] for menu in self.MAIN_MENU]
-        title = self.main_screen_info()
-        return self.menu(menu_data, title)
-    
-    def get_main_option(self, pos) -> str:
-        """ 
-        Finds the code for the chosen main menu selection 
-        
-        :params int: postion in the list of the chosen option
-        """
-        return self.MAIN_MENU[pos]["code"]
-
-    # Season menu functionality
-    def create_season_menu(self, seasons_data: list) -> TerminalMenu:
-        """ 
-        Creates the Season Menu to display to the user 
-        
-        :param season_data: List of seasons to populate the menu options
-        """
-
-        season_data = self.list_to_menu_options(seasons_data, "Name")
-        title = self.season_screen_info()
-        return self.menu(season_data, title)
-    
-    def get_season_option(self, data: list, pos: int) -> str:
-        """
-        Finds the code for the chosen season menu selection
-
-        :param data: list of the data used in the menu options
-        :param pos: position of the chosen selection in the list
-        """
-        self.season_choice = data[pos]["Name"]
-        return data[pos]["Year"]
-
-    # Team menu functionality
-    def create_team_menu(self, teams_data: list) -> TerminalMenu:
-        """
-        Creates the Teams Menu to display to the user 
-
-        :param teams_data: list of teams to populate the menu options
-        """
-        team_data = self.list_to_menu_options(teams_data, "Team")
-        title = self.team_screen_info()
-        return self.menu(team_data, title)
-    
-    def get_team_option(self, data: list, pos: int) -> str:
-        """
-        Return the ID of the chosen team
-
-        :param data: List of teams
-        :param pos: position of the chosen selection in the list
-        """
-        return data[pos]["ID"]
+        logo = textwrap.dedent(Menu.LOGO.value)
+        title = logo + about + message
+        return title
     
     # Misc functionlaity for menus
     def list_to_menu_options(self, data: list, k: str ) -> list:
@@ -132,115 +107,41 @@ class MenuUtil():
         """
         return [d[k] for d in data]
 
-    def footy_stats_logo(self) -> str:
-        """ 
-        returns an ascii string of the Footy Stats CLI logo. dedent to 
-        remove unnecessary formatting  
-        """
-
-        heading = """
-              ______            __           _____ __        __          ________    ____
-             / ____/___  ____  / /___  __   / ___// /_____ _/ /______   / ____/ /   /  _/
-            / /_  / __ \/ __ \/ __/ / / /   \__ \/ __/ __ `/ __/ ___/  / /   / /    / /  
-           / __/ / /_/ / /_/ / /_/ /_/ /   ___/ / /_/ /_/ / /_(__  )  / /___/ /____/ /   
-          /_/    \____/\____/\__/\__, /   /____/\__/\__,_/\__/____/   \____/_____/___/   
-                                /____/                                                                                                
-        """
-        return textwrap.dedent(heading)
-    
-    def league_screen_info(self) -> str:
-        """ 
-        Builds string with information about the application and the league menu
-        and returns it 
-        """
-        
-        about = ("\nFooty Stats CLI is an application for all football related "
-        "data. Using the\nFootball-Data API to gather data about Leagues, "
-        "Fixtures/Results, Teams\nand Goalscorers.\n")
-        instructions = ("\nTo navigate the app, use the keyboard. [Up/Down] on "
-                        "the keyboard moves\nthrough menu options. [Enter] "
-                        "selects the option. [Q/ESC] navigates to\nthe previous"
-                        " menu or quits the app.\n")
-        message = ("\nTo get started, select the LEAGUE you want to view " 
-                "data for:\n")
-        title = self.footy_stats_logo() + about + instructions + message
-        
-        return title
-    
-    def season_screen_info(self) -> str:
-        """ 
-        Builds string with information about the application and the season menu
-        and returns it 
-        """
-
-        about = ("\nFooty Stats CLI shows up to 10 seasons worth of historical "
-                "data.\n")
-        message = ("\nSelect the SEASON you wish to view data for:\n")
-        title = self.footy_stats_logo() + about + message
-
-        return title
-    
-    def main_screen_info(self) -> str:
-        """ 
-        Builds string with information about the application and the main menu
-        and returns it 
-        """
-
-        about = ("\nFooty Stats CLI has 5 main options to choose from. Select "
-                "your option below\n")
-                
-        current_choice = (f'\nCompetition: {self.league_choice}\n'
-                f'Season: {self.season_choice}\n')
-        
-        title = self.footy_stats_logo() + about + current_choice
-
-        return title
-    
-    def team_screen_info(self) -> str:
-        """ 
-        Builds string with information about the application and the team menu
-        and returns it 
-        """
-
-        message = ("\nSelect a team to view their Fixtures/Results:\n")
-        title = self.footy_stats_logo() + message
-
-        return title
-    
-    def end_screen_info(self) -> str:
+    def end_screen(self) -> str:
         """ Builds string to display when the user exits the application """
 
+        logo = textwrap.dedent(Menu.LOGO.value)
         message = "\n Thanks for using Footy Stats CLI.\n"
-        title = self.footy_stats_logo() + message
+        title = logo + message
         
         print(title)
     
     def show_league_menu(self):
-        menu = self.create_league_menu()
+        menu = self.create_menu("league")
         menu_sel = menu.show()
 
         if menu_sel == None:
             return False
         
-        league = self.get_league_option(menu_sel)
+        league = self.get_menu_option("league", menu_sel)
         self.client.league = league
         return True
 
     def show_season_menu(self):
         seasons = self.client.competitions.get_competition_seasons()
-        menu = self.create_season_menu(seasons)
+        menu = self.create_menu("season", seasons)
         menu_sel = menu.show()
 
         if menu_sel == None:
             return False
         
-        client_season = self.get_season_option(seasons, menu_sel)
+        client_season = self.get_menu_option("season", menu_sel, seasons)
         self.client.season = client_season
         return True   
 
     def show_main_menu(self):
         message = "\nPress any key to go back to the Main Menu..."
-        menu = self.create_main_menu()  
+        menu = self.create_menu("main")  
         menu_sel = menu.show()
 
         if menu_sel == None:
@@ -256,15 +157,15 @@ class MenuUtil():
 
     def show_team_menu(self):
         teams = self.client.competitions.get_list_teams()
-        menu = self.create_team_menu(teams)
+        menu = self.create_menu("team", teams)
         menu_sel = menu.show()
         if menu_sel == None:
             return False
-        self.client.team = self.get_team_option(teams,menu_sel)
+        self.client.team = self.get_menu_option("team", menu_sel, teams)
         return True
     
     def fetch_data(self, main_sel):
-        option = self.get_main_option(main_sel)
+        option = self.get_menu_option("main", main_sel)
 
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()

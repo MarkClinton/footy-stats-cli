@@ -33,5 +33,5 @@ class Main(MenuUtil, ClearDisplay):
                     if not self.show_main_menu():
                         break
 
-        self.end_screen_info()
+        self.end_screen()
         
