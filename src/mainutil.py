@@ -118,7 +118,7 @@ class MenuUtil():
         
         print(title)
     
-    def show_league_menu(self):
+    def league_menu(self):
         menu = self.create_menu("league")
         menu_sel = menu.show()
 
@@ -129,7 +129,7 @@ class MenuUtil():
         self.client.league = league
         return True
 
-    def show_season_menu(self):
+    def season_menu(self):
         seasons = self.client.competitions.get_competition_seasons()
         menu = self.create_menu("season", seasons)
         menu_sel = menu.show()
@@ -141,7 +141,7 @@ class MenuUtil():
         self.client.season = client_season
         return True   
 
-    def show_main_menu(self):
+    def main_menu(self):
         message = "\nPress any key to go back to the Main Menu..."
         menu = self.create_menu("main")  
         menu_sel = menu.show()
@@ -157,7 +157,7 @@ class MenuUtil():
         self.clear_display()
         return True   
 
-    def show_team_menu(self):
+    def team_menu(self):
         teams = self.client.competitions.get_list_teams()
         menu = self.create_menu("team", teams)
         menu_sel = menu.show()
