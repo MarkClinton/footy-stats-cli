@@ -5,7 +5,6 @@ Instantiates a new APIClient to which we can call all endpoints
 from tabulate import tabulate
 from .apiclient import APIClient
 from .mainutil import MenuUtil, ClearDisplay
-from getch import pause
 
 
 class Main(MenuUtil, ClearDisplay):
@@ -34,75 +33,5 @@ class Main(MenuUtil, ClearDisplay):
                     if not self.show_main_menu():
                         break
 
-        print(self.end_screen_info())
-
-    def show_league_menu(self):
-        menu = self.create_league_menu()
-        menu_sel = menu.show()
-
-        if menu_sel == None:
-            return False
-        
-        league = self.get_league_option(menu_sel)
-        self.client.league = league
-        return True
-
-    def show_season_menu(self):
-        seasons = self.client.competitions.get_competition_seasons()
-        menu = self.create_season_menu(seasons)
-        menu_sel = menu.show()
-
-        if menu_sel == None:
-            return False
-        
-        client_season = self.get_season_option(seasons, menu_sel)
-        self.client.season = client_season
-        return True   
-
-    def show_main_menu(self):
-        message = "\nPress any key to go back to the Main Menu..."
-        menu = self.create_main_menu()  
-        menu_sel = menu.show()
-
-        if menu_sel == None:
-            return False
-        elif menu_sel == 3:
-            if not self.show_team_menu():
-                return True
-            
-        self.fetch_data(menu_sel)
-        pause(message)  
-        self.clear_display()
-        return True   
-
-    def show_team_menu(self):
-        teams = self.client.competitions.get_list_teams()
-        menu = self.create_team_menu(teams)
-        menu_sel = menu.show()
-        if menu_sel == None:
-            return False
-        self.client.team = self.get_team_option(teams,menu_sel)
-        return True
-
-    def fetch_data(self, main_sel):
-        option = self.get_main_option(main_sel)
-
-        if option == "comp_teams":
-            data = self.client.competitions.get_competition_teams()
-        elif option == "comp_standings":
-            data = self.client.competitions.get_competition_standings()
-        elif option == "comp_matches":
-            data = self.client.competitions.get_competition_matches()
-        elif option == "teams_matches":
-            data = self.client.teams.get_teams_matches()
-        elif option == "comp_goalscorers":
-            data = self.client.competitions.get_competition_goalscorers()
-        
-        if data:
-            table = tabulate(data, headers="keys", colalign=("left",), 
-                        tablefmt="simple")
-        else:
-            table = tabulate([], headers=["No Data Found"], 
-                        tablefmt="simple")
-        print(table)
+        self.end_screen_info()
         
