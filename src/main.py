@@ -25,11 +25,11 @@ class Main(MenuUtil):
         menu_show = True
 
         while menu_show:
-            menu_show = self.menu_display("league")
+            menu_show = self.display_menu("league")
             while menu_show:
-                if not self.menu_display("season"):
+                if not self.display_menu("season"):
                     break
                 while menu_show:
-                    if not self.menu_display("main"):
+                    if not self.display_menu("main"):
                         break
         self.finish()

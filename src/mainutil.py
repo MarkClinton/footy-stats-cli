@@ -66,7 +66,7 @@ class MenuUtil():
             case "team":
                 data = self.list_to_menu_options(menu_data, "Team")
 
-        title = self.menu_title(identifier)
+        title = self.get_menu_title(identifier)
         return self.menu(data, title)
     
     def get_menu_option(self, identifier: str, pos: int, 
@@ -91,7 +91,7 @@ class MenuUtil():
                 option = menu_data[pos]["ID"]
         return option
     
-    def menu_title(self, identifier: str) -> str:
+    def get_menu_title(self, identifier: str) -> str:
         """
         Returns the title for a menu
 
@@ -116,28 +116,8 @@ class MenuUtil():
         logo = textwrap.dedent(Menu.LOGO.value)
         title = logo + about + message
         return title
-    
-    # Misc functionlaity for menus
-    def list_to_menu_options(self, data: list, k: str ) -> list:
-        """
-        Takes a list of dict items and returns a clean list of strings to use
-        as menu options.
 
-        :param data: list of dict items
-        :param k: the key of the dict value
-        """
-        return [d[k] for d in data]
-
-    def finish(self) -> str:
-        """ Builds string to display when the user exits the application """
-
-        logo = textwrap.dedent(Menu.LOGO.value)
-        message = "\n Thanks for using Footy Stats CLI.\n"
-        title = logo + message
-
-        print(title)
-
-    def menu_display(self, identifier:str) -> bool:
+    def display_menu(self, identifier:str) -> bool:
         """ 
         Logic to display a menu and fetch menu options. Logs users selection 
         for League & Seasonand sets the corresponding APIClient instance 
@@ -161,7 +141,7 @@ class MenuUtil():
         match identifier:
             case "main":
                 if menu_sel == 3:
-                    if not self.menu_display("team"):
+                    if not self.display_menu("team"):
                         return True
                 self.fetch_data(menu_sel)
                 pause(message)  
@@ -177,6 +157,25 @@ class MenuUtil():
                 self.client.team = self.get_menu_option(identifier, menu_sel, 
                                                         teams)
         return True
+
+    def list_to_menu_options(self, data: list, k: str ) -> list:
+        """
+        Takes a list of dict items and returns a clean list of strings to use
+        as menu options.
+
+        :param data: list of dict items
+        :param k: the key of the dict value
+        """
+        return [d[k] for d in data]
+        
+    def finish(self) -> str:
+        """ Builds string to display when the user exits the application """
+
+        logo = textwrap.dedent(Menu.LOGO.value)
+        message = "\n Thanks for using Footy Stats CLI.\n"
+        title = logo + message
+
+        print(title)
 
     def fetch_data(self, main_sel: str):
         """
