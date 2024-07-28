@@ -98,9 +98,9 @@ class MenuUtil():
         :param identifier: the menu name
         """
 
-        main_menu = Menu.MAIN_MESSAGE.value.format(comp=self.league_choice, 
-                                                    season=self.season_choice)
         if identifier == "main":
+            main_menu = Menu.MAIN_MESSAGE.value.format(comp=self.league_choice, 
+                                                    season=self.season_choice)
             about = Menu.MAIN_ABOUT.value
             message = main_menu
         elif identifier == "league":
@@ -128,7 +128,7 @@ class MenuUtil():
         """
         return [d[k] for d in data]
 
-    def end_screen(self) -> str:
+    def finish(self) -> str:
         """ Builds string to display when the user exits the application """
 
         logo = textwrap.dedent(Menu.LOGO.value)
@@ -136,74 +136,46 @@ class MenuUtil():
         title = logo + message
 
         print(title)
-    
-    def league_menu(self) -> bool:
+
+    def menu_display(self, identifier:str) -> bool:
         """ 
-        The logic for the league menu. Displays the league menu options. Logs 
-        users selection and sets the APIClient instance variable league.
-        Returns bool to let the menu know how to progress.
+        Logic to display a menu and fetch menu options. Logs users selection 
+        for League & Seasonand sets the corresponding APIClient instance 
+        variable. Returns bool to tell the manu while loop how to progress.
         """
-
-        menu = self.create_menu("league")
-        menu_sel = menu.show()
-        if menu_sel == None:
-            return False
-
-        league = self.get_menu_option("league", menu_sel)
-        self.client.league = league
-        return True
-
-    def season_menu(self) -> bool:
-        """ 
-        The logic for the season menu. Displays the season menu options. Logs 
-        users selection and sets the APIClient instance variable season.
-        Returns bool to let the menu know how to progress.
-        """
-                
-        seasons = self.client.competitions.get_competition_seasons()
-        menu = self.create_menu("season", seasons)
-        menu_sel = menu.show()
-        if menu_sel == None:
-            return False
-
-        client_season = self.get_menu_option("season", menu_sel, seasons)
-        self.client.season = client_season
-        return True   
-
-    def main_menu(self) -> bool:
-        """ 
-        The logic for the main menu. Displays the main menu options. Logs 
-        users selection and fetchs the data.Returns bool to let the menu 
-        know how to progress.
-        """
-                
         message = "\nPress any key to go back to the Main Menu..."
-        menu = self.create_menu("main")  
+
+        if identifier == "season":
+            seasons = self.client.competitions.get_competition_seasons()
+            menu = self.create_menu(identifier, seasons)
+        elif identifier == "team":
+            teams = self.client.competitions.get_list_teams()
+            menu = self.create_menu(identifier, teams)
+        else:
+            menu = self.create_menu(identifier)
+
         menu_sel = menu.show()
         if menu_sel == None:
             return False
-        elif menu_sel == 3:
-            if not self.team_menu():
-                return True
 
-        self.fetch_data(menu_sel)
-        pause(message)  
-        self.clear_display()
-        return True   
-
-    def team_menu(self) -> bool:
-        """ 
-        The logic for the team menu. Displays the team menu options. Logs 
-        users selection and sets the APIClient instance variable team.
-        Returns bool to let the menu know how to progress.
-        """
-                
-        teams = self.client.competitions.get_list_teams()
-        menu = self.create_menu("team", teams)
-        menu_sel = menu.show()
-        if menu_sel == None:
-            return False
-        self.client.team = self.get_menu_option("team", menu_sel, teams)
+        match identifier:
+            case "main":
+                if menu_sel == 3:
+                    if not self.menu_display("team"):
+                        return True
+                self.fetch_data(menu_sel)
+                pause(message)  
+                self.clear_display()
+            case "league":
+                league = self.get_menu_option(identifier, menu_sel)
+                self.client.league = league
+            case "season":
+                season = self.get_menu_option(identifier, menu_sel, 
+                                                    seasons)
+                self.client.season = season
+            case "team":
+                self.client.team = self.get_menu_option(identifier, menu_sel, 
+                                                        teams)
         return True
 
     def fetch_data(self, main_sel: str):
@@ -232,11 +204,6 @@ class MenuUtil():
             table = tabulate([], headers=["No Data Found"], 
                         tablefmt="simple")
         print(table)
-
-class ClearDisplay():
-    """ 
-    Mixin class to handle clearing the terminal display. 
-    """
 
     def clear_display(self):
         """ Determines the OS. Clears the terminal screen. """

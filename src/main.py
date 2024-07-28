@@ -4,10 +4,10 @@ Instantiates a new APIClient to which we can call all endpoints
 """
 from tabulate import tabulate
 from .apiclient import APIClient
-from .mainutil import MenuUtil, ClearDisplay
+from .mainutil import MenuUtil
 
 
-class Main(MenuUtil, ClearDisplay):
+class Main(MenuUtil):
     """
     Main() class that handles the app logic. Displaying data, fetching data
     and showing menu items.
@@ -16,7 +16,7 @@ class Main(MenuUtil, ClearDisplay):
     """
 
     def __init__(self): 
-        # Initialize default APIClient
+        # Initialize a default APIClient
         self.client = APIClient("PL")   
         self.start()
         
@@ -25,11 +25,11 @@ class Main(MenuUtil, ClearDisplay):
         menu_show = True
 
         while menu_show:
-            menu_show = self.league_menu()
+            menu_show = self.menu_display("league")
             while menu_show:
-                if not self.season_menu():
+                if not self.menu_display("season"):
                     break
                 while menu_show:
-                    if not self.main_menu():
+                    if not self.menu_display("main"):
                         break
-        self.end_screen()
+        self.finish()
