@@ -21,13 +21,19 @@ class MenuUtil():
             {"code": "SA", "name": "Serie A"}
         ]
     
-    MAIN_MENU = [
+    MAIN_MENU_OPTIONS = [
             {"code": "comp_teams", "option": "Show All Teams"},
             {"code": "comp_standings", "option": "Show League Table"},
             {"code": "comp_matches", "option": "Show All Fixtures/Results"},
             {"code": "teams_matches", "option": "Show Teams Fixtures/Results"},
             {"code": "comp_goalscorers", "option": "Show Top 10 Goalscorers"}
         ] 
+    
+    LEAGUE_MENU = "league"
+    MAIN_MENU = "main"
+    SEASON_MENU = "season"
+    TEAM_MENU = "team"
+
 
     def menu(self, menu_options: list, title: str) -> TerminalMenu:
         """
@@ -57,13 +63,13 @@ class MenuUtil():
         """
 
         match identifier:
-            case "main":
-                data = [menu["option"] for menu in self.MAIN_MENU]
-            case "league":
+            case self.MAIN_MENU:
+                data = [menu["option"] for menu in self.MAIN_MENU_OPTIONS]
+            case self.LEAGUE_MENU:
                 data = [league["name"] for league in self.LEAGUES]
-            case "season":
+            case self.SEASON_MENU:
                 data = self.list_to_menu_options(menu_data, "Name")
-            case "team":
+            case self.SEASON_MENU:
                 data = self.list_to_menu_options(menu_data, "Team")
 
         title = self.get_menu_title(identifier)
@@ -79,15 +85,15 @@ class MenuUtil():
         :param menu_data: the list used to populate the menu
         """
         match identifier:
-            case "main":
-                option = self.MAIN_MENU[pos]["code"]
-            case "league":
+            case self.MAIN_MENU:
+                option = self.MAIN_MENU_OPTIONS[pos]["code"]
+            case self.LEAGUE_MENU:
                 self.league_choice = self.LEAGUES[pos]["name"]
                 option = self.LEAGUES[pos]["code"]
-            case "season":
+            case self.SEASON_MENU:
                 self.season_choice = menu_data[pos]["Name"]
                 option = menu_data[pos]["Year"]
-            case "team":
+            case self.TEAM_MENU:
                 option = menu_data[pos]["ID"]
         return option
     
@@ -98,18 +104,18 @@ class MenuUtil():
         :param identifier: the menu name
         """
 
-        if identifier == "main":
+        if identifier == self.MAIN_MENU:
             main_menu = Menu.MAIN_MESSAGE.value.format(comp=self.league_choice, 
                                                     season=self.season_choice)
             about = Menu.MAIN_ABOUT.value
             message = main_menu
-        elif identifier == "league":
+        elif identifier == self.LEAGUE_MENU:
             about = Menu.LEAGUE_ABOUT.value
             message = Menu.LEAGUE_MESSAGE.value
-        elif identifier == "season":
+        elif identifier == self.SEASON_MENU:
             about = Menu.SEASON_ABOUT.value
             message = Menu.SEASON_MESSAGE.value
-        elif identifier == "team":
+        elif identifier == self.TEAM_MENU:
             about = Menu.TEAM_ABOUT.value
             message = Menu.TEAM_MESSAGE.value
         
@@ -125,10 +131,10 @@ class MenuUtil():
         """
         message = "\nPress any key to go back to the Main Menu..."
 
-        if identifier == "season":
+        if identifier == self.SEASON_MENU:
             seasons = self.client.competitions.get_competition_seasons()
             menu = self.create_menu(identifier, seasons)
-        elif identifier == "team":
+        elif identifier == self.TEAM_MENU:
             teams = self.client.competitions.get_list_teams()
             menu = self.create_menu(identifier, teams)
         else:
@@ -139,21 +145,21 @@ class MenuUtil():
             return False
 
         match identifier:
-            case "main":
+            case self.MAIN_MENU:
                 if menu_sel == 3:
-                    if not self.display_menu("team"):
+                    if not self.display_menu(self.TEAM_MENU):
                         return True
                 self.fetch_data(menu_sel)
                 pause(message)  
                 self.clear_display()
-            case "league":
+            case self.LEAGUE_MENU:
                 league = self.get_menu_option(identifier, menu_sel)
                 self.client.league = league
-            case "season":
+            case self.SEASON_MENU:
                 season = self.get_menu_option(identifier, menu_sel, 
                                                     seasons)
                 self.client.season = season
-            case "team":
+            case self.TEAM_MENU:
                 self.client.team = self.get_menu_option(identifier, menu_sel, 
                                                         teams)
         return True
@@ -179,11 +185,11 @@ class MenuUtil():
 
     def fetch_data(self, main_sel: str):
         """
-        Using the MAIN_MENU list it selects the option chosen by the user
+        Using the MAIN_MENU_OPTIONS list it selects the option chosen by the user
         and fetches the data from the API. Python-tabulate is used to display
         the data in table format.
         """
-        option = self.get_menu_option("main", main_sel)
+        option = self.get_menu_option(self.MAIN_MENU, main_sel)
 
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
