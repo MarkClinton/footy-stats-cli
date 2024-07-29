@@ -1,7 +1,5 @@
-from enum import Enum
 
-
-class Menu(Enum):
+class AppText():
     LEAGUE_ABOUT = ("\nLEAGUE MENU\nFooty Stats CLI has 5 League options to ")
     LEAGUE_MESSAGE = ("choose from\n\nSelect the LEAGUE you want to view "
                       "data for:\n")

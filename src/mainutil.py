@@ -6,7 +6,7 @@ import textwrap
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from getch import pause
-from .enums import Menu
+from .apptext import AppText
 
 
 class MenuUtil():
@@ -118,25 +118,25 @@ class MenuUtil():
         """
 
         if identifier == self.MAIN_MENU:
-            main_menu = Menu.MAIN_MESSAGE.value.format(
+            main_menu = AppText.MAIN_MESSAGE.format(
                                             comp=self.league_choice,
                                             season=self.season_choice)
-            about = Menu.MAIN_ABOUT.value
+            about = AppText.MAIN_ABOUT
             message = main_menu
         elif identifier == self.LEAGUE_MENU:
-            about = Menu.LEAGUE_ABOUT.value
-            message = Menu.LEAGUE_MESSAGE.value
+            about = AppText.LEAGUE_ABOUT
+            message = AppText.LEAGUE_MESSAGE
         elif identifier == self.START_MENU:
-            about = Menu.START_ABOUT.value
-            message = Menu.START_MESSAGE.value
+            about = AppText.START_ABOUT
+            message = AppText.START_MESSAGE
         elif identifier == self.SEASON_MENU:
-            about = Menu.SEASON_ABOUT.value
-            message = Menu.SEASON_MESSAGE.value
+            about = AppText.SEASON_ABOUT
+            message = AppText.SEASON_MESSAGE
         elif identifier == self.TEAM_MENU:
-            about = Menu.TEAM_ABOUT.value
-            message = Menu.TEAM_MESSAGE.value
+            about = AppText.TEAM_ABOUT
+            message = AppText.TEAM_MESSAGE
 
-        logo = textwrap.dedent(Menu.LOGO.value)
+        logo = textwrap.dedent(AppText.LOGO)
         title = logo + about + message
         return title
 
@@ -194,13 +194,13 @@ class MenuUtil():
         :param sel: int of the users menu selection
         """
         message = "\nPress any key to go back to the Start Menu..."
-        logo = textwrap.dedent(Menu.LOGO.value)
+        logo = textwrap.dedent(AppText.LOGO)
         if sel == 1:
-            help_message = Menu.HELP_MESSAGE.value
+            help_message = AppText.HELP_MESSAGE
             print(logo + help_message)
             pause(message)
         elif sel == 2:
-            about_message = Menu.ABOUT_MESSAGE.value
+            about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
             pause(message)
         self.clear_display()
@@ -219,7 +219,7 @@ class MenuUtil():
     def finish(self) -> str:
         """ Builds string to display when the user exits the application """
 
-        logo = textwrap.dedent(Menu.LOGO.value)
+        logo = textwrap.dedent(AppText.LOGO)
         message = "\n Thanks for using Footy Stats CLI.\n"
         title = logo + message
 
