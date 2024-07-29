@@ -4,7 +4,7 @@ from datetime import datetime
 class EndpointUtil():
     """
     A mixin class to handle common methods between both Competitions and
-     Team class.
+    Team class.
     """
 
     def clean_matches_list(self, match_data) -> list:

@@ -15,7 +15,7 @@ class MenuUtil():
     Mixin class to handle all menu functionality
     """
 
-    LEAGUES = [
+    LEAGUE_MENU_OPTIONS = [
             {"code": "PL", "name": "Premier League"},
             {"code": "FL1", "name": "Ligue 1"},
             {"code": "PD", "name": "La Liga"},
@@ -30,7 +30,14 @@ class MenuUtil():
             {"code": "teams_matches", "option": "Show Teams Fixtures/Results"},
             {"code": "comp_goalscorers", "option": "Show Top 10 Goalscorers"}
         ]
+    
+    START_MENU_OPTIONS = [
+        {"code": "start", "option": "Start"},
+        {"code": "help", "option": "Help"},
+        {"code": "about", "option": "About Footy Stats CLI"}
+    ]
 
+    START_MENU = "start"
     LEAGUE_MENU = "league"
     MAIN_MENU = "main"
     SEASON_MENU = "season"
@@ -58,7 +65,7 @@ class MenuUtil():
                     menu_data: str = None) -> TerminalMenu:
         """
         Create a TerminalMenu with the necessary menu options. Returns a
-         Terminal Menu.
+        Terminal Menu.
 
         :params identifier: the name of the menu
         :params menu_data: the data to use to populate menu
@@ -68,7 +75,9 @@ class MenuUtil():
             case self.MAIN_MENU:
                 data = [menu["option"] for menu in self.MAIN_MENU_OPTIONS]
             case self.LEAGUE_MENU:
-                data = [league["name"] for league in self.LEAGUES]
+                data = [league["name"] for league in self.LEAGUE_MENU_OPTIONS]
+            case self.START_MENU:
+                data = [start["option"] for start in self.START_MENU_OPTIONS]
             case self.SEASON_MENU:
                 data = self.list_to_menu_options(menu_data, "Name")
             case self.SEASON_MENU:
@@ -90,8 +99,10 @@ class MenuUtil():
             case self.MAIN_MENU:
                 option = self.MAIN_MENU_OPTIONS[pos]["code"]
             case self.LEAGUE_MENU:
-                self.league_choice = self.LEAGUES[pos]["name"]
-                option = self.LEAGUES[pos]["code"]
+                self.league_choice = self.LEAGUE_MENU_OPTIONS[pos]["name"]
+                option = self.LEAGUE_MENU_OPTIONS[pos]["code"]
+            case self.START_MENU:
+                option = self.START_MENU_OPTIONS[pos]["code"]
             case self.SEASON_MENU:
                 self.season_choice = menu_data[pos]["Name"]
                 option = menu_data[pos]["Year"]
@@ -115,6 +126,9 @@ class MenuUtil():
         elif identifier == self.LEAGUE_MENU:
             about = Menu.LEAGUE_ABOUT.value
             message = Menu.LEAGUE_MESSAGE.value
+        elif identifier == self.START_MENU:
+            about = Menu.START_ABOUT.value
+            message = Menu.START_MESSAGE.value
         elif identifier == self.SEASON_MENU:
             about = Menu.SEASON_ABOUT.value
             message = Menu.SEASON_MESSAGE.value
@@ -129,8 +143,8 @@ class MenuUtil():
     def display_menu(self, identifier: str) -> bool:
         """
         Logic to display a menu and fetch menu options. Logs users selection
-         for League & Seasonand sets the corresponding APIClient instance
-         variable. Returns bool to tell the manu while loop how to progress.
+        for League & Seasonand sets the corresponding APIClient instance
+        variable. Returns bool to tell the manu while loop how to progress.
         """
         message = "\nPress any key to go back to the Main Menu..."
 
@@ -158,6 +172,10 @@ class MenuUtil():
             case self.LEAGUE_MENU:
                 league = self.get_menu_option(identifier, menu_sel)
                 self.client.league = league
+            case self.START_MENU:
+                if menu_sel != 0:
+                    if not self.handle_start_menu(menu_sel):
+                        return self.display_menu(self.START_MENU)
             case self.SEASON_MENU:
                 season = self.get_menu_option(identifier, menu_sel,
                                               seasons)
@@ -166,6 +184,16 @@ class MenuUtil():
                 self.client.team = self.get_menu_option(identifier, menu_sel,
                                                         teams)
         return True
+
+    def handle_start_menu(self, sel: int) -> bool:
+        message = "\nPress any key to go back to the Start Menu..."
+        if sel == 1:
+            print("Help")
+            pause(message)
+        elif sel == 2:
+            print("About")
+            pause(message)
+        return False
 
     def list_to_menu_options(self, data: list, k: str) -> list:
         """
@@ -189,8 +217,8 @@ class MenuUtil():
     def fetch_data(self, main_sel: str):
         """
         Using the MAIN_MENU_OPTIONS list it selects the option chosen by the
-         user and fetches the data from the API. Python-tabulate is used to
-         display the data in table format.
+        user and fetches the data from the API. Python-tabulate is used to
+        display the data in table format.
         """
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
 

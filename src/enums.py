@@ -2,13 +2,7 @@ from enum import Enum
 
 
 class Menu(Enum):
-    LEAGUE_ABOUT = ("\nFooty Stats CLI is an application for all football "
-                    "related data. Using the\nFootball-Data API to gather data"
-                    " about Leagues, Fixtures/Results, Teams\nand Goalscorers."
-                    "\n\nTo navigate the app on the keyboard. [Up/Down] on "
-                    "moves\nthrough menu options. [Enter] selects the option. "
-                    "[Q/ESC] navigates to\nthe previous menu or quits the "
-                    "app.\n")
+    LEAGUE_ABOUT = ("\nFooty Stats CLI has 5 League options to choose from\n")
     LEAGUE_MESSAGE = ("\nTo get started, select the LEAGUE you want to view "
                       "data for:\n")
     MAIN_ABOUT = ("\nFooty Stats CLI has 5 main options to choose from. "
@@ -20,6 +14,14 @@ class Menu(Enum):
     SEASON_MESSAGE = ("\nSelect the SEASON you wish to view data for:\n")
     TEAM_ABOUT = ("\nBelow shows the full list of available teams\n")
     TEAM_MESSAGE = ("\nSelect a team to view their Fixtures/Results:\n")
+    START_ABOUT = ("\nFooty Stats CLI is an application for all football "
+                    "related data. Using the\nFootball-Data API to gather data"
+                    " about Leagues, Fixtures/Results, Teams\nand Goalscorers."
+                    "\n\nTo navigate the app on the keyboard. [Up/Down] on "
+                    "moves\nthrough menu options. [Enter] selects the option. "
+                    "[Q/ESC] navigates to\nthe previous menu or quits the "
+                    "app.\n")
+    START_MESSAGE = ("\nSelect an option below:\n")
     LOGO = ("""
               ______            __           _____ __        __          ________    ____
              / ____/___  ____  / /___  __   / ___// /_____ _/ /______   / ____/ /   /  _/
