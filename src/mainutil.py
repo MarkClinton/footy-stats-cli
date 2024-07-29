@@ -186,6 +186,13 @@ class MenuUtil():
         return True
 
     def handle_start_menu(self, sel: int) -> bool:
+        """
+        Functionality for the start menu. Depending on the selection show the 
+        corresponding information. Returns false to signal to show the start
+        menu again.
+
+        :param sel: int of the users menu selection
+        """
         message = "\nPress any key to go back to the Start Menu..."
         logo = textwrap.dedent(Menu.LOGO.value)
         if sel == 1:
