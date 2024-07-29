@@ -1,5 +1,5 @@
 """
-This is a class that will get the competition data 
+This is a class that will get the competition data
 Only deals with the info needed to call the competitions endpoint
 """
 
@@ -10,7 +10,7 @@ from .endpointutil import EndpointUtil
 
 class Competitions(BaseEndPoint, EndpointUtil):
     """
-    Competitions() class handles fetching all Competition data. Uses 
+    Competitions() class handles fetching all Competition data. Uses
     BaseEndPoint as the parent to call the neccessary request functions.
     """
 
@@ -20,49 +20,49 @@ class Competitions(BaseEndPoint, EndpointUtil):
         """ Get a list of competitions availables """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
-        return(
+        return (
             self.process_response(response, "competitions")
         )
-    
+
     def get_competition_seasons(self) -> list:
         """  Get a list of seasons available for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
-        return(
+        return (
             self.clean_season_list(self.process_response(response, "seasons"))
         )
-    
+
     def get_competition_teams(self) -> list:
         """ Get a list of teams that take part in a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return(
+        return (
             self.clean_team_list(self.process_response(response, "teams"))
         )
-    
+
     def get_competition_standings(self) -> list:
         """ Get the league table for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
-        return(
+        return (
             self.clean_standings_list(
                 self.process_response(response, "standings")
             )
         )
-    
+
     def get_list_teams(self) -> list:
         """ Get a list of dicts of teams and their ID's """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return(
+        return (
             self.get_team_ids(self.process_response(response, "teams"))
         )
-    
+
     def get_competition_goalscorers(self) -> list:
         """ Get the top 10 goalscorers for a season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
-        return(
+        return (
             self.clean_scorers_list(self.process_response(response, "scorers"))
         )
 
@@ -70,7 +70,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
         """ Get all matches for a competition for a certain season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
-        return(
+        return (
             self.clean_matches_list(self.process_response(response, "matches"))
         )
 
@@ -119,7 +119,8 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 # "Goal Difference": s["goalDifference"]
             }
             standings.append(standing)
-        # Sort list of dict items in descending order with respect to Points value
+        # Sort list of dict items in descending order with respect to Points
+        # value
         sorted(standings, key=lambda x: x['Points'], reverse=True)
         return standings
 
@@ -130,7 +131,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params team_data: list of teams with team data
         """
-        
+
         teams = []
         for t in team_data:
             team = {
@@ -142,7 +143,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
             teams.append(team)
 
         return teams
-    
+
     @staticmethod
     def get_team_ids(team_data: list) -> list:
         """
@@ -150,7 +151,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params team_data: list of teams with team data
         """
-        
+
         teams = []
         for t in team_data:
             team = {
@@ -173,12 +174,14 @@ class Competitions(BaseEndPoint, EndpointUtil):
         amount = len(season_data) if len(season_data) < 10 else 10
 
         for i in range(amount):
-            start_year = datetime.strptime(season_data[i]["startDate"], '%Y-%m-%d').year
-            end_year =  datetime.strptime(season_data[i]["endDate"], '%Y-%m-%d').year
+            start_year = datetime.strptime(season_data[i]["startDate"],
+                                           '%Y-%m-%d').year
+            end_year = datetime.strptime(season_data[i]["endDate"],
+                                         '%Y-%m-%d').year
             season = {
-                "Year": start_year, 
+                "Year": start_year,
                 "Name": f'{start_year}/{end_year}'
             }
             seasons.append(season)
-            
+
         return seasons
