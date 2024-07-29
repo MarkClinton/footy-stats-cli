@@ -1,6 +1,6 @@
 """
 This file will intialise the API and be used to get all the endpoints
-i.e. APIClient.competitions.getCompetitionsList(), 
+i.e. APIClient.competitions.getCompetitionsList(),
 APIClient.matches.getMatchesList()
 """
 
@@ -12,13 +12,13 @@ class APIClient(BaseClient):
 
     """
     The API Client that handles all the API operations. Accepts parameters
-    for the API such as league, season and team. 
+    for the API such as league, season and team.
     """
-    
-    def __init__(self, league: str, season: str=None, team: int=None):
+
+    def __init__(self, league: str, season: str = None, team: int = None):
         """
-        Initialize the APIClient with a league to start. Optional for season and
-        team.
+        Initialize the APIClient with a league to start. Optional for season
+         and team.
 
         :param league: league name or identifier
         :param season: season year
@@ -29,5 +29,5 @@ class APIClient(BaseClient):
         self.competitions = endpoints.Competitions(self)
         self.teams = endpoints.Teams(self)
         # Pass the instance of APIClient to the Competitions class. Provides
-        # a reference of the instance allowing Competitions() to interact with 
+        # a reference of the instance allowing Competitions() to interact with
         # it.
