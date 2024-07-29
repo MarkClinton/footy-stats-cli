@@ -53,12 +53,12 @@ class BaseEndPoint:
         match(resource):
             case "teams":
                 uri = f'{self.client.url}{resource}/{self.client.team}/'
-                '{subresource}'
+                f'{subresource}'
                 params["competition"] = self.client.league
             case "competitions":
                 if (subresource):
-                    uri = f'{self.client.url}{resource}/{self.client.league}/'
-                    '{subresource}'
+                    uri = (f'{self.client.url}{resource}/{self.client.league}/'
+                    f'{subresource}')
                 else:
                     uri = f'{self.client.url}{resource}/{self.client.league}'
         return [uri, params]

@@ -16,11 +16,11 @@ class MenuUtil():
     """
 
     LEAGUE_MENU_OPTIONS = [
-            {"code": "PL", "name": "Premier League"},
-            {"code": "FL1", "name": "Ligue 1"},
-            {"code": "PD", "name": "La Liga"},
-            {"code": "BL1", "name": "Bundesliga"},
-            {"code": "SA", "name": "Serie A"}
+            {"code": "PL", "option": "Premier League"},
+            {"code": "FL1", "option": "Ligue 1"},
+            {"code": "PD", "option": "La Liga"},
+            {"code": "BL1", "option": "Bundesliga"},
+            {"code": "SA", "option": "Serie A"}
         ]
 
     MAIN_MENU_OPTIONS = [
@@ -75,7 +75,7 @@ class MenuUtil():
             case self.MAIN_MENU:
                 data = [menu["option"] for menu in self.MAIN_MENU_OPTIONS]
             case self.LEAGUE_MENU:
-                data = [league["name"] for league in self.LEAGUE_MENU_OPTIONS]
+                data = [league["option"] for league in self.LEAGUE_MENU_OPTIONS]
             case self.START_MENU:
                 data = [start["option"] for start in self.START_MENU_OPTIONS]
             case self.SEASON_MENU:
@@ -99,7 +99,7 @@ class MenuUtil():
             case self.MAIN_MENU:
                 option = self.MAIN_MENU_OPTIONS[pos]["code"]
             case self.LEAGUE_MENU:
-                self.league_choice = self.LEAGUE_MENU_OPTIONS[pos]["name"]
+                self.league_choice = self.LEAGUE_MENU_OPTIONS[pos]["option"]
                 option = self.LEAGUE_MENU_OPTIONS[pos]["code"]
             case self.START_MENU:
                 option = self.START_MENU_OPTIONS[pos]["code"]
