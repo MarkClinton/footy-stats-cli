@@ -2,10 +2,9 @@ from datetime import datetime
 
 
 class EndpointUtil():
-
     """
-    A mixin class to handle common methods between both Competitions and 
-    Team class.
+    A mixin class to handle common methods between both Competitions and
+     Team class.
     """
 
     def clean_matches_list(self, match_data) -> list:
@@ -25,8 +24,9 @@ class EndpointUtil():
             score = f'{home_score}-{away_score}'
 
             format_date = datetime.strptime(m["utcDate"], '%Y-%m-%dT%H:%M:%SZ')
-            match_date = f'{format_date.day}/{format_date.month}/{format_date.year}'
-            
+            match_date = f'{format_date.day}/{format_date.month}/'
+            '{format_date.year}'
+
             match = {
                 "Date": match_date,
                 "Home": home_team,
