@@ -2,24 +2,25 @@ from enum import Enum
 
 
 class Menu(Enum):
-    LEAGUE_ABOUT = ("\nFooty Stats CLI has 5 League options to choose from\n")
-    LEAGUE_MESSAGE = ("\nTo get started, select the LEAGUE you want to view "
+    LEAGUE_ABOUT = ("\nLEAGUE MENU\nFooty Stats CLI has 5 League options to ")
+    LEAGUE_MESSAGE = ("choose from\n\nSelect the LEAGUE you want to view "
                       "data for:\n")
-    MAIN_ABOUT = ("\nFooty Stats CLI has 5 main options to choose from. "
-                  "Select your option below\n")
+    MAIN_ABOUT = ("\nMAIN MENU\nFooty Stats CLI has 5 main options to choose "
+                  "from. Select your option below\n")
     MAIN_MESSAGE = ("\nCompetition: {comp}\n"
                     "Season: {season}\n")
-    SEASON_ABOUT = ("\nFooty Stats CLI shows up to 10 seasons worth of"
-                    " historical data.\n")
+    SEASON_ABOUT = ("\nSEASON MENU\nFooty Stats CLI shows up to 10 seasons "
+                    "worth of historical data.\n")
     SEASON_MESSAGE = ("\nSelect the SEASON you wish to view data for:\n")
-    TEAM_ABOUT = ("\nBelow shows the full list of available teams\n")
+    TEAM_ABOUT = ("\nTEAM MENU\nBelow shows the full list of available teams\n")
     TEAM_MESSAGE = ("\nSelect a team to view their Fixtures/Results:\n")
-    START_ABOUT = ("\nFooty Stats CLI is an application for all football "
-                    "related data. Using the\nFootball-Data API to gather data"
-                    " about Leagues, Fixtures/Results, Teams\nand Goalscorers."
-                    "\n\nNavigate the app using the keyboard. [Up/Down] "
-                    "moves through menu options.\n[Enter] selects the option. "
-                    "Click the Help option below for more\ninformation\n")
+    START_ABOUT = ("\nSTART MENU\nFooty Stats CLI is an application for all "
+                    "football related data. Using the\nFootball-Data API to "
+                    "gather data about Leagues, Fixtures/Results, Teams\nand "
+                    "Goalscorers.\n\nNavigate the app using the keyboard. "
+                    "[Up/Down] moves through menu options.\n[Enter] selects the "
+                    "option. Click the Help option below for more"
+                    "\ninformation\n")
     START_MESSAGE = ("\nSelect an option below:\n")
     LOGO = ("""
               ______            __           _____ __        __          ________    ____
