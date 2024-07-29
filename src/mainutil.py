@@ -187,11 +187,14 @@ class MenuUtil():
 
     def handle_start_menu(self, sel: int) -> bool:
         message = "\nPress any key to go back to the Start Menu..."
+        logo = textwrap.dedent(Menu.LOGO.value)
         if sel == 1:
-            print("Help")
+            help_message = Menu.HELP_MESSAGE.value
+            print(logo + help_message)
             pause(message)
         elif sel == 2:
-            print("About")
+            about_message = Menu.ABOUT_MESSAGE.value
+            print(logo + about_message)
             pause(message)
         return False
 

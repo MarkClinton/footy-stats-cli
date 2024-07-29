@@ -17,10 +17,9 @@ class Menu(Enum):
     START_ABOUT = ("\nFooty Stats CLI is an application for all football "
                     "related data. Using the\nFootball-Data API to gather data"
                     " about Leagues, Fixtures/Results, Teams\nand Goalscorers."
-                    "\n\nTo navigate the app on the keyboard. [Up/Down] on "
-                    "moves\nthrough menu options. [Enter] selects the option. "
-                    "[Q/ESC] navigates to\nthe previous menu or quits the "
-                    "app.\n")
+                    "\n\nNavigate the app using the keyboard. [Up/Down] "
+                    "moves through menu options.\n[Enter] selects the option. "
+                    "Click the Help option below for more\ninformation\n")
     START_MESSAGE = ("\nSelect an option below:\n")
     LOGO = ("""
               ______            __           _____ __        __          ________    ____
@@ -30,3 +29,27 @@ class Menu(Enum):
           /_/    \____/\____/\__/\__, /   /____/\__/\__,_/\__/____/   \____/_____/___/   
                                 /____/ 
             """)
+    HELP_MESSAGE = ("\nFooty Stats CLI uses the keyboard to navigate menu "
+                    "options. See the\ncheatsheet below on how to use Footy "
+                    "Stats CLI:\n\n[UP/DOWN] Keyboard Arrows: Navigate menu "
+                    "items. The cursor will cycle\nthrough the available items "
+                    "if you reach the end of the list.\n\n[ENTER]: Clicking "
+                    "enter on the keyboard will select the option and\neither "
+                    "display the data you have chosen or progress to the next "
+                    "menu.\n\n[Q/ESC]: Click [Q] or [ESC] on the keyboard to "
+                    "either go back to the\nprevious menu or exit the program "
+                    "depending on what menu screen\nyou are on. Clicking [Q] "
+                    "or [ESC] on the Start Menu screen will exit\nthe program."
+                    "\n\n[ANY KEY]: When data is displayed to a user "
+                    "(just like\nit is now) a message will appear at the bottom "
+                    "of the screen.\nPressing [ANY KEY] will being them back "
+                    "to the previous menu.")
+    ABOUT_MESSAGE = ("\nFooty Stats CLI is a command line interface application"
+                     " built using Python.\nIt utilises the football-data.org "
+                     "API [https://www.football-data.org/] to\nsupply all the "
+                     "data.\n\nAvailable Resources:\nLeagues: Premier League,"
+                     " Ligue 1, La Liga, Bundesliga, Serie A\nSeasons: Last "
+                     "10 years.\nData: Teams, League Table"
+                     ", Fixtures & Results, Top 10 Goalscorers\n\n"
+                     "Github Repo: https://github.com/MarkClinton/"
+                     "footy-stats-cli")
