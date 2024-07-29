@@ -4,6 +4,7 @@ Only deals with the info needed to call the competitions endpoint
 """
 
 from datetime import datetime
+from getch import pause
 from .baseendpoint import BaseEndPoint
 from .endpointutil import EndpointUtil
 
@@ -28,51 +29,75 @@ class Competitions(BaseEndPoint, EndpointUtil):
         """  Get a list of seasons available for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
-        return (
-            self.clean_season_list(self.process_response(response, "seasons"))
-        )
+        if response.status_code != 200:
+            print("Oops sorry, " + response.json()["message"])
+            pause()
+            return False
+        else:
+            return (
+                self.clean_season_list(self.process_response(response, 
+                                                             "seasons"))
+            )
 
     def get_competition_teams(self) -> list:
         """ Get a list of teams that take part in a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return (
-            self.clean_team_list(self.process_response(response, "teams"))
-        )
+        if response.status_code != 200:
+            return [response.json()]
+        else:
+            return (
+                self.clean_team_list(self.process_response(response, "teams"))
+            )
 
     def get_competition_standings(self) -> list:
         """ Get the league table for a competition """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
-        return (
-            self.clean_standings_list(
-                self.process_response(response, "standings")
+        if response.status_code != 200:
+            return [response.json()]
+        else:
+            return (
+                self.clean_standings_list(
+                    self.process_response(response, "standings")
+                )
             )
-        )
 
     def get_list_teams(self) -> list:
         """ Get a list of dicts of teams and their ID's """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
-        return (
-            self.get_team_ids(self.process_response(response, "teams"))
-        )
+        if response.status_code != 200:
+            print("Oops sorry, " + response.json()["message"])
+            pause()
+            return False
+        else:
+            return (
+                self.get_team_ids(self.process_response(response, "teams"))
+            )
 
     def get_competition_goalscorers(self) -> list:
         """ Get the top 10 goalscorers for a season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
-        return (
-            self.clean_scorers_list(self.process_response(response, "scorers"))
-        )
+        if response.status_code != 200:
+            return [response.json()]
+        else:
+            return (
+                self.clean_scorers_list(self.process_response(response, "scorers"))
+            )
 
     def get_competition_matches(self) -> list:
         """ Get all matches for a competition for a certain season """
 
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
-        return (
-            self.clean_matches_list(self.process_response(response, "matches"))
-        )
+        if response.status_code != 200:
+            return [response.json()]
+        else:
+            return (
+                self.clean_matches_list(self.process_response(response, 
+                                                              "matches"))
+            )
 
     @staticmethod
     def clean_scorers_list(scorers_data: list) -> list:

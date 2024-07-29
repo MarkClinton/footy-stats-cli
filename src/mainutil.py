@@ -150,9 +150,13 @@ class MenuUtil():
 
         if identifier == self.SEASON_MENU:
             seasons = self.client.competitions.get_competition_seasons()
+            if not seasons:
+                return False
             menu = self.create_menu(identifier, seasons)
         elif identifier == self.TEAM_MENU:
             teams = self.client.competitions.get_list_teams()
+            if not teams:
+                return False
             menu = self.create_menu(identifier, teams)
         else:
             menu = self.create_menu(identifier)
@@ -243,7 +247,6 @@ class MenuUtil():
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
-
         if data:
             table = tabulate(data, headers="keys", colalign=("left",),
                              tablefmt="simple")

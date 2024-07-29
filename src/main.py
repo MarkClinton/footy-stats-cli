@@ -17,7 +17,7 @@ class Main(MenuUtil):
 
     def __init__(self): 
         # Initialize a default APIClient
-        self.client = APIClient("PL")   
+        self.client = APIClient("PL")
         self.start()
         
 
