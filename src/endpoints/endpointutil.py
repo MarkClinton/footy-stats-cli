@@ -21,7 +21,10 @@ class EndpointUtil():
             home_score = m["score"]["fullTime"]["home"]
             away_team = m["awayTeam"]["name"]
             away_score = m["score"]["fullTime"]["away"]
-            score = f'{home_score}-{away_score}'
+            if home_score is None and away_score is None:
+                score = "-"
+            else:
+                score = f'{home_score}-{away_score}'
 
             format_date = datetime.strptime(m["utcDate"], '%Y-%m-%dT%H:%M:%SZ')
             match_date = (f'{format_date.day}/{format_date.month}/'
