@@ -80,7 +80,7 @@ class MenuUtil():
                 data = [start["option"] for start in self.START_MENU_OPTIONS]
             case self.SEASON_MENU:
                 data = self.list_to_menu_options(menu_data, "Name")
-            case self.SEASON_MENU:
+            case self.TEAM_MENU:
                 data = self.list_to_menu_options(menu_data, "Team")
 
         title = self.get_menu_title(identifier)
