@@ -203,6 +203,7 @@ class MenuUtil():
             about_message = Menu.ABOUT_MESSAGE.value
             print(logo + about_message)
             pause(message)
+        self.clear_display()
         return False
 
     def list_to_menu_options(self, data: list, k: str) -> list:
