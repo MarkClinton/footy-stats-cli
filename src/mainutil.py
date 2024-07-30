@@ -263,7 +263,7 @@ class MenuUtil():
                             tablefmt="simple")
             print(table)
 
-    def paginate(self, data):
+    def paginate(self, data: list):
 
         # Show 18 results per page
         results_per_page = 18
