@@ -265,8 +265,8 @@ class MenuUtil():
 
     def paginate(self, data):
 
-        # Show 25 results per page
-        results_per_page = 25
+        # Show 18 results per page
+        results_per_page = 18
         total_pages = (len(data) // results_per_page) + 1
         page = 0
         
