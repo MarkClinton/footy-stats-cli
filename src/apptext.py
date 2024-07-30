@@ -47,8 +47,8 @@ class AppText():
                      " built using Python.\nIt utilises the football-data.org "
                      "API [https://www.football-data.org/] to\nsupply all the "
                      "data.\n\nAvailable Resources:\nLeagues: Premier League,"
-                     " Ligue 1, La Liga, Bundesliga, Serie A\nSeasons: Last "
-                     "10 years.\nData: Teams, League Table"
+                     " Ligue 1, La Liga, Bundesliga, Serie A\nSeasons: From "
+                     "2020 onwards.\nData: Teams, League Table"
                      ", Fixtures & Results, Top 10 Goalscorers\n\n"
                      "Github Repo: https://github.com/MarkClinton/"
                      "footy-stats-cli")

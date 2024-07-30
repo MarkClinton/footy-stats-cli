@@ -196,7 +196,9 @@ class Competitions(BaseEndPoint, EndpointUtil):
         """
 
         seasons = []
-        amount = len(season_data) if len(season_data) < 10 else 10
+        # Due to limitations with the API we can only offer seasons
+        # from 2020 onward.
+        amount = len(season_data) if len(season_data) < 5 else 5
 
         for i in range(amount):
             start_year = datetime.strptime(season_data[i]["startDate"],
