@@ -39,6 +39,25 @@ option with one click.
 
 ## Features
 
+- ### Iterable Menu 
+All menu's are created with the help of python library [simple-term-menu](https://pypi.org/project/simple-term-menu/). 
+It offers a cyclical scrolling which allows the user to navigate more quickly.
+
+![Cyclical Menu](documentation/images/cyclical_menu.gif)
+
+- ### Help Area
+There is a help area on the start screen that provides a user with information on how to navigate the application.
+It contains tips and tricks on how to best use the app. 
+
+![Help Area](documentation/images/help_area.gif)
+
+- ## About Area
+There is also an about area on the start screen. This screen provides information to the user about what type of data they
+can expect to see in the app. 
+
+![About Area](documentation/images/about_area.gif)
+
+
 ### Future Features
 
 ## Technologies
