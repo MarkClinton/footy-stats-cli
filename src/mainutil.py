@@ -2,10 +2,12 @@
 This class handles creating and displaying menu's for the end user
 """
 import os
+import math
 import textwrap
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from getch import pause
+from blessed import Terminal
 from .apptext import AppText
 
 
@@ -254,6 +256,18 @@ class MenuUtil():
             table = tabulate([], headers=["No Data Found"],
                              tablefmt="simple")
         print(table)
+
+    def paginate(self, data):
+
+        page_size = math.ceil(len(data) / 25)
+        page = 0
+        
+        for d in range(0, len(data), page_size):
+            page += 1
+            yield tabulate(data[d:d + page_size], headers="keys", colalign=("left",),
+                             tablefmt="simple")
+            pause(f'Page {page} of {page_size}... Click [ENTER] to continue...')
+        
 
     def clear_display(self):
         """ Determines the OS. Clears the terminal screen. """
