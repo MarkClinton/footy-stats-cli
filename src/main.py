@@ -17,15 +17,8 @@ class Main(MenuUtil):
 
     def __init__(self): 
         # Initialize a default APIClient
-        self.client = APIClient("PL", "2023")
-        data = self.client.competitions.get_competition_matches()
-        for num in self.paginate(data):
-            print(num)
-            input()
-            self.clear_display()
-        # self.start()
-        # self.test()
-        
+        self.client = APIClient("PL")
+        self.start()
 
     def start(self):
         menu_show = True
@@ -43,23 +36,3 @@ class Main(MenuUtil):
                             break
         self.finish()
 
-
-    def test(self):
-        def nextSquare():
-            i = 1
-        
-            # An Infinite loop to generate squares
-            while True:
-                yield i*i
-                print("hey")
-                i += 1  # Next execution resumes
-                # from this point
-        
-        
-        # Driver code to test above generator
-        # function
-        for num in nextSquare():
-            if num > 100:
-                break
-            print(num)
-            input()

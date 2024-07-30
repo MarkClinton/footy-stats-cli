@@ -249,24 +249,29 @@ class MenuUtil():
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
-        if data:
-            table = tabulate(data, headers="keys", colalign=("left",),
-                             tablefmt="simple")
+        if data and len(data) > 25:
+            for items, current_page, pages in self.paginate(data):
+                table = tabulate(items, headers="keys",
+                                tablefmt="simple")
+                print(table)
+                pause(f'\nPage {current_page} of {pages}. Click enter to continue...')
+                self.clear_display()
         else:
-            table = tabulate([], headers=["No Data Found"],
-                             tablefmt="simple")
-        print(table)
+            table = tabulate(data, headers=["No Data Found"],
+                              tablefmt="simple")
+            print(table)
+            pause("\nPress any key to go back to the Main Menu...")
 
     def paginate(self, data):
 
-        page_size = math.ceil(len(data) / 25)
+        # Show 25 results per page
+        results_per_page = 25
+        total_pages = (len(data) // results_per_page) + 1
         page = 0
         
-        for d in range(0, len(data), page_size):
-            page += 1
-            yield tabulate(data[d:d + page_size], headers="keys", colalign=("left",),
-                             tablefmt="simple")
-            pause(f'Page {page} of {page_size}... Click [ENTER] to continue...')
+        for d in range(0, len(data), results_per_page):
+            page = (d // results_per_page) + 1
+            yield data[d:d + results_per_page], page, total_pages
         
 
     def clear_display(self):
