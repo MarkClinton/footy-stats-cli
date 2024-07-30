@@ -256,11 +256,14 @@ class MenuUtil():
                 print(table)
                 pause(f'\nPage {current_page} of {pages}. Click enter to continue...')
                 self.clear_display()
+        elif data:
+            table = tabulate(data, headers="keys",
+                            tablefmt="simple")
+            print(table)
         else:
             table = tabulate(data, headers=["No Data Found"],
-                              tablefmt="simple")
+                            tablefmt="simple")
             print(table)
-            pause("\nPress any key to go back to the Main Menu...")
 
     def paginate(self, data):
 
