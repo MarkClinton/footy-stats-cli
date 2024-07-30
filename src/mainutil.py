@@ -2,12 +2,10 @@
 This class handles creating and displaying menu's for the end user
 """
 import os
-import math
 import textwrap
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from getch import pause
-from blessed import Terminal
 from .apptext import AppText
 
 
