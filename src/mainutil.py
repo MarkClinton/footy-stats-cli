@@ -170,6 +170,7 @@ class MenuUtil():
                 self.fetch_data(menu_sel)
                 pause(message)
                 self.clear_display()
+                self.clear_display()
             case self.LEAGUE_MENU:
                 league = self.get_menu_option(identifier, menu_sel)
                 self.client.league = league
