@@ -261,6 +261,7 @@ class MenuUtil():
                     f'\nPage {current_page}/{pages}. Click any key to continue.'
                     )
                 self.clear_display()
+                self.clear_display()
         elif data:
             table = tabulate(data, headers="keys",tablefmt="simple")
             print(header)
