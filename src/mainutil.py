@@ -177,12 +177,14 @@ class MenuUtil():
                     if not self.handle_start_menu(menu_sel):
                         return self.display_menu(self.START_MENU)
             case self.SEASON_MENU:
-                season = self.get_menu_option(identifier, menu_sel,
-                                              seasons)
+                season = self.get_menu_option(
+                    identifier, menu_sel,seasons
+                    )
                 self.client.season = season
             case self.TEAM_MENU:
-                self.client.team = self.get_menu_option(identifier, menu_sel,
-                                                        teams)
+                self.client.team = self.get_menu_option(
+                    identifier, menu_sel,teams
+                    )
         return True
 
     def handle_start_menu(self, sel: int) -> bool:
@@ -232,6 +234,7 @@ class MenuUtil():
         display the data in table format.
         """
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
+        header = f'{self.MAIN_MENU_OPTIONS[main_sel]["option"]}\n'
 
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
@@ -243,20 +246,25 @@ class MenuUtil():
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
+
         if data and len(data) > 25:
             for items, current_page, pages in self.paginate(data):
-                table = tabulate(items, headers="keys",
-                                tablefmt="simple")
+                table = tabulate(
+                    items, headers="keys", tablefmt="simple"
+                    )
+                print(header)
                 print(table)
-                pause(f'\nPage {current_page} of {pages}. Click enter to continue...')
+                pause(
+                    f'\nPage {current_page}/{pages}. Click any key to continue.'
+                    )
                 self.clear_display()
         elif data:
-            table = tabulate(data, headers="keys",
-                            tablefmt="simple")
+            table = tabulate(data, headers="keys",tablefmt="simple")
+            print(header)
             print(table)
         else:
-            table = tabulate(data, headers=["No Data Found"],
-                            tablefmt="simple")
+            table = tabulate(data, headers=["No Data Found"],tablefmt="simple")
+            print(header)
             print(table)
 
     def paginate(self, data: list):

@@ -9,7 +9,6 @@ from . import endpoints
 
 
 class APIClient(BaseClient):
-
     """
     The API Client that handles all the API operations. Accepts parameters
     for the API such as league, season and team.
