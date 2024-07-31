@@ -23,10 +23,10 @@ class BaseEndPoint:
 
         :param parent: BaseClient class
         """
-        self.client = parent
         # When APIClient class creates an instanse of BaseEndPoint
         # (Competitions) it passes an instance of itself and we set self.client
         # to the instance of BaseClient
+        self.client = parent
 
     def request(self, resource: str,
                 subresource: str = None) -> requests.Response:
@@ -47,18 +47,21 @@ class BaseEndPoint:
         :param resource: The endpoint to fetch data from
         :param subresource: the name of the object in the json response
         """
-
         params = {}
         params["season"] = self.client.season
         match(resource):
             case "teams":
-                uri = (f'{self.client.url}{resource}/{self.client.team}/'
-                f'{subresource}')
+                uri = (
+                    f'{self.client.url}{resource}/{self.client.team}/'
+                    f'{subresource}'
+                )
                 params["competition"] = self.client.league
             case "competitions":
                 if (subresource):
-                    uri = (f'{self.client.url}{resource}/{self.client.league}/'
-                    f'{subresource}')
+                    uri = (
+                        f'{self.client.url}{resource}/{self.client.league}/'
+                        f'{subresource}'
+                    )
                 else:
                     uri = f'{self.client.url}{resource}/{self.client.league}'
         return [uri, params]

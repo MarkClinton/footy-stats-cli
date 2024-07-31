@@ -24,5 +24,7 @@ class Teams(BaseEndPoint, EndpointUtil):
             return [response.json()]
         else:
             return (
-                self.clean_matches_list(self.process_response(response, "matches"))
+                self.clean_matches_list(
+                    self.process_response(response, "matches")
+                )
             )

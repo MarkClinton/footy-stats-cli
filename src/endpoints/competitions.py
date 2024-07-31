@@ -19,7 +19,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
     def get_competitions_list(self):
         """ Get a list of competitions availables """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         return (
             self.process_response(response, "competitions")
@@ -27,7 +26,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
     def get_competition_seasons(self) -> list:
         """  Get a list of seasons available for a competition """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         if response.status_code != 200:
             print("Oops sorry, " + response.json()["message"])
@@ -35,13 +33,13 @@ class Competitions(BaseEndPoint, EndpointUtil):
             return False
         else:
             return (
-                self.clean_season_list(self.process_response(response, 
-                                                             "seasons"))
+                self.clean_season_list(
+                    self.process_response(response, "seasons")
+                )
             )
 
     def get_competition_teams(self) -> list:
         """ Get a list of teams that take part in a competition """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         if response.status_code != 200:
             return [response.json()]
@@ -52,7 +50,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
     def get_competition_standings(self) -> list:
         """ Get the league table for a competition """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "standings")
         if response.status_code != 200:
             return [response.json()]
@@ -65,7 +62,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
     def get_list_teams(self) -> list:
         """ Get a list of dicts of teams and their ID's """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         if response.status_code != 200:
             print("Oops sorry, " + response.json()["message"])
@@ -78,25 +74,26 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
     def get_competition_goalscorers(self) -> list:
         """ Get the top 10 goalscorers for a season """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "scorers")
         if response.status_code != 200:
             return [response.json()]
         else:
             return (
-                self.clean_scorers_list(self.process_response(response, "scorers"))
+                self.clean_scorers_list(
+                    self.process_response(response, "scorers")
+                )
             )
 
     def get_competition_matches(self) -> list:
         """ Get all matches for a competition for a certain season """
-
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "matches")
         if response.status_code != 200:
             return [response.json()]
         else:
             return (
-                self.clean_matches_list(self.process_response(response, 
-                                                              "matches"))
+                self.clean_matches_list(
+                    self.process_response(response, "matches")
+                )
             )
 
     @staticmethod
@@ -106,7 +103,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params scorers_data: list of  goalscorers
         """
-
         scorers = []
 
         for s in scorers_data:
@@ -115,8 +111,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 "Team": s["team"]["name"],
                 "Matches Played": s["playedMatches"],
                 "Goals": s["goals"]
-                # "Assists": s["assists"],
-                # "Penalties": s["penalties"]
             }
             scorers.append(scorer)
         return scorers
@@ -128,7 +122,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params standings_data: list of teams with league table data
         """
-
         standings = []
 
         for s in standings_data[0]["table"]:
@@ -139,9 +132,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 "Draw": s["draw"],
                 "Lost": s["lost"],
                 "Points": s["points"]
-                # "Goals For": s["goalsFor"],
-                # "Goals Against": s["goalsAgainst"],
-                # "Goal Difference": s["goalDifference"]
             }
             standings.append(standing)
         # Sort list of dict items in descending order with respect to Points
@@ -156,14 +146,12 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params team_data: list of teams with team data
         """
-
         teams = []
         for t in team_data:
             team = {
                 "Team": t["name"],
                 "Founded": t["founded"],
                 "Stadium": t["venue"]
-                # "Current Manager": t["coach"]["name"]
             }
             teams.append(team)
 
@@ -176,7 +164,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params team_data: list of teams with team data
         """
-
         teams = []
         for t in team_data:
             team = {
@@ -194,17 +181,18 @@ class Competitions(BaseEndPoint, EndpointUtil):
 
         :params season_data: list of seasons with season data
         """
-
         seasons = []
         # Due to limitations with the API we can only offer seasons
         # from 2020 onward.
         amount = len(season_data) if len(season_data) < 5 else 5
 
         for i in range(amount):
-            start_year = datetime.strptime(season_data[i]["startDate"],
-                                           '%Y-%m-%d').year
-            end_year = datetime.strptime(season_data[i]["endDate"],
-                                         '%Y-%m-%d').year
+            start_year = datetime.strptime(
+                    season_data[i]["startDate"], '%Y-%m-%d'
+                ).year
+            end_year = datetime.strptime(
+                    season_data[i]["endDate"], '%Y-%m-%d'
+                ).year
             season = {
                 "Year": start_year,
                 "Name": f'{start_year}/{end_year}'

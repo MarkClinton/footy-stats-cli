@@ -1,5 +1,12 @@
+"""
+AppText class holds all text items needed to populate menu screens.
+"""
+
 
 class AppText():
+    """
+    AppText class holds all text items needed to populate menu screens.
+    """
     LEAGUE_ABOUT = (f"""
 LEAGUE MENU
 Footy Stats CLI has 5 League options to choose from.

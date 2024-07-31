@@ -73,4 +73,3 @@ class BaseClient:
     def load_key(self) -> str:
         load_dotenv()
         return os.getenv(self.SECRET_KEY_NAME)
-        # Should handle this better if the secret key is not found
