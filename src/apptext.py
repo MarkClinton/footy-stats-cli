@@ -40,7 +40,7 @@ Footy Stats CLI is an application for all football related data. Using the
 Football-Data API to gather data about Leagues, Fixtures/Results, Teams
 and Goalscorers.
 
-Navigate the app using the keyboard.{term.cyan}[Up/Down]{term.normal} moves through menu options.
+Navigate the app using the keyboard.{term.palegreen}[Up/Down]{term.normal} moves through menu options.
 {term.green}[Enter]{term.normal} selects the option. Click the Help option below for more info.
 Click {term.green}[Q/ESC]{term.normal} to exit the app.
                 """)
