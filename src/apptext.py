@@ -12,7 +12,7 @@ class AppText():
     PROCESSING = f'{term.blink("Processing Request...")}'
     ANY_KEY = f'{term.bold_yellow}[ANY KEY]{term.normal}'
     Q = f'{term.bold_yellow}[Q]{term.normal}'
-    GREEN = f'{term.bold_lightgreen}'
+    GREEN = f'\n{term.bold_lightgreen}'
     NORMAL = f'{term.normal}\n'
     UP_DOWN = f'{term.bold_yellow}[Up/Down]{term.normal}'
     ENTER = f'{term.bold_yellow}[Enter]{term.normal}'

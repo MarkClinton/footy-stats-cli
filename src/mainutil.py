@@ -138,8 +138,8 @@ class MenuUtil():
     def get_screen_info(self, identifier: str) -> str:
         if identifier == self.MAIN_MENU:
             user_choice = (
-                f'\n{self.league_choice} ' 
-                f'Season {self.season_choice}\n'
+                f'{AppText.GREEN}{self.league_choice} ' 
+                f'Season {self.season_choice}{AppText.NORMAL}'
             )
             about = AppText.MAIN_ABOUT + user_choice
         elif identifier == self.LEAGUE_MENU:
@@ -186,7 +186,6 @@ class MenuUtil():
         match identifier:
             case self.MAIN_MENU:
                 if menu_sel == 3:
-                    print(AppText.LOGO)
                     if not self.display_menu(self.TEAM_MENU):
                         return True
                 self.fetch_data(menu_sel)
