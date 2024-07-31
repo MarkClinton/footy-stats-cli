@@ -53,7 +53,7 @@ class MenuUtil():
             menu_entries=menu_options,
             title=title,
             menu_cursor="> ",
-            menu_cursor_style=("fg_yellow", "bg_yellow", "bold"),
+            menu_cursor_style=("fg_yellow", "bold"),
             cycle_cursor=True,
             clear_screen=False,
         )
