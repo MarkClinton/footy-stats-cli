@@ -107,6 +107,7 @@ class MenuUtil():
                 self.season_choice = menu_data[pos]["Name"]
                 option = menu_data[pos]["Year"]
             case self.TEAM_MENU:
+                self.team_choice = menu_data[pos]["Team"]
                 option = menu_data[pos]["ID"]
         return option
 
@@ -183,7 +184,7 @@ class MenuUtil():
                 self.client.season = season
             case self.TEAM_MENU:
                 self.client.team = self.get_menu_option(
-                    identifier, menu_sel,teams
+                    identifier, menu_sel, teams
                     )
         return True
 
@@ -205,6 +206,7 @@ class MenuUtil():
             about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
             pause(message)
+        self.clear_display()
         self.clear_display()
         return False
 
@@ -243,6 +245,7 @@ class MenuUtil():
         elif option == "comp_matches":
             data = self.client.competitions.get_competition_matches()
         elif option == "teams_matches":
+            header = f'{self.team_choice}: {header}'
             data = self.client.teams.get_teams_matches()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
