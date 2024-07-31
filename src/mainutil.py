@@ -186,6 +186,7 @@ class MenuUtil():
         match identifier:
             case self.MAIN_MENU:
                 if menu_sel == 3:
+                    print(AppText.LOGO)
                     if not self.display_menu(self.TEAM_MENU):
                         return True
                 self.fetch_data(menu_sel)

@@ -17,31 +17,34 @@ class AppText():
     UP_DOWN = f'{term.bold_yellow}[Up/Down]{term.normal}'
     ENTER = f'{term.bold_yellow}[Enter]{term.normal}'
     ESC = f'{term.bold_yellow}[Q/ESC]{term.normal}'
-    MAIN_TITLE = (f"""Select the option you want to view data for below:""")
-    LEAGUE_TITLE = (f"""Select the league you want to view data for below:""")
-    SEASON_TITLE = (f"""Select the season you want to view data for below:""")
-    TEAM_TITLE = (f"""Select a team below to view their fixtures/results:""")
-    START_TITLE = (f"""Select an option below:""")
+    MAIN_TITLE = "Select the option you want to view data for below:\n"
+    LEAGUE_TITLE = "Select the league you want to view data for below:\n"
+    SEASON_TITLE = "Select the season you want to view data for below:\n"
+    TEAM_TITLE = "Select a team below to view their fixtures/results:\n"
+    START_TITLE = "Select an option below:\n"
 
     LEAGUE_ABOUT = (f"""
 Footy Stats CLI has 5 League options to choose from.
+                    
 Click {ESC} to go back to start menu.
                     """)
 
     MAIN_ABOUT = (f"""
 Footy Stats CLI has 5 main options to choose from. 
+                  
 Click {ESC} to go back to season menu.
                 """)
 
     SEASON_ABOUT = (f"""
 Footy Stats CLI shows up to 5 seasons worth of historical data.
+                    
 Click {ESC} to go back to league menu.
                     """)
 
     TEAM_ABOUT = (f"""
-TEAM MENU
 Below shows the full list of available teams.
-Click [Q/ESC] to go back to main menu.
+                  
+Click {ESC} to go back to main menu.
                 """)
 
     START_ABOUT = (f"""
@@ -52,7 +55,8 @@ and Goalscorers.
 Navigate the app using the keyboard.
 {UP_DOWN} moves through menu options. {ENTER} selects the option. 
 Click the Help option below for more info.
-Click {term.bold_yellow}[Q/ESC]{term.normal} to exit the app.
+
+Click {ESC}to exit the app.
                 """)
 
     HELP_MESSAGE = (f"""
