@@ -150,11 +150,13 @@ class MenuUtil():
         variable. Returns bool to tell the manu while loop how to progress.
         """
         if identifier == self.SEASON_MENU:
+            print("Processing Request....")
             seasons = self.client.competitions.get_competition_seasons()
             if not seasons:
                 return False
             menu = self.create_menu(identifier, seasons)
         elif identifier == self.TEAM_MENU:
+            print("Processing Request....")
             teams = self.client.competitions.get_list_teams()
             if not teams:
                 return False
@@ -172,7 +174,6 @@ class MenuUtil():
                     if not self.display_menu(self.TEAM_MENU):
                         return True
                 self.fetch_data(menu_sel)
-                self.clear_display()
                 self.clear_display()
             case self.LEAGUE_MENU:
                 league = self.get_menu_option(identifier, menu_sel)
@@ -240,7 +241,6 @@ class MenuUtil():
         display the data in table format.
         """
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
-
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
             header = f'All {self.league_choice} Teams {self.season_choice}\n'
@@ -248,11 +248,15 @@ class MenuUtil():
             data = self.client.competitions.get_competition_standings()
             header = f'{self.league_choice} Table {self.season_choice}\n'
         elif option == "comp_matches":
+            print("Processing Request....")
             data = self.client.competitions.get_competition_matches()
             header = f'All {self.season_choice} {self.league_choice} Matches\n'
+            self.clear_display()
         elif option == "teams_matches":
+            print("Processing Request....")
             data = self.client.teams.get_teams_matches()
             header = f'{self.team_choice} {self.season_choice} Matches\n'
+            self.clear_display()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
             header = (
