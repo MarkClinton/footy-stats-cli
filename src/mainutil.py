@@ -118,26 +118,22 @@ class MenuUtil():
         """
 
         if identifier == self.MAIN_MENU:
-            main_menu = AppText.MAIN_MESSAGE.format(
-                                            comp=self.league_choice,
-                                            season=self.season_choice)
-            about = AppText.MAIN_ABOUT
-            message = main_menu
+            user_choice = (
+                f'\n{self.league_choice} ' 
+                f'Season {self.season_choice}\n'
+            )
+            about = AppText.MAIN_ABOUT + user_choice
         elif identifier == self.LEAGUE_MENU:
             about = AppText.LEAGUE_ABOUT
-            message = AppText.LEAGUE_MESSAGE
         elif identifier == self.START_MENU:
             about = AppText.START_ABOUT
-            message = AppText.START_MESSAGE
         elif identifier == self.SEASON_MENU:
             about = AppText.SEASON_ABOUT
-            message = AppText.SEASON_MESSAGE
         elif identifier == self.TEAM_MENU:
             about = AppText.TEAM_ABOUT
-            message = AppText.TEAM_MESSAGE
 
-        logo = textwrap.dedent(AppText.LOGO)
-        title = logo + about + message
+        logo = AppText.LOGO
+        title = logo + about
         return title
 
     def display_menu(self, identifier: str) -> bool:
