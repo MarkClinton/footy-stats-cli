@@ -363,3 +363,5 @@ class MenuUtil():
         if os.name in ('nt', 'dos'):
             command = 'cls'
         os.system(command)
+        print("\033[3J\033[H\033[2J", end='')
+        os.sys.stdout.flush()
