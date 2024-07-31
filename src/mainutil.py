@@ -57,7 +57,7 @@ class MenuUtil():
             menu_cursor_style=("fg_green", "bold"),
             menu_highlight_style=("bg_green", "fg_yellow", "bold"),
             cycle_cursor=True,
-            clear_screen=True,
+            clear_screen=False,
         )
         return menu
 
@@ -125,9 +125,22 @@ class MenuUtil():
         """
 
         if identifier == self.MAIN_MENU:
+            title = AppText.MAIN_TITLE
+        elif identifier == self.LEAGUE_MENU:
+            title = AppText.LEAGUE_TITLE
+        elif identifier == self.START_MENU:
+            title = AppText.START_TITLE
+        elif identifier == self.SEASON_MENU:
+            title = AppText.SEASON_TITLE
+        elif identifier == self.TEAM_MENU:
+            title = AppText.TEAM_TITLE
+        return title
+
+    def get_screen_info(self, identifier: str) -> str:
+        if identifier == self.MAIN_MENU:
             user_choice = (
                 f'\n{self.league_choice} ' 
-                f'Season {self.season_choice}\n'
+                f'Season {self.season_choice}'
             )
             about = AppText.MAIN_ABOUT + user_choice
         elif identifier == self.LEAGUE_MENU:
@@ -139,9 +152,7 @@ class MenuUtil():
         elif identifier == self.TEAM_MENU:
             about = AppText.TEAM_ABOUT
 
-        logo = AppText.LOGO
-        title = logo + about
-        return title
+        return about
 
     def display_menu(self, identifier: str) -> bool:
         """
@@ -149,6 +160,8 @@ class MenuUtil():
         for League & Seasonand sets the corresponding APIClient instance
         variable. Returns bool to tell the manu while loop how to progress.
         """
+        self.clear_display()
+        print(AppText.LOGO)
         if identifier == self.SEASON_MENU:
             print("Processing Request....")
             seasons = self.client.competitions.get_competition_seasons()
@@ -163,7 +176,10 @@ class MenuUtil():
             menu = self.create_menu(identifier, teams)
         else:
             menu = self.create_menu(identifier)
-
+        
+        self.clear_display()
+        print(AppText.LOGO)
+        print(self.get_screen_info(identifier))
         menu_sel = menu.show()
         if menu_sel is None:
             return False
@@ -227,8 +243,8 @@ class MenuUtil():
 
     def finish(self) -> str:
         """ Builds string to display when the user exits the application """
-
-        logo = textwrap.dedent(AppText.LOGO)
+        self.clear_display()
+        logo = AppText.LOGO
         message = "\n Thanks for using Footy Stats CLI.\n"
         title = logo + message
 
