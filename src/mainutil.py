@@ -3,14 +3,14 @@ This class handles creating and displaying menu's for the end user
 """
 import os
 import textwrap
+from typing import Generator
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
-from getch import pause
+import getch
 from .apptext import AppText
 
 
 class MenuUtil():
-
     """
     Mixin class to handle all menu functionality
     """
@@ -61,8 +61,11 @@ class MenuUtil():
         )
         return menu
 
-    def create_menu(self, identifier: str,
-                    menu_data: str = None) -> TerminalMenu:
+    def create_menu(
+        self, 
+        identifier: str,
+        menu_data: str = None
+    ) -> TerminalMenu:
         """
         Create a TerminalMenu with the necessary menu options. Returns a
         Terminal Menu.
@@ -70,7 +73,6 @@ class MenuUtil():
         :params identifier: the name of the menu
         :params menu_data: the data to use to populate menu
         """
-
         match identifier:
             case self.MAIN_MENU:
                 data = [menu["option"] for menu in self.MAIN_MENU_OPTIONS]
@@ -86,8 +88,12 @@ class MenuUtil():
         title = self.get_menu_title(identifier)
         return self.menu(data, title)
 
-    def get_menu_option(self, identifier: str, pos: int,
-                        menu_data: list = None) -> str:
+    def get_menu_option(
+        self, 
+        identifier: str, 
+        pos: int,
+        menu_data: list = None
+    ) -> str:
         """
         Return the users selected menu option
 
@@ -143,8 +149,6 @@ class MenuUtil():
         for League & Seasonand sets the corresponding APIClient instance
         variable. Returns bool to tell the manu while loop how to progress.
         """
-        message = "\nPress any key to go back to the Main Menu..."
-
         if identifier == self.SEASON_MENU:
             seasons = self.client.competitions.get_competition_seasons()
             if not seasons:
@@ -168,7 +172,6 @@ class MenuUtil():
                     if not self.display_menu(self.TEAM_MENU):
                         return True
                 self.fetch_data(menu_sel)
-                pause(message)
                 self.clear_display()
                 self.clear_display()
             case self.LEAGUE_MENU:
@@ -186,7 +189,7 @@ class MenuUtil():
             case self.TEAM_MENU:
                 self.client.team = self.get_menu_option(
                     identifier, menu_sel, teams
-                    )
+                )
         return True
 
     def handle_start_menu(self, sel: int) -> bool:
@@ -197,16 +200,16 @@ class MenuUtil():
 
         :param sel: int of the users menu selection
         """
-        message = "\nPress any key to go back to the Start Menu..."
+        message = "\nPress [ANY KEY] to go back to the Start Menu..."
         logo = textwrap.dedent(AppText.LOGO)
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
             print(logo + help_message)
-            pause(message)
+            getch.pause(message)
         elif sel == 2:
             about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
-            pause(message)
+            getch.pause(message)
         self.clear_display()
         self.clear_display()
         return False
@@ -237,44 +240,69 @@ class MenuUtil():
         display the data in table format.
         """
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
-        header = f'{self.MAIN_MENU_OPTIONS[main_sel]["option"]}\n'
 
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
+            header = f'All {self.league_choice} Teams {self.season_choice}\n'
         elif option == "comp_standings":
             data = self.client.competitions.get_competition_standings()
+            header = f'{self.league_choice} Table {self.season_choice}\n'
         elif option == "comp_matches":
             data = self.client.competitions.get_competition_matches()
+            header = f'All {self.season_choice} {self.league_choice} Matches\n'
         elif option == "teams_matches":
-            header = f'{self.team_choice}: {header}'
             data = self.client.teams.get_teams_matches()
+            header = f'{self.team_choice} {self.season_choice} Matches\n'
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
+            header = (
+                f'Top 10 {self.league_choice}' 
+                f' Goalscorers {self.season_choice}\n'
+            )
+        self.print_data(data, header)
+
+    def print_data(self, data: list, header: str):
+        message = "\nPress [ANY KEY] to go back to the main menu.."
 
         if data and len(data) >= 20:
             for items, current_page, pages in self.paginate(data):
                 table = tabulate(
-                    items, headers="keys", tablefmt="simple"
-                    )
+                        items, headers="keys", tablefmt="simple"
+                        )
                 print(header)
                 print(table)
-                pause(
-                    f'\nPage {current_page}/{pages}. Click any key to continue.'
+                print(f'\nPage {current_page} of {pages}')
+                if current_page == pages:
+                    print ("Press [ANY KEY] to go back to the main menu..")
+                else:
+                    print(
+                        "Press [ANY KEY] to continue or [Q] to go back to "
+                        "main menu.."
                     )
+                if self.paginate_navigate():
+                    break
                 self.clear_display()
                 self.clear_display()
         elif data:
             table = tabulate(data, headers="keys",tablefmt="simple")
             print(header)
             print(table)
+            getch.pause(message)
         else:
             table = tabulate(data, headers=["No Data Found"],tablefmt="simple")
             print(header)
             print(table)
+            getch.pause(message)
 
-    def paginate(self, data: list):
+    def paginate(
+            self, 
+            data: list
+    ) -> Generator[tuple[list, int, int], None, None]:
+        """
+        Pagination method used to only display 15 results at a time.
 
-        # Show 18 results per page
+        :param data: list data to paginate.
+        """
         results_per_page = 15
         total_pages = (len(data) // results_per_page) + 1
         page = 0
@@ -282,7 +310,16 @@ class MenuUtil():
         for d in range(0, len(data), results_per_page):
             page = (d // results_per_page) + 1
             yield data[d:d + results_per_page], page, total_pages
-        
+    
+    def paginate_navigate(self) -> bool:
+        """ 
+        Determines if the user wants to continue to the next page or exit
+        """
+        char = getch.getch()
+        if char == 'q':
+            self.clear_display()
+            return True
+        return False
 
     def clear_display(self):
         """ Determines the OS. Clears the terminal screen. """
