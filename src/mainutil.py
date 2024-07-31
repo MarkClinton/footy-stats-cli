@@ -55,7 +55,6 @@ class MenuUtil():
             title=title,
             menu_cursor="> ",
             menu_cursor_style=("fg_yellow", "bold"),
-            menu_highlight_style=("fg_gray", "bg_yellow", "bold"),
             cycle_cursor=True,
             clear_screen=False,
         )
@@ -260,23 +259,35 @@ class MenuUtil():
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
-            header = f'All {self.league_choice} Teams {self.season_choice}\n'
+            header = (
+                f'{AppText.GREEN}{self.league_choice} Teams '
+                f'{self.season_choice}{AppText.NORMAL}'
+            )
         elif option == "comp_standings":
             data = self.client.competitions.get_competition_standings()
-            header = f'{self.league_choice} Table {self.season_choice}\n'
+            header = (
+                f'{AppText.GREEN}{self.league_choice} Table '
+                f'{self.season_choice}{AppText.NORMAL}'
+            )
         elif option == "comp_matches":
             data = self.client.competitions.get_competition_matches()
-            header = f'All {self.season_choice} {self.league_choice} Matches\n'
+            header = (
+                f'{AppText.GREEN}{self.season_choice} '
+                f'{self.league_choice} Matches{AppText.NORMAL}'
+            )
             self.clear_display()
         elif option == "teams_matches":
             data = self.client.teams.get_teams_matches()
-            header = f'{self.team_choice} {self.season_choice} Matches\n'
+            header = (
+                f'{AppText.GREEN}{self.team_choice} {self.season_choice} '
+                f'Matches{AppText.NORMAL}'
+            )
             self.clear_display()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
             header = (
-                f'Top 10 {self.league_choice}' 
-                f' Goalscorers {self.season_choice}\n'
+                f'{AppText.GREEN}Top 10 {self.league_choice}' 
+                f' Goalscorers {self.season_choice}{AppText.NORMAL}'
             )
         self.clear_display()
         self.print_data(data, header)

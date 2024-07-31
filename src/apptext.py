@@ -75,7 +75,7 @@ It utilises the API from {term.link('https://www.football-data.org/',
 'football-data.org')} to supply all the data.
 {term.link('https://github.com/MarkClinton/footy-stats-cli', 'Github Repo')}
 
-{term.bold_lightgreen}Available Resources:{term.normal}
+{term.underline_bold}Available Resources:{term.normal}
 Leagues: Premier League, Ligue 1, La Liga, Bundesliga, Serie A
 Seasons: From 2020 onwards.
 Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
@@ -85,3 +85,5 @@ Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
 
     ANY_KEY = f'{term.bold_lightgreen}[ANY KEY]{term.normal}'
     Q = f'{term.bold_lightgreen}[Q]{term.normal}'
+    GREEN = f'{term.bold_lightgreen}'
+    NORMAL = f'{term.normal}'
