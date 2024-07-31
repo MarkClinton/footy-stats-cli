@@ -181,7 +181,8 @@ class MenuUtil():
             menu = self.create_menu(identifier)
 
         self.clear_display()
-        print(AppText.LOGO)
+        if identifier != "team":
+            print(AppText.LOGO)
         print(self.get_screen_info(identifier))
         menu_sel = menu.show()
         if menu_sel is None:
@@ -227,12 +228,14 @@ class MenuUtil():
             help_message = AppText.HELP_MESSAGE
             print(logo + help_message)
             getch.pause(message)
+            return False
         elif sel == 2:
             about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
             getch.pause(message)
+            return False
         self.clear_display()
-        return False
+        return True
 
     def list_to_menu_options(self, data: list, k: str) -> list:
         """
