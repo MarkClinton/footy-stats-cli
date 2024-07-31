@@ -42,8 +42,6 @@ Click {ESC} to go back to league menu.
                     """)
 
     TEAM_ABOUT = (f"""
-Below shows the full list of available teams.
-                  
 Click {ESC} to go back to main menu.
                 """)
 
