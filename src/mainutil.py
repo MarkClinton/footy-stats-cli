@@ -251,7 +251,7 @@ class MenuUtil():
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
 
-        if data and len(data) > 25:
+        if data and len(data) >= 20:
             for items, current_page, pages in self.paginate(data):
                 table = tabulate(
                     items, headers="keys", tablefmt="simple"
@@ -275,7 +275,7 @@ class MenuUtil():
     def paginate(self, data: list):
 
         # Show 18 results per page
-        results_per_page = 18
+        results_per_page = 15
         total_pages = (len(data) // results_per_page) + 1
         page = 0
         
