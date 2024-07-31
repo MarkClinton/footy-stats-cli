@@ -240,6 +240,7 @@ class MenuUtil():
         user and fetches the data from the API. Python-tabulate is used to
         display the data in table format.
         """
+        print("Processing Request....")
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
@@ -248,12 +249,10 @@ class MenuUtil():
             data = self.client.competitions.get_competition_standings()
             header = f'{self.league_choice} Table {self.season_choice}\n'
         elif option == "comp_matches":
-            print("Processing Request....")
             data = self.client.competitions.get_competition_matches()
             header = f'All {self.season_choice} {self.league_choice} Matches\n'
             self.clear_display()
         elif option == "teams_matches":
-            print("Processing Request....")
             data = self.client.teams.get_teams_matches()
             header = f'{self.team_choice} {self.season_choice} Matches\n'
             self.clear_display()
@@ -263,6 +262,7 @@ class MenuUtil():
                 f'Top 10 {self.league_choice}' 
                 f' Goalscorers {self.season_choice}\n'
             )
+        self.clear_display()
         self.print_data(data, header)
 
     def print_data(self, data: list, header: str):
