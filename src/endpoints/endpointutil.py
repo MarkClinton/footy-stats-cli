@@ -16,7 +16,6 @@ class EndpointUtil():
         matches = []
 
         for m in match_data:
-
             home_team = m["homeTeam"]["name"]
             home_score = m["score"]["fullTime"]["home"]
             away_team = m["awayTeam"]["name"]

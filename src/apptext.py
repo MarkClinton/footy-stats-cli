@@ -25,19 +25,19 @@ class AppText():
 
     LEAGUE_ABOUT = (f"""
 Footy Stats CLI has 5 League options to choose from.
-                    
+
 Click {ESC} to go back to start menu.
                     """)
 
     MAIN_ABOUT = (f"""
 Footy Stats CLI has 5 main options to choose from. 
-                  
+
 Click {ESC} to go back to season menu.
                 """)
 
     SEASON_ABOUT = (f"""
 Footy Stats CLI shows up to 5 seasons worth of historical data.
-                    
+
 Click {ESC} to go back to league menu.
                     """)
 
@@ -82,7 +82,7 @@ Leagues: Premier League, Ligue 1, La Liga, Bundesliga, Serie A
 Seasons: From 2020 onwards.
 Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
                     """)
-    
+
     LOGO = (f"""{term.bold_lightgreen}
    ____        __         ______       __        _______   ____
   / ___/_ ___ / /___ __  / __/ /____ _/ /____   / ___/ /  /  _/
@@ -90,4 +90,3 @@ Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
 /_/  \___\___\__/\_, / /___/\__/\_,_/\__/___/  \___/____/___/  
                 /___/ {term.normal}
             """)
-

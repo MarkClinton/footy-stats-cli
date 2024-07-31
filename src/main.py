@@ -22,7 +22,6 @@ class Main(MenuUtil):
 
     def start(self):
         menu_show = True
-
         while menu_show:
             menu_show = self.display_menu("start")
             while menu_show:

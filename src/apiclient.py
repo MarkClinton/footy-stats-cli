@@ -30,4 +30,3 @@ class APIClient(BaseClient):
         # it.
         self.competitions = endpoints.Competitions(self)
         self.teams = endpoints.Teams(self)
-        

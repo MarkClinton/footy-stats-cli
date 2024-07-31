@@ -134,8 +134,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 "Points": s["points"]
             }
             standings.append(standing)
-        # Sort list of dict items in descending order with respect to Points
-        # value
+        # Sort list of dict items in descending order by Points
         sorted(standings, key=lambda x: x['Points'], reverse=True)
         return standings
 
@@ -198,5 +197,4 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 "Name": f'{start_year}/{end_year}'
             }
             seasons.append(season)
-
         return seasons

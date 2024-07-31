@@ -2,7 +2,6 @@
 This class handles creating and displaying menu's for the end user
 """
 import os
-import textwrap
 from typing import Generator
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
@@ -180,7 +179,7 @@ class MenuUtil():
             menu = self.create_menu(identifier, teams)
         else:
             menu = self.create_menu(identifier)
-        
+
         self.clear_display()
         print(AppText.LOGO)
         print(self.get_screen_info(identifier))
@@ -222,7 +221,7 @@ class MenuUtil():
         :param sel: int of the users menu selection
         """
         self.clear_display()
-        message = (f'\nPress {AppText.ANY_KEY} to go back to the Start Menu...')
+        message = (f'\nPress {AppText.ANY_KEY} to go back to the start menu...')
         logo = AppText.LOGO
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
@@ -249,7 +248,7 @@ class MenuUtil():
         """ Builds string to display when the user exits the application """
         self.clear_display()
         logo = AppText.LOGO
-        message = "\n Thanks for using Footy Stats CLI.\n"
+        message = "\nThanks for using Footy Stats CLI.\n"
         title = logo + message
 
         print(title)
@@ -280,14 +279,12 @@ class MenuUtil():
                 f'{AppText.GREEN}{self.season_choice} '
                 f'{self.league_choice} Matches{AppText.NORMAL}'
             )
-            self.clear_display()
         elif option == "teams_matches":
             data = self.client.teams.get_teams_matches()
             header = (
                 f'{AppText.GREEN}{self.team_choice} {self.season_choice} '
                 f'Matches{AppText.NORMAL}'
             )
-            self.clear_display()
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
             header = (
@@ -344,14 +341,15 @@ class MenuUtil():
         results_per_page = 15
         total_pages = (len(data) // results_per_page) + 1
         page = 0
-        
+
         for d in range(0, len(data), results_per_page):
             page = (d // results_per_page) + 1
             yield data[d:d + results_per_page], page, total_pages
     
     def paginate_navigate(self) -> bool:
         """ 
-        Determines if the user wants to continue to the next page or exit
+        Returns boolean to determine if the user wants to continue 
+        to the next page or exit
         """
         char = getch.getch()
         if char == 'q':
