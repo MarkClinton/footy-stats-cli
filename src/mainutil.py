@@ -55,7 +55,7 @@ class MenuUtil():
             title=title,
             menu_cursor="> ",
             menu_cursor_style=("fg_green", "bold"),
-            menu_highlight_style=("bg_green", "fg_yellow", "bold"),
+            menu_highlight_style=("bg_gray","fg_black", "bold"),
             cycle_cursor=True,
             clear_screen=False,
         )
@@ -140,7 +140,7 @@ class MenuUtil():
         if identifier == self.MAIN_MENU:
             user_choice = (
                 f'\n{self.league_choice} ' 
-                f'Season {self.season_choice}'
+                f'Season {self.season_choice}\n'
             )
             about = AppText.MAIN_ABOUT + user_choice
         elif identifier == self.LEAGUE_MENU:
@@ -163,13 +163,13 @@ class MenuUtil():
         self.clear_display()
         print(AppText.LOGO)
         if identifier == self.SEASON_MENU:
-            print("Processing Request....")
+            print(AppText.PROCESSING)
             seasons = self.client.competitions.get_competition_seasons()
             if not seasons:
                 return False
             menu = self.create_menu(identifier, seasons)
         elif identifier == self.TEAM_MENU:
-            print("Processing Request....")
+            print(AppText.PROCESSING)
             teams = self.client.competitions.get_list_teams()
             if not teams:
                 return False
@@ -217,7 +217,8 @@ class MenuUtil():
 
         :param sel: int of the users menu selection
         """
-        message = "\nPress [ANY KEY] to go back to the Start Menu..."
+        self.clear_display()
+        message = (f'\nPress {AppText.ANY_KEY} to go back to the Start Menu...')
         logo = textwrap.dedent(AppText.LOGO)
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
@@ -227,7 +228,6 @@ class MenuUtil():
             about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
             getch.pause(message)
-        self.clear_display()
         self.clear_display()
         return False
 
@@ -256,7 +256,7 @@ class MenuUtil():
         user and fetches the data from the API. Python-tabulate is used to
         display the data in table format.
         """
-        print("Processing Request....")
+        print(AppText.PROCESSING)
         option = self.get_menu_option(self.MAIN_MENU, main_sel)
         if option == "comp_teams":
             data = self.client.competitions.get_competition_teams()
@@ -282,7 +282,7 @@ class MenuUtil():
         self.print_data(data, header)
 
     def print_data(self, data: list, header: str):
-        message = "\nPress [ANY KEY] to go back to the main menu.."
+        message = f'\nPress {AppText.ANY_KEY} to go back to the main menu..'
 
         if data and len(data) >= 20:
             for items, current_page, pages in self.paginate(data):
@@ -293,11 +293,13 @@ class MenuUtil():
                 print(table)
                 print(f'\nPage {current_page} of {pages}')
                 if current_page == pages:
-                    print ("Press [ANY KEY] to go back to the main menu..")
+                    print (
+                        f'Press {AppText.ANY_KEY} to go back to the main menu..'
+                        )
                 else:
                     print(
-                        "Press [ANY KEY] to continue or [Q] to go back to "
-                        "main menu.."
+                        f'Press {AppText.ANY_KEY} for next page or {AppText.Q} '
+                        "for main menu.."
                     )
                 if self.paginate_navigate():
                     break
