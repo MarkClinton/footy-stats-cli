@@ -136,6 +136,11 @@ class MenuUtil():
         return title
 
     def get_screen_info(self, identifier: str) -> str:
+        """
+        Returns the string to be displayed on a screen
+
+        :params identifier: the menu name
+        """
         if identifier == self.MAIN_MENU:
             user_choice = (
                 f'{AppText.GREEN}{self.league_choice} ' 
@@ -218,7 +223,7 @@ class MenuUtil():
         """
         self.clear_display()
         message = (f'\nPress {AppText.ANY_KEY} to go back to the Start Menu...')
-        logo = textwrap.dedent(AppText.LOGO)
+        logo = AppText.LOGO
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
             print(logo + help_message)
