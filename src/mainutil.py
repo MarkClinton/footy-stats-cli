@@ -3,9 +3,9 @@ This class handles creating and displaying menu's for the end user
 """
 import os
 from typing import Generator
+import getch
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
-import getch
 from .apptext import AppText
 
 
@@ -53,7 +53,7 @@ class MenuUtil():
             menu_entries=menu_options,
             title=title,
             menu_cursor="> ",
-            menu_cursor_style=("fg_yellow", "bold"),
+            menu_cursor_style=("fg_yellow", "bg_yellow", "bold"),
             cycle_cursor=True,
             clear_screen=False,
         )
