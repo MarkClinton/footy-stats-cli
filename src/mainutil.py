@@ -55,7 +55,6 @@ class MenuUtil():
             title=title,
             menu_cursor="> ",
             menu_cursor_style=("fg_green", "bold"),
-            menu_highlight_style=("bg_gray","fg_black", "bold"),
             cycle_cursor=True,
             clear_screen=False,
         )
