@@ -59,14 +59,14 @@ Click {term.bold_lightgreen}[Q/ESC]{term.normal} to exit the app.
 Footy Stats CLI uses the keyboard to navigate menu options. See the
 cheatsheet below on how to use Footy Stats CLI:
 
-{term.bold_lightyellow}[UP/DOWN]{term.normal}: Navigate menu items.
-{term.bold_lightyellow}[ENTER]{term.normal}: Select the option and either display 
+{term.bold_yellow}[UP/DOWN]{term.normal}: Navigate menu items.
+{term.bold_yellow}[ENTER]{term.normal}: Select the option and either display 
 the data you have chosen or progress to the next menu.
-{term.bold_lightyellow}[Q/ESC]{term.normal}: Click [Q] or [ESC] on the keyboard to 
+{term.bold_yellow}[Q/ESC]{term.normal}: Click [Q] or [ESC] on the keyboard to 
 either go back to the previous menu or exit the program 
 depending on what menu screen you are on. Clicking [Q] or 
 [ESC] on the Start Menu screen will exit the program.
-{term.bold_lightyellow}[ANY KEY]{term.normal}: Progress the app
+{term.bold_yellow}[ANY KEY]{term.normal}: Progress the app
                 """)
 
     ABOUT_MESSAGE = (f"""
