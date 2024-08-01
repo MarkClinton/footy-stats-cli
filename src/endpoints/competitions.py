@@ -3,7 +3,6 @@ This is a class that will get the competition data
 Only deals with the info needed to call the competitions endpoint
 """
 from datetime import datetime
-from getch import pause
 from .baseendpoint import BaseEndPoint
 from .endpointutil import EndpointUtil
 
@@ -28,7 +27,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
         response = self.request(self.BASE_COMPETITIONS_RESOURCE)
         if response.status_code != 200:
             print("Oops sorry, " + response.json()["message"])
-            pause()
             return False
         else:
             return (
@@ -64,7 +62,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
         response = self.request(self.BASE_COMPETITIONS_RESOURCE, "teams")
         if response.status_code != 200:
             print("Oops sorry, " + response.json()["message"])
-            pause()
             return False
         else:
             return (
