@@ -16,7 +16,6 @@ class Teams(BaseEndPoint, EndpointUtil):
 
     def get_teams_matches(self) -> list:
         """ Get a list of all matches a team played in a given season """
-
         response = self.request(self.BASE_TEAMS_RESOURCE, "matches")
         if response.status_code != 200:
             return [response.json()]

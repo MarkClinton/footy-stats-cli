@@ -7,7 +7,6 @@ from src import endpoints
 from src.baseclient import BaseClient
 
 
-
 class APIClient(BaseClient):
     """
     The API Client that handles all the API operations. Accepts parameters

@@ -5,7 +5,6 @@ endpoint classes i.e competitions.request() or competitions.process_request()
 Deals with the getting and processing of the data
 It uses BaseClient as the parent class to get headers for the request
 """
-
 import requests
 from src.baseclient import BaseClient
 
@@ -24,12 +23,15 @@ class BaseEndPoint:
         :param parent: BaseClient class
         """
         # When APIClient class creates an instanse of BaseEndPoint
-        # (Competitions) it passes an instance of itself and we set self.client
+        # Competitions it passes an instance of itself and we set self.client
         # to the instance of BaseClient
         self.client = parent
 
-    def request(self, resource: str,
-                subresource: str = None) -> requests.Response:
+    def request(
+            self,
+            resource: str,
+            subresource: str = None
+    ) -> requests.Response:
         """
         Request and fetch data from the endpoint
 
@@ -79,5 +81,4 @@ class BaseEndPoint:
         :param response: The response from the request
         :param data: the object in the JSON
         """
-
         return response.json().get(data)

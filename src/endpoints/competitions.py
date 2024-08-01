@@ -2,7 +2,6 @@
 This is a class that will get the competition data
 Only deals with the info needed to call the competitions endpoint
 """
-
 from datetime import datetime
 from getch import pause
 from .baseendpoint import BaseEndPoint
@@ -146,6 +145,7 @@ class Competitions(BaseEndPoint, EndpointUtil):
         :params team_data: list of teams with team data
         """
         teams = []
+
         for t in team_data:
             team = {
                 "Team": t["name"],
@@ -153,7 +153,6 @@ class Competitions(BaseEndPoint, EndpointUtil):
                 "Stadium": t["venue"]
             }
             teams.append(team)
-
         return teams
 
     @staticmethod
@@ -164,13 +163,13 @@ class Competitions(BaseEndPoint, EndpointUtil):
         :params team_data: list of teams with team data
         """
         teams = []
+
         for t in team_data:
             team = {
                 "ID": t["id"],
                 "Team": t["name"]
             }
             teams.append(team)
-
         return teams
 
     @staticmethod

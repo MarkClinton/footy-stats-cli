@@ -26,8 +26,10 @@ class EndpointUtil():
                 score = f'{home_score}-{away_score}'
 
             format_date = datetime.strptime(m["utcDate"], '%Y-%m-%dT%H:%M:%SZ')
-            match_date = (f'{format_date.day}/{format_date.month}/'
-            f'{format_date.year}')
+            match_date = (
+                f'{format_date.day}/{format_date.month}/'
+                f'{format_date.year}'
+            )
 
             match = {
                 "Date": match_date,
