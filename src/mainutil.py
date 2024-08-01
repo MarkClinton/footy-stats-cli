@@ -204,9 +204,7 @@ class MenuUtil():
                     if not self.handle_start_menu(menu_sel):
                         return self.display_menu(self.START_MENU)
             case self.SEASON_MENU:
-                season = self.get_menu_option(
-                    identifier, menu_sel, seasons
-                    )
+                season = self.get_menu_option(identifier, menu_sel, seasons)
                 self.client.season = season
             case self.TEAM_MENU:
                 self.client.team = self.get_menu_option(
