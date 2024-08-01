@@ -2,9 +2,8 @@
 The main file that deals with the overall running of the app.
 Instantiates a new APIClient to which we can call all endpoints
 """
-from tabulate import tabulate
-from .apiclient import APIClient
-from .mainutil import MenuUtil
+from src.apiclient import APIClient
+from src.mainutil import MenuUtil
 
 
 class Main(MenuUtil):
@@ -15,12 +14,16 @@ class Main(MenuUtil):
     Creates a new APIClient when intialized.
     """
 
-    def __init__(self): 
+    def __init__(self):
         # Initialize a default APIClient
         self.client = APIClient("PL")
         self.start()
 
     def start(self):
+        """
+        Start of the program. Calls each menu option and progresses as 
+        needed.
+        """
         menu_show = True
         while menu_show:
             menu_show = self.display_menu("start")
@@ -34,4 +37,3 @@ class Main(MenuUtil):
                         if not self.display_menu("main"):
                             break
         self.finish()
-

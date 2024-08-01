@@ -2,8 +2,6 @@
 This is a class that will get the Team data
 Only deals with the info needed to call the team endpoint
 """
-
-from getch import pause
 from .baseendpoint import BaseEndPoint
 from .endpointutil import EndpointUtil
 

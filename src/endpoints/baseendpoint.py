@@ -7,7 +7,7 @@ It uses BaseClient as the parent class to get headers for the request
 """
 
 import requests
-from ..baseclient import BaseClient
+from src.baseclient import BaseClient
 
 
 class BaseEndPoint:
@@ -37,7 +37,12 @@ class BaseEndPoint:
         :param subresource: the name of the object in the json response
         """
         uri, params = self.url_builder(resource, subresource)
-        response = requests.get(uri, headers=self.client.header, params=params)
+        response = requests.get(
+                        uri,
+                        headers=self.client.header,
+                        params=params,
+                        timeout=60
+                    )
         return response
 
     def url_builder(self, resource: str, subresource: str) -> list:
@@ -57,7 +62,7 @@ class BaseEndPoint:
                 )
                 params["competition"] = self.client.league
             case "competitions":
-                if (subresource):
+                if subresource:
                     uri = (
                         f'{self.client.url}{resource}/{self.client.league}/'
                         f'{subresource}'

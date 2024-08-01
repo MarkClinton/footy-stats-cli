@@ -23,29 +23,29 @@ class AppText():
     TEAM_TITLE = "Select a team below to view their fixtures/results:\n"
     START_TITLE = "Select an option below:\n"
 
-    LEAGUE_ABOUT = (f"""
+    LEAGUE_ABOUT = f"""
 Footy Stats CLI has 5 League options to choose from.
 
 Click {ESC} to go back to start menu.
-                    """)
+                    """
 
-    MAIN_ABOUT = (f"""
+    MAIN_ABOUT = f"""
 Footy Stats CLI has 5 main options to choose from. 
 
 Click {ESC} to go back to season menu.
-                """)
+                """
 
-    SEASON_ABOUT = (f"""
+    SEASON_ABOUT = f"""
 Footy Stats CLI shows up to 5 seasons worth of historical data.
 
 Click {ESC} to go back to league menu.
-                    """)
+                    """
 
-    TEAM_ABOUT = (f"""
+    TEAM_ABOUT = f"""
 Click {ESC} to go back to main menu.
-                """)
+                """
 
-    START_ABOUT = (f"""
+    START_ABOUT = f"""
 Footy Stats CLI is an application for all football related data. Using the
 Football-Data API to gather data about Leagues, Fixtures/Results, Teams
 and Goalscorers.
@@ -55,9 +55,9 @@ Navigate the app using the keyboard.
 Click the Help option below for more info.
 
 Click {ESC}to exit the app.
-                """)
+                """
 
-    HELP_MESSAGE = (f"""
+    HELP_MESSAGE = f"""
 Footy Stats CLI uses the keyboard to navigate menu options. See the
 cheatsheet below on how to use Footy Stats CLI:
 
@@ -69,9 +69,9 @@ either go back to the previous menu or exit the program
 depending on what menu screen you are on. Clicking [Q] or 
 [ESC] on the Start Menu screen will exit the program.
 {ANY_KEY}: Progress the app when prompted.
-                """)
+                """
 
-    ABOUT_MESSAGE = (f"""
+    ABOUT_MESSAGE = f"""
 Footy Stats CLI is a command line interface application built using Python.
 It utilises the API from {term.link('https://www.football-data.org/', 
 'football-data.org')} to supply all the data.
@@ -81,12 +81,12 @@ It utilises the API from {term.link('https://www.football-data.org/',
 Leagues: Premier League, Ligue 1, La Liga, Bundesliga, Serie A
 Seasons: From 2020 onwards.
 Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
-                    """)
+                    """
 
-    LOGO = (f"""{term.bold_lightgreen}
+    LOGO = f"""{term.bold_lightgreen}
    ____        __         ______       __        _______   ____
   / ___/_ ___ / /___ __  / __/ /____ _/ /____   / ___/ /  /  _/
  / _// _ / _ / __/ // / _\ \/ __/ _ `/ __(_-<  / /__/ /___/ /  
 /_/  \___\___\__/\_, / /___/\__/\_,_/\__/___/  \___/____/___/  
                 /___/ {term.normal}
-            """)
+            """

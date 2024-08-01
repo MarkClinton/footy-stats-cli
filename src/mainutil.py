@@ -6,7 +6,7 @@ from typing import Generator
 import getch
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
-from .apptext import AppText
+from src.apptext import AppText
 
 
 class MenuUtil():
@@ -29,7 +29,7 @@ class MenuUtil():
             {"code": "teams_matches", "option": "Show Teams Fixtures/Results"},
             {"code": "comp_goalscorers", "option": "Show Top 10 Goalscorers"}
         ]
-    
+
     START_MENU_OPTIONS = [
         {"code": "start", "option": "Start"},
         {"code": "help", "option": "Help"},
@@ -60,7 +60,7 @@ class MenuUtil():
         return menu
 
     def create_menu(
-        self, 
+        self,
         identifier: str,
         menu_data: str = None
     ) -> TerminalMenu:
@@ -75,7 +75,9 @@ class MenuUtil():
             case self.MAIN_MENU:
                 data = [menu["option"] for menu in self.MAIN_MENU_OPTIONS]
             case self.LEAGUE_MENU:
-                data = [league["option"] for league in self.LEAGUE_MENU_OPTIONS]
+                data = [
+                    league["option"] for league in self.LEAGUE_MENU_OPTIONS
+                ]
             case self.START_MENU:
                 data = [start["option"] for start in self.START_MENU_OPTIONS]
             case self.SEASON_MENU:
@@ -87,8 +89,8 @@ class MenuUtil():
         return self.menu(data, title)
 
     def get_menu_option(
-        self, 
-        identifier: str, 
+        self,
+        identifier: str,
         pos: int,
         menu_data: list = None
     ) -> str:
@@ -142,7 +144,7 @@ class MenuUtil():
         """
         if identifier == self.MAIN_MENU:
             user_choice = (
-                f'{AppText.GREEN}{self.league_choice} ' 
+                f'{AppText.GREEN}{self.league_choice} '
                 f'Season {self.season_choice}{AppText.NORMAL}'
             )
             about = AppText.MAIN_ABOUT + user_choice
@@ -154,7 +156,6 @@ class MenuUtil():
             about = AppText.SEASON_ABOUT
         elif identifier == self.TEAM_MENU:
             about = AppText.TEAM_ABOUT
-
         return about
 
     def display_menu(self, identifier: str) -> bool:
@@ -181,7 +182,7 @@ class MenuUtil():
             menu = self.create_menu(identifier)
 
         self.clear_display()
-        if identifier != "team":
+        if identifier != self.TEAM_MENU:
             print(AppText.LOGO)
         print(self.get_screen_info(identifier))
         menu_sel = menu.show()
@@ -204,7 +205,7 @@ class MenuUtil():
                         return self.display_menu(self.START_MENU)
             case self.SEASON_MENU:
                 season = self.get_menu_option(
-                    identifier, menu_sel,seasons
+                    identifier, menu_sel, seasons
                     )
                 self.client.season = season
             case self.TEAM_MENU:
@@ -215,14 +216,14 @@ class MenuUtil():
 
     def handle_start_menu(self, sel: int) -> bool:
         """
-        Functionality for the start menu. Depending on the selection show the 
+        Functionality for the start menu. Depending on the selection show the
         corresponding information. Returns false to signal to show the start
         menu again.
 
         :param sel: int of the users menu selection
         """
         self.clear_display()
-        message = (f'\nPress {AppText.ANY_KEY} to go back to the start menu...')
+        message = f'\nPress {AppText.ANY_KEY} to go back to the start menu..'
         logo = AppText.LOGO
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
@@ -253,7 +254,6 @@ class MenuUtil():
         logo = AppText.LOGO
         message = "\nThanks for using Footy Stats CLI.\n"
         title = logo + message
-
         print(title)
 
     def fetch_data(self, main_sel: str):
@@ -291,13 +291,20 @@ class MenuUtil():
         elif option == "comp_goalscorers":
             data = self.client.competitions.get_competition_goalscorers()
             header = (
-                f'{AppText.GREEN}Top 10 {self.league_choice}' 
-                f' Goalscorers {self.season_choice}{AppText.NORMAL}'
+                f'{AppText.GREEN}Top 10 {self.league_choice} '
+                f'Goalscorers {self.season_choice}{AppText.NORMAL}'
             )
         self.clear_display()
         self.print_data(data, header)
 
     def print_data(self, data: list, header: str):
+        """
+        Accepts a list of data, string of header to display on screen.
+        Processes the data and prints to screen.
+
+        :params data: list of data
+        :params header: identifier str of the data printed
+        """
         message = f'\nPress {AppText.ANY_KEY} to go back to the main menu..'
 
         if data and len(data) >= 20:
@@ -309,31 +316,34 @@ class MenuUtil():
                 print(table)
                 print(f'\nPage {current_page} of {pages}')
                 if current_page == pages:
-                    print (
-                        f'Press {AppText.ANY_KEY} to go back to the main menu..'
-                        )
+                    print(
+                        f'Press {AppText.ANY_KEY} to go back to the '
+                        f'main menu..'
+                    )
                 else:
                     print(
-                        f'Press {AppText.ANY_KEY} for next page or {AppText.Q} '
-                        "for main menu.."
+                        f'Press {AppText.ANY_KEY} for next page or '
+                        f'{AppText.Q} for main menu..'
                     )
                 if self.paginate_navigate():
                     break
                 self.clear_display()
                 self.clear_display()
         elif data:
-            table = tabulate(data, headers="keys",tablefmt="simple")
+            table = tabulate(data, headers="keys", tablefmt="simple")
             print(header)
             print(table)
             getch.pause(message)
         else:
-            table = tabulate(data, headers=["No Data Found"],tablefmt="simple")
+            table = tabulate(
+                    data, headers=["No Data Found"], tablefmt="simple"
+                    )
             print(header)
             print(table)
             getch.pause(message)
 
     def paginate(
-            self, 
+            self,
             data: list
     ) -> Generator[tuple[list, int, int], None, None]:
         """
@@ -348,10 +358,10 @@ class MenuUtil():
         for d in range(0, len(data), results_per_page):
             page = (d // results_per_page) + 1
             yield data[d:d + results_per_page], page, total_pages
-    
+
     def paginate_navigate(self) -> bool:
-        """ 
-        Returns boolean to determine if the user wants to continue 
+        """
+        Returns boolean to determine if the user wants to continue
         to the next page or exit
         """
         char = getch.getch()
