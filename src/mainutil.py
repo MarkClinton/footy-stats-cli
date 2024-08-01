@@ -3,16 +3,14 @@ This class handles creating and displaying menu's for the end user
 """
 import os
 from typing import Generator
-import getch
+from blessed import Terminal
 from tabulate import tabulate
 from simple_term_menu import TerminalMenu
 from src.apptext import AppText
 
 
 class MenuUtil():
-    """
-    Mixin class to handle all menu functionality
-    """
+    """ Mixin class to handle all menu functionality """
 
     LEAGUE_MENU_OPTIONS = [
             {"code": "PL", "option": "Premier League"},
@@ -41,6 +39,8 @@ class MenuUtil():
     MAIN_MENU = "main"
     SEASON_MENU = "season"
     TEAM_MENU = "team"
+
+    term = Terminal()
 
     def menu(self, menu_options: list, title: str) -> TerminalMenu:
         """
@@ -221,17 +221,17 @@ class MenuUtil():
         :param sel: int of the users menu selection
         """
         self.clear_display()
-        message = f'\nPress {AppText.ANY_KEY} to go back to the start menu..'
+        message = f'\nPress {AppText.ENTER} to go back to the start menu..'
         logo = AppText.LOGO
         if sel == 1:
             help_message = AppText.HELP_MESSAGE
             print(logo + help_message)
-            getch.pause(message)
+            self.user_enter_action(message)
             return False
         elif sel == 2:
             about_message = AppText.ABOUT_MESSAGE
             print(logo + about_message)
-            getch.pause(message)
+            self.user_enter_action(message)
             return False
         self.clear_display()
         return True
@@ -245,6 +245,37 @@ class MenuUtil():
         :param k: the key of the dict value
         """
         return [d[k] for d in data]
+
+    def user_enter_action(self, message: str):
+        """
+        Displays to the user a message and accepts only valid input. 
+
+        :param message: message to display before validating input.
+        """
+        print(message)
+        with self.term.cbreak():
+            val = self.term.inkey()
+            while val.name != 'KEY_ENTER':
+                print(AppText.ERROR_INPUT)
+                val = self.term.inkey()
+
+    def user_enter_or_action(self) -> bool:
+        """
+        Returns boolean to determine if the user wants to continue
+        to the next page or exit. Used on results that are paginated.
+        Print error message if input is not valid.
+        """
+        valid = ['KEY_ENTER', 'q']
+        with self.term.cbreak():
+            val = self.term.inkey()
+            while val.name not in (valid):
+                if val.name == 'KEY_ENTER':
+                    return False
+                elif val.lower() == 'q':
+                    return True
+                else:
+                    print(AppText.ERROR_INPUT)
+                    val = self.term.inkey()
 
     def finish(self) -> str:
         """ Builds string to display when the user exits the application """
@@ -303,8 +334,7 @@ class MenuUtil():
         :params data: list of data
         :params header: identifier str of the data printed
         """
-        message = f'\nPress {AppText.ANY_KEY} to go back to the main menu..'
-
+        message = f'\nPress {AppText.ENTER} to go back to the main menu..'
         if data and len(data) >= 20:
             for items, current_page, pages in self.paginate(data):
                 table = tabulate(
@@ -315,15 +345,15 @@ class MenuUtil():
                 print(f'\nPage {current_page} of {pages}')
                 if current_page == pages:
                     print(
-                        f'Press {AppText.ANY_KEY} to go back to the '
+                        f'Press {AppText.ENTER} to go back to the '
                         f'main menu..'
                     )
                 else:
                     print(
-                        f'Press {AppText.ANY_KEY} for next page or '
+                        f'Press {AppText.ENTER} for next page or '
                         f'{AppText.Q} for main menu..'
                     )
-                if self.paginate_navigate():
+                if self.user_enter_or_action():
                     break
                 self.clear_display()
                 self.clear_display()
@@ -331,14 +361,14 @@ class MenuUtil():
             table = tabulate(data, headers="keys", tablefmt="simple")
             print(header)
             print(table)
-            getch.pause(message)
+            self.user_enter_action(message)
         else:
             table = tabulate(
                     data, headers=["No Data Found"], tablefmt="simple"
                     )
             print(header)
             print(table)
-            getch.pause(message)
+            self.user_enter_action(message)
 
     def paginate(
             self,
@@ -356,17 +386,6 @@ class MenuUtil():
         for d in range(0, len(data), results_per_page):
             page = (d // results_per_page) + 1
             yield data[d:d + results_per_page], page, total_pages
-
-    def paginate_navigate(self) -> bool:
-        """
-        Returns boolean to determine if the user wants to continue
-        to the next page or exit
-        """
-        char = getch.getch()
-        if char == 'q':
-            self.clear_display()
-            return True
-        return False
 
     def clear_display(self):
         """ Determines the OS. Clears the terminal screen. """

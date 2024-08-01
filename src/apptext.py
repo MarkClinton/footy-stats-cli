@@ -11,7 +11,9 @@ class AppText():
     term = Terminal()
 
     PROCESSING = f'{term.blink("Processing Request...")}'
-    ANY_KEY = f'{term.bold_yellow}[ANY KEY]{term.normal}'
+    ERROR_INPUT = (
+        f'{term.red}Sorry thats not a valid action{term.normal}'
+    )
     Q = f'{term.bold_yellow}[Q]{term.normal}'
     GREEN = f'\n{term.bold_lightgreen}'
     NORMAL = f'{term.normal}\n'
@@ -69,7 +71,7 @@ the data you have chosen or progress to the next menu.
 either go back to the previous menu or exit the program
 depending on what menu screen you are on. Clicking [Q] or
 [ESC] on the Start Menu screen will exit the program.
-{ANY_KEY}: Progress the app when prompted.
+{ENTER}: when prompted, the app will ask to click Enter to progress
                 """
 
     ABOUT_MESSAGE = f"""
