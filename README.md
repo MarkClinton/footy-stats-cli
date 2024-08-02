@@ -285,5 +285,54 @@ Used in the BaseEndPoint() class to make requests to the API.
 - ### Helpful Links
 
 - ### Acknowledgments 
+    - Thanks to my mentor [Juliia](https://github.com/IuliiaKonovalova) for all the help along the way with this project. 
+    - A special shoutout to my girlfriend Aoife who helped keep me sane during this project. 
 
 ## Bugs
+
+ - ### Persistent Print on Heroku
+ There was an issue where if the content I was printing to the terminal was greater than 24 rows in length, the cutoff of the
+ content would persistantly be displayed throughout the program. Although it would be hidden, the user could still scroll up
+ and see this. Since the program prints a lot of data to the screen and refreshes what the user should see it was an issue. 
+
+ ![Persistent Print on Heroku](documentation/imagery/bugs/print_persist.gif)
+
+**Cause**: The cause of this was due to the 'clear' command only clearing what was visible on the screen. If the content was 
+30 rows in height, it would leave 6 rows of content in the scrollback buffer. 
+
+ **Solution**: The fix for this was to introduce the following snippet of code in the clearDisplay() method.
+ ``` 
+ print("\033[3J\033[H\033[2J", end='')
+        os.sys.stdout.flush()
+```
+It prints a combination of ANSI escape codes to the terminal which clears the scrollback buffer, moves cursor to the top left corner
+and clears the entire terminal. 
+
+- ### Using getch.pause() to accept user input
+The pause() function from the python library [getch](https://pypi.org/project/getch/) was originally used to accept keyboard input
+from the user to progress the app i.e. "Click Any Key to go back to Start Menu". An example of this behaviour can be found
+when viewing paginated data and using an arrow key to move to the next page. It skips 3 pages. 
+
+ ![Arrow Key input](documentation/imagery/bugs/arrowkey_input_bug.gif)
+
+**Cause**: The pause() function doesnt handle arrow keys as input very well. It doesnt clean or decode the arrow key input. This meant it was 
+filling the input buffer with 3 inputs every time it was used with the pause() method.
+
+ **Resolution**: Blessed was already being used to add colour to text. Blessed also had functionality to handle keyboard input. I created
+ 2 methods called ```user_enter_action``` and ```user_enter_or_action```. Utilizing Blessed's keyboard input functionality, ```user_enter_action```
+ only accepts enter as an input and throws a warning onscreen when enter is not selected. ```user_enter_or_action``` method was created
+ to handle input on paginated screens. It needed to have 2 options, either Enter for the next page or Q to go back to main menu. It also throws 
+ a warning onscreen it the keyboard input isnt one of those values
+
+ - ### Menu content half prints to screen when menu is used
+ There was an issue when using blessed to introduce color to the program. 
+
+![Title Coloured Text](documentation/imagery/bugs/print_on_menu_select.gif)
+
+ **Cause**: The cause of this issue was using coloured text in the title of TerminalMenu(). For whatever reason it didnt like this. 
+
+ **Resolution**: The fix for this was to move the majority of the screen content out of the title of a TerminalMenu() and not use
+ coloured text in the title. This meant some refactoring to acheive the same functionality. 
+
+
+
