@@ -278,6 +278,47 @@ Used in the BaseEndPoint() class to make requests to the API.
 
 ## Deployment
 
+- ## Deployment To Heroku
+    - Login into [Heroku](https://id.heroku.com/login) and sign in or sign up if you dont have an account. 
+    - Click 'New' on the top right of the screen.
+    - Select 'Create New App'
+    - Enter a unique name for the application and choose the region most appropiate to your location.
+    - Click 'Create App'
+    - The app should now be created and you are viewing the Deploy screen.
+    - Click on the 'Settings' tab.
+    - Find the section called 'Config Vars'. Click 'Reveal Config Vars'.
+    - In the KEY field, enter 'FOOTBALL_DATA_API_KEY'
+    - In the VALUE field, enter your football-data API Key
+    - Click 'Add'
+    - You will need to add another 'Config Var'
+    - In the KEY field, enter 'PORT'
+    - In the VALUE field, enter '8000'
+    - Click 'Add'
+    - On the same page, navigate to the Buildpacks section.
+    - You will need to add two buildpacks.
+    - Click 'Add buildpack' and select the 'python' option. Click 'Add buildpack'
+    - Add another buildpack
+    - This time select 'nodejs' and click 'Add buildpack'
+    - Make sure the order of the buildpacks is heroku/python first then heroku/nodejs.
+    - Click the 'Deploy' tab at the top of the screen.
+    - Select 'Github' as the Deployment Method
+    - Search for the correct depository and click 'Connect'
+    - Choose either 'Enable Automatic Deploys' in the Automatic Deploys section or select 'Deploy Branch' in the Manual Deploy section
+    - Wait for the App to build and click 'View'
+
+- ## Deployment on a local machine
+    - Open the [Footy Stats CLI github](https://github.com/MarkClinton/footy-stats-cli) repository
+    - Select Code, choose HTTPS tab and clone the url. For more information see this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+    - Clone the repo to your local machine in a terminal window using ```git clone https://github.com/MarkClinton/footy-stats-cli.git```
+    - The next step is optional if you dont want to add the libraries to your local machine
+        - ```cd``` to the root of the cloned project
+        - Create a virtual env folder inside the root directory
+        - Use the command ```python3 -m venv env``` to create an env folder
+        - Add the env folder to your .gitignore
+        - Run the command ```source env/bin/activate``` to activate the virtual environment
+    - Run the command ```"pip3 install -r requirements.txt"``` to install the requirements
+    - Run ```python3 run.py``` to run the program
+
 ## Credits
 
 - ### Resources
