@@ -256,6 +256,24 @@ else show the data. This should be updated in the future to use try/except.
 
 ## Libraries
 
+- ### [os](https://docs.python.org/3/library/os.html)
+Used for both clearing the display by determining what os is being used to print the right call and to get the secret key.
+- ### [typing](https://docs.python.org/3/library/typing.html) 
+Used for describe the correct function annotation for paginate method in MainUtil.
+- ### [datetime](https://docs.python.org/3/library/datetime.html)
+Used in both Competitions() and EndpointUtil() class to format date data returned from API.
+- ### [blessed](https://pypi.org/project/blessed/) 
+Used in both AppText() and MenuUtil(). In AppText blessed it used to add colour to strings. In MenuUtil blessed is used 
+to accept the correct keyboard input by using the inkey() method.
+- ### [tabulate](https://pypi.org/project/tabulate/) 
+Used in the MainUtil() class. It formats the list of data returned from the API into a table. 
+- ### [simple term menu](https://pypi.org/project/simple-term-menu/) 
+Used in the MainUtil() class. It creates a menu with the neccessary information. 
+- ### [dotenv](https://pypi.org/project/python-dotenv/)
+Used in the BaseClient() class. Using the load_dotenv() to read the key value of the secret key.
+- ### [requests](https://pypi.org/project/requests/)
+Used in the BaseEndPoint() class to make requests to the API. 
+
 ## Testing
 
 ## Deployment
