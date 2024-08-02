@@ -446,6 +446,3 @@ filling the input buffer with 3 inputs every time it was used with the pause() m
 
  **Solution**: The fix for this was to move the majority of the screen content out of the title of a TerminalMenu() and not use
  coloured text in the title. This meant some refactoring to achieve the same functionality. 
-
-
-
