@@ -281,8 +281,28 @@ Used in the BaseEndPoint() class to make requests to the API.
 ## Credits
 
 - ### Resources
+    - [football-data.org](https://www.football-data.org/)
+    - [EZGif](https://ezgif.com/)
+    - [StackOverflow](https://stackoverflow.com/)
+    - [Love Sandwiches](https://github.com/MarkClinton/love-sandwiches)
+    - [CodeInstitute Python Essentials Module](https://codeinstitute.net/ie/)
+    - [Corey Schafer Youtube Channel](https://youtu.be/ZDa-Z5JzLYM)
 
 - ### Helpful Links
+    - [Working with JSON data in Python](https://realpython.com/python-json/)
+    - [Weather API tutorial in Python](https://www.youtube.com/watch?v=9P5MY_2i7K8)
+    - [Working with API's in Python](https://www.youtube.com/watch?v=-oPuGc05Lxs)
+    - [Consuming Web API's with Python](https://itnext.io/consuming-web-apis-with-python-fa9b751d2c75)
+    - [How to use Web APIs in python3](https://www.digitalocean.com/community/tutorials/how-to-use-web-apis-in-python-3)
+    - [How to Hide API Keys in Python: An Environment Variables Example](https://www.youtube.com/watch?v=FrQ46MPSpUs&t=1s)
+    - [PP3 Batlleships](https://github.com/dnlbowers/battleships)
+    - [Python: Inheritance versus Composition ](https://stackoverflow.com/questions/20847727/python-inheritance-versus-composition)
+    - [Unpack list of dicts](https://teamtreehouse.com/community/unpacking-challenge-how-do-you-unpack-within-a-list-of-dictionaries)
+    - [Sort by dict values](https://www.youtube.com/watch?v=OY9AULPtLIU)
+    - [Request librabry with REST API](https://blog.networktocode.com/post/using-python-requests-with-rest-apis/)
+    - [Clear console in python](https://www.delftstack.com/howto/python/python-clear-console/)
+    - [Yield in python for pagination](https://www.geeksforgeeks.org/use-yield-keyword-instead-return-keyword-python/)
+    - [Betfair API Wrapper](https://github.com/betcode-org/betfair) 
 
 - ### Acknowledgments 
     - Thanks to my mentor [Juliia](https://github.com/IuliiaKonovalova) for all the help along the way with this project. 
@@ -318,7 +338,7 @@ when viewing paginated data and using an arrow key to move to the next page. It 
 **Cause**: The pause() function doesnt handle arrow keys as input very well. It doesnt clean or decode the arrow key input. This meant it was 
 filling the input buffer with 3 inputs every time it was used with the pause() method.
 
- **Resolution**: Blessed was already being used to add colour to text. Blessed also had functionality to handle keyboard input. I created
+ **Solution**: Blessed was already being used to add colour to text. Blessed also had functionality to handle keyboard input. I created
  2 methods called ```user_enter_action``` and ```user_enter_or_action```. Utilizing Blessed's keyboard input functionality, ```user_enter_action```
  only accepts enter as an input and throws a warning onscreen when enter is not selected. ```user_enter_or_action``` method was created
  to handle input on paginated screens. It needed to have 2 options, either Enter for the next page or Q to go back to main menu. It also throws 
@@ -331,7 +351,7 @@ filling the input buffer with 3 inputs every time it was used with the pause() m
 
  **Cause**: The cause of this issue was using coloured text in the title of TerminalMenu(). For whatever reason it didnt like this. 
 
- **Resolution**: The fix for this was to move the majority of the screen content out of the title of a TerminalMenu() and not use
+ **Solution**: The fix for this was to move the majority of the screen content out of the title of a TerminalMenu() and not use
  coloured text in the title. This meant some refactoring to acheive the same functionality. 
 
 
