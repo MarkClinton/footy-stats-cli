@@ -80,6 +80,65 @@ some project planning and initial concepts.
   - [Research](documentation/documents/Footy_Stats_Research.pdf)
   - [Initial Concept](documentation/documents/Footy_Stats_Initial_Concept.pdf)
 
+## Architecture
+Before starting this project I spent some time researching python applications to get a sense 
+of how best to approach the code. I didnt want a solution where everything was relying on 
+run.py. I knew with what I wanted to acheive this could get messy and pose a lot of problems. 
+Having used OOP from past experiences I wanted to incorporate those principals into
+this project. I knew about this [GitHub repository](https://github.com/betcode-org/betfair) 
+from Betfair. I was interested to see how they structured their code as it was similar in
+the approach I wanted to take. Essentially, in the Betfair code they are making a call to 
+an endpoint and receiving and displaying data. There is a lot of other functionality happening
+with it that I wasnt concerned about. 
+
+Using what I learnt from that codebase I applied a similar approach to my application. 
+The class that handles everything to start a request is the APIClient(). APIClient is a 
+child of BaseClient(). Initiliazing the APIClient() instance in main.py ```self.client = APIClient("PL")```
+will init() the parent BaseClient() using super_init() passing the value of "PL" as the league.
+
+In the init() of APIClient() it also creates an instance of the Competitions() and Team()
+by passing a reference of self. The Competitions and Teams class, inheriting from
+BaseEndPoint() calls the BaseEndPoints init(). BaseEndPoint then sets the instance variable 
+self.client to be a reference to BaseClient() using the APIClient() instance. Each class
+encapsulates its own behaviour and data
+
+The approach uses both Inheritance and Composition to acheive this. Inheritance is 
+described as a "is a" relationship where Composition is described as a "has a" relationship.
+
+- APIClient() **is a** child of BaseClient()
+- Competitions() and Teams() **is a** child of BaseEndPoint()
+- Competitions() and Teams() **has a** reference to the APIClient()
+- BaseEndPoint() **has a** reference to BaseClient() (Through child APIClient())
+
+The benefits of taking this approach makes the application more robust and flexible.
+Having classes that handle independent functionlaity makes it easier to maintain and update. 
+
+- **APIClient()**: This class is used to create an instance using the input from the user. 
+As the user progresses in the program we can set instance variables of the users choices. It only
+handles setting the instance variables needed from the user to make request. 
+- **BaseClient()**: This class handles everything thats needed to build a request. It defines
+the URL, gets the secret key and creates the header. It has getter that can be used by other classes. 
+- **BaseEndPoint()**: This class deals with making the requests to the API. It has a URL builder method
+which uses varibales from BaseClient() to build the correct url. It also has a method to make the request
+and a method to process the response. 
+- **Competitions()**: This class only handles functionality related to the competitions endpoint. It has methods
+to get the data and clean the data as needed. It utilizes its parent BaseEndPoint() for requests. 
+- **Teams()**: This class only handles functionality related to the teams endpoint. It has methods
+for getting and cleaning the data as needed. 
+
+Having clearly defined functionality in seperate classes allows the program to be more flexible.
+Using encapsulation where each class has its own brhaviour and data makes it easier to use and 
+easier to maintain without having to update a lot of the codebase For example, the football-data api has 
+another endpoint called People. To introduce this into the current program would be as easy as creating 
+a new person class similar to Competitions() and Teams(). It can utilize the BaseEndPoint to make requests.
+
+Thats the core architecture of the program. There are other concepts introduced to make it easier to maintain:
+
+- **MainUtil()**: MainUtil is a mixin which handles the logic of the menus. Its used by main.py
+- **EndpointUtil()**: EndpointUtil is also a mixin which handles functionality shared by Competitions()
+and Teams()
+- **AppText()**: AppText is a simple class that holds a number of class variables which define the text used 
+throughout the menu screens. Its seperated from MainUtil to make the code easier to maintain. 
 
 ## Features
 
