@@ -89,18 +89,18 @@ Leagues: Premier League, Ligue 1, La Liga, Bundesliga, Serie A
 Seasons: From 2020 onwards.
 Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
                     """
-    
-#Formatted this way to comply with PEP8. Throwing a Invalid escape sequence 'x' 
-# (W605) otherwise - https://www.flake8rules.com/rules/W605.html
+
+# Formatted this way to comply with PEP8. Throwing a Invalid escape sequence
+# 'x' (W605) otherwise - https://www.flake8rules.com/rules/W605.html
     LOGO = (
         f'{term.bold_lightgreen}'
         r"""
- _____           _           ____  _        _          ____ _     ___
-|  ___|__   ___ | |_ _   _  / ___|| |_ __ _| |_ ___   / ___| |   |_ _|
-| |_ / _ \ / _ \| __| | | | \___ \| __/ _` | __/ __| | |   | |    | |
-|  _| (_) | (_) | |_| |_| |  ___) | || (_| | |_\__ \ | |___| |___ | |
-|_|  \___/ \___/ \__|\__, | |____/ \__\__,_|\__|___/  \____|_____|___|
-                     |___/
+    ______            __           _____ __        __          ________    ____
+   / ____/___  ____  / /___  __   / ___// /_____ _/ /______   / ____/ /   /  _/
+  / /_  / __ \/ __ \/ __/ / / /   \__ \/ __/ __ `/ __/ ___/  / /   / /    / /
+ / __/ / /_/ / /_/ / /_/ /_/ /   ___/ / /_/ /_/ / /_(__  )  / /___/ /____/ /
+/_/    \____/\____/\__/\__, /   /____/\__/\__,_/\__/____/   \____/_____/___/
+                      /____/
         """
         f'{term.normal}'
     )

@@ -69,7 +69,7 @@ seen below:
 To get a better understanding of how the program would flow and fit together for 
 the end user I created a wireframe using [Lucid Charts](https://www.lucidchart.com/pages/?)
 
-![wireframe](documentation/imagery/images/Footy_Stats_CLI_wireframe.png)
+![wireframe](documentation/imagery/images/footy_stats_cli_wireframe.png)
 
 - ## Research
 I took notes when researching this project. Different potential projects for usings an 
@@ -77,8 +77,8 @@ API. The core idea was to always use an api and manipulate and display data to t
 user. The question was, what sort of data that would be. The links below show
 some project planning and initial concepts. 
 
-  - [Research](documentation/documents/Footy_Stats_Research.pdf)
-  - [Initial Concept](documentation/documents/Footy_Stats_Initial_Concept.pdf)
+  - [Research](documentation/documents/footy_stats_research.pdf)
+  - [Initial Concept](documentation/documents/footy_stats_initial_concept.pdf)
 
 ## Architecture
 Before starting this project I spent some time researching python applications to get a sense 
@@ -323,7 +323,7 @@ All files pass the [CI Python Linter](https://pep8ci.herokuapp.com/#) with no er
 I kept getting the following error for the ASCII logo [Invalid escape sequence 'x' (W605)](https://www.flake8rules.com/rules/W605.html).
 The way its currently formatted is to comply with PEP8.
 
-See the results of each file here.
+See the results of each file [here](documentation/imagery/validator_images/).
 
 
 ## Deployment
