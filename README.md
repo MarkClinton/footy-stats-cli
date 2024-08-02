@@ -111,13 +111,13 @@ described as a "is a" relationship where Composition is described as a "has a" r
 - BaseEndPoint() **has a** reference to BaseClient() (Through child APIClient())
 
 The benefits of taking this approach makes the application more robust and flexible.
-Having classes that handle independent functionlaity makes it easier to maintain and update. 
+Having classes that handle independent functionality makes it easier to maintain and update. 
 
 - **APIClient()**: This class is used to create an instance using the input from the user. 
 As the user progresses in the program we can set instance variables of the users choices. It only
 handles setting the instance variables needed from the user to make request. 
 - **BaseClient()**: This class handles everything thats needed to build a request. It defines
-the URL, gets the secret key and creates the header. It has getter that can be used by other classes. 
+the URL, gets the secret key and creates the header. It has getter methods that can be used by other classes. 
 - **BaseEndPoint()**: This class deals with making the requests to the API. It has a URL builder method
 which uses varibales from BaseClient() to build the correct url. It also has a method to make the request
 and a method to process the response. 
@@ -127,8 +127,8 @@ to get the data and clean the data as needed. It utilizes its parent BaseEndPoin
 for getting and cleaning the data as needed. 
 
 Having clearly defined functionality in seperate classes allows the program to be more flexible.
-Using encapsulation where each class has its own brhaviour and data makes it easier to use and 
-easier to maintain without having to update a lot of the codebase For example, the football-data api has 
+Using encapsulation where each class has its own behaviour and data makes it easier to use and 
+easier to maintain without having to update a lot of the codebase. For example, the football-data api has 
 another endpoint called People. To introduce this into the current program would be as easy as creating 
 a new person class similar to Competitions() and Teams(). It can utilize the BaseEndPoint to make requests.
 
@@ -229,32 +229,43 @@ the program displays a warning message saying "Sorry, thats not a valid action. 
 
 
 
-### Future Features
+### Future Development
+There are a number of features I wanted to introduce but did not have the time or was restricted in creating. 
 
-## Technologies
+- ## More Seasons
+The football-data api has more seasons than what is displayed in the program. The reason we limit it to 5 is the 
+subscription I have only has access to 5 seasons. Updating the subscription would allow the program to use every season
+available for each league.
 
-### Languages
+- ## More Leagues
+Same again, the restrictions of the Leagues is due to the limits of the access token being used. Updating the subscription
+to football-data would allow the program to get more data from more leagues. 
 
+- ## Display More Data
+Due to the limits of the terminal wisth used on Heroku, the data displayed had to be carefully selected. Not all the data
+I wanted to display could fit into the terminal window. 
 
-### Other Tools
+- ## Ability for users to enter their own football-data access token
+A user who already has an access token for football-data should have the ability to input their access token. This would
+allow for more flexibility. A user could have a different subscription to football-data than the program uses allowing them to see
+more data.
 
+- ## Try/Except
+Currently the program handles response status codes using if/else. if the response status code is not 200 then display a message.
+else show the data. This should be updated in the future to use try/except. 
 
-## Deployment
-
+## Libraries
 
 ## Testing
+
+## Deployment
 
 ## Credits
 
 - ### Resources
- 
-
-- ### Media
 
 - ### Helpful Links
 
-
 - ### Acknowledgments 
-
 
 ## Bugs
