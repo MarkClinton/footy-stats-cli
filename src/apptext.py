@@ -12,7 +12,8 @@ class AppText():
 
     PROCESSING = f'{term.blink("Processing Request...")}'
     ERROR_INPUT = (
-        f'{term.red}Sorry thats not a valid action{term.normal}'
+        f'{term.red}Sorry, thats not a valid action. '
+        f'Please try again{term.normal}'
     )
     Q = f'{term.bold_yellow}[Q]{term.normal}'
     GREEN = f'\n{term.bold_lightgreen}'
