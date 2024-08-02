@@ -229,28 +229,28 @@ the program displays a warning message saying "Sorry, thats not a valid action. 
 
 
 
-### Future Development
+## Future Development
 There are a number of features I wanted to introduce but did not have the time or was restricted in creating. 
 
-- ## More Seasons
+- ### More Seasons
 The football-data api has more seasons than what is displayed in the program. The reason we limit it to 5 is the 
 subscription I have only has access to 5 seasons. Updating the subscription would allow the program to use every season
 available for each league.
 
-- ## More Leagues
+- ### More Leagues
 Same again, the restrictions of the Leagues is due to the limits of the access token being used. Updating the subscription
 to football-data would allow the program to get more data from more leagues. 
 
-- ## Display More Data
+- ### Display More Data
 Due to the limits of the terminal wisth used on Heroku, the data displayed had to be carefully selected. Not all the data
 I wanted to display could fit into the terminal window. 
 
-- ## Ability for users to enter their own football-data access token
+- ### Ability for users to enter their own football-data access token
 A user who already has an access token for football-data should have the ability to input their access token. This would
 allow for more flexibility. A user could have a different subscription to football-data than the program uses allowing them to see
 more data.
 
-- ## Try/Except
+- ### Try/Except
 Currently the program handles response status codes using if/else. if the response status code is not 200 then display a message.
 else show the data. This should be updated in the future to use try/except. 
 
