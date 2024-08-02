@@ -275,7 +275,9 @@ Used in the BaseClient() class. Using the load_dotenv() to read the key value of
 - ### [requests](https://pypi.org/project/requests/)
 Used in the BaseEndPoint() class to make requests to the API. 
 
-## Manual Testing
+## Testing
+
+### Manual Testing
 
 The following manual testing is done in chronological order as a user progress through the app
 and the actions they take and what result they should see.
@@ -314,6 +316,11 @@ and the actions they take and what result they should see.
 | When viewing data from the main menu on a non paginated screen| ----------- |
 | Any keyboard input other than Enter  | Warning message is shown        | Pass  |
 | Enter keyboard input  | Display next page        | Pass    |
+
+### PEP8
+All files pass the [CI Python Linter](https://pep8ci.herokuapp.com/#) with no errors.
+
+See the results of each file here.
 
 
 ## Deployment
@@ -388,6 +395,7 @@ and the actions they take and what result they should see.
 - ### Acknowledgments 
     - Thanks to my mentor [Juliia](https://github.com/IuliiaKonovalova) for all the help along the way with this project. 
     - A special shoutout to my girlfriend Aoife who helped keep me sane during this project. 
+    - Thanks to [CodeInstitute](https://codeinstitute.net/ie/) who created the web terminal to display this Python project.
 
 ## Bugs
 

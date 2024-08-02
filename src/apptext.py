@@ -66,16 +66,16 @@ Footy Stats CLI uses the keyboard to navigate menu options. See the
 cheatsheet below on how to use Footy Stats CLI:
 
 {UP_DOWN}: Navigate menu items. Menu's are cyclical. Pressing down on the
-last menu item will navigate to the first menu item. 
-{ESC}: On menu screens, pressing either Q or ESC will navigate back to the 
-previous menu screen. Allowing you to choose different criteria to display, 
+last menu item will navigate to the first menu item.
+{ESC}: On menu screens, pressing either Q or ESC will navigate back to the
+previous menu screen. Allowing you to choose different criteria to display,
 e.g. different Leagues or different Seasons
 {ENTER}: The Enter key is used to select a menu item. Once selected the program
-will either show a menu screen or display data depending where you are in the 
-program. Enter can also be used when prompted, the app will ask you to click 
+will either show a menu screen or display data depending where you are in the
+program. Enter can also be used when prompted, the app will ask you to click
 Enter to progress.
-{Q}: Q, on its own, when viewing data from the main menu will navigate back to 
-the main menu. This option is used when the data displayed is paginated. 
+{Q}: Q, on its own, when viewing data from the main menu will navigate back to
+the main menu. This option is used when the data displayed is paginated.
                 """
 
     ABOUT_MESSAGE = f"""
@@ -90,10 +90,12 @@ Seasons: From 2020 onwards.
 Data: Teams, League Table, Fixtures & Results, Top 10 Goalscorers
                     """
 
-    LOGO = f"""{term.bold_lightgreen}
+    LOGO = (
+        f"""{term.bold_lightgreen}
    ____        __         ______       __        _______   ____
   / ___/_ ___ / /___ __  / __/ /____ _/ /____   / ___/ /  /  _/
- / _// _ / _ / __/ // / _\ \/ __/ _ `/ __(_-<  / /__/ /___/ /  
-/_/  \___\___\__/\_, / /___/\__/\_,_/\__/___/  \___/____/___/ 
-                /___/ {term.normal}
-            """
+ / _// _ / _ / __/ // / _\ \/ __/ _ `/ __(_-<  / /__/ /___/ /
+/_/  \___\___\__/\_, / /___/\__/\_,_/\__/___/  \___/____/___/
+                /___/ 
+{term.normal}"""
+)

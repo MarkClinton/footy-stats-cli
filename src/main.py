@@ -21,7 +21,7 @@ class Main(MenuUtil):
 
     def start(self):
         """
-        Start of the program. Calls each menu option and progresses as 
+        Start of the program. Calls each menu option and progresses as
         needed.
         """
         menu_show = True

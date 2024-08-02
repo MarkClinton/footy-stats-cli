@@ -248,7 +248,7 @@ class MenuUtil():
 
     def user_enter_action(self, message: str):
         """
-        Displays to the user a message and accepts only valid input. 
+        Displays to the user a message and accepts only valid input.
 
         :param message: message to display before validating input.
         """

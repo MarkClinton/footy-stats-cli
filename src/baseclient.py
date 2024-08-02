@@ -16,8 +16,8 @@ class BaseClient:
     VERSION = "v4"
 
     def __init__(
-            self, 
-            league: str = None, 
+            self,
+            league: str = None,
             season: str = None,
             team: int = None
     ):
