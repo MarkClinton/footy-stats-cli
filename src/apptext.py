@@ -65,14 +65,17 @@ Click {ESC}to exit the app.
 Footy Stats CLI uses the keyboard to navigate menu options. See the
 cheatsheet below on how to use Footy Stats CLI:
 
-{UP_DOWN}: Navigate menu items.
-{ENTER}: Select the option and either display
-the data you have chosen or progress to the next menu.
-{ESC}: Click [Q] or [ESC] on the keyboard to
-either go back to the previous menu or exit the program
-depending on what menu screen you are on. Clicking [Q] or
-[ESC] on the Start Menu screen will exit the program.
-{ENTER}: when prompted, the app will ask to click Enter to progress
+{UP_DOWN}: Navigate menu items. Menu's are cyclical. Pressing down on the
+last menu item will navigate to the first menu item. 
+{ESC}: On menu screens, pressing either Q or ESC will navigate back to the 
+previous menu screen. Allowing you to choose different criteria to display, 
+e.g. different Leagues or different Seasons
+{ENTER}: The Enter key is used to select a menu item. Once selected the program
+will either show a menu screen or display data depending where you are in the 
+program. Enter can also be used when prompted, the app will ask you to click 
+Enter to progress.
+{Q}: Q, on its own, when viewing data from the main menu will navigate back to 
+the main menu. This option is used when the data displayed is paginated. 
                 """
 
     ABOUT_MESSAGE = f"""

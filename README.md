@@ -10,6 +10,33 @@ the [football-data.org](https://www.football-data.org/) API. The aim of this app
 is to give value to the underlying API. Allowing end users to easily access, display 
 and find the relevant information they need about a league, club or particular season. 
 
+## How To: Program Instructions
+The program itself is simple to use. It utilizes the keyboard to navigate,
+select and display data. Breakdown of controls:
+
+- **[UP/DOWN ARROW KEYS]**: Navigate menu items. Menu's are cyclical. Pressing down on the
+last menu item will navigate to the first menu item. 
+- **[ESC/Q]**: On menu screens, pressing either Q or ESC will navigate back to the previous 
+menu screen. Allowing you to choose different criteria to display, e.g. different Leagues
+or different Seasons
+- **[ENTER]**: The Enter key is used to select a menu item. Once selected the program
+will either show a menu screen or display data depending where you are in the program.
+Enter can also be used when prompted, the app will ask the user to click Enter to progress.
+- **[Q]**: Q, on its own, when viewing data from the main menu will navigate back to the main
+manu. This option is used when the data displayed is paginated. 
+
+## User Stories 
+
+As a user, I want to be able to:
+
+- Be guided through the program clearly.
+- Feel comfortable with what I have to do next to use the program how I want.
+- See the information I have asked for.
+- Always have the option to navigate back if I need to.
+- Seek help where appropiate.
+- Know what it is I am viewing.
+- Be prompted if I have done something wrong. 
+
 ## Design
 I wanted the initial design for the application to intuitive to the user and easy
 to navigate. The approach for the design was always "User First". To keep in mind
