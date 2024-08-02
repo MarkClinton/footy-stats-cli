@@ -320,6 +320,9 @@ and the actions they take and what result they should see.
 ### PEP8
 All files pass the [CI Python Linter](https://pep8ci.herokuapp.com/#) with no errors.
 
+I kept getting the following error for the ASCII logo [Invalid escape sequence 'x' (W605)](https://www.flake8rules.com/rules/W605.html).
+The way its currently formatted is to comply with PEP8.
+
 See the results of each file here.
 
 
@@ -375,6 +378,7 @@ See the results of each file here.
     - [Love Sandwiches](https://github.com/MarkClinton/love-sandwiches)
     - [CodeInstitute Python Essentials Module](https://codeinstitute.net/ie/)
     - [Corey Schafer Youtube Channel](https://youtu.be/ZDa-Z5JzLYM)
+    - [ASCII Text Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
 
 - ### Helpful Links
     - [Working with JSON data in Python](https://realpython.com/python-json/)
