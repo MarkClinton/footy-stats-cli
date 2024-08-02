@@ -2,14 +2,13 @@
 
 Live site: [Footy Stats CLI](https://footy-stats-cli-7fb9beca2387.herokuapp.com/)
 
-![Main image](documentation/images/start_screen.png)
+![Main image](documentation/imagery/images/main_image.png)
 
 ## About
 Footy Stats CLI is a command line interface tool built using Python. It utilises 
 the [football-data.org](https://www.football-data.org/) API. The aim of this application 
 is to give value to the underlying API. Allowing end users to easily access, display 
 and find the relevant information they need about a league, club or particular season. 
-
 
 ## Design
 I wanted the initial design for the application to intuitive to the user and easy
@@ -24,17 +23,35 @@ want, see the data and go back to the main menu. The cycling menu feature saves
 time for a user they can quickly get from the last menu option to the first menu 
 option with one click. 
 
-- ### Colour Scheme 
+- ### Inspiration
+The idea behind how Footy Stats CLI should function and feel borrowed inspiration 
+from the oldschool Teletext. Simply put, Teletext was the standard for displaying 
+text and graphics on television sets. Its a nostalgic, childhood memory of checking
+football scores on a saturday afternoon before the internet was made publicly 
+available in Ireland. [More about Teletext](https://en.wikipedia.org/wiki/Teletext)
 
+- ### Imagery 
+The colors used in Footy Stats CLI are bright and visiually striking. The 
+bright colors implemented in Footy Stats CLI were to mimic those found in Teletext,
+seen below: 
 
-- ### Imagery
-
-- ### Typography 
-
+![Teletext1](documentation/imagery/images/teletext1.png)
+![Teletext2](documentation/imagery/images/teletext2.png)
 
 - ### Wireframes
+To get a better understanding of how the program would flow and fit together for 
+the end user I created a wireframe using [Lucid Charts](https://www.lucidchart.com/pages/?)
 
-## Target Audience
+![wireframe](documentation/imagery/images/Footy_Stats_CLI_wireframe.png)
+
+- ## Research
+I took notes when researching this project. Different potential projects for usings an 
+API. The core idea was to always use an api and manipulate and display data to the end
+user. The question was, what sort of data that would be. The links below show
+some project planning and initial concepts. 
+
+  - [Research](documentation/documents/Footy_Stats_Research.pdf)
+  - [Initial Concept](documentation/documents/Footy_Stats_Initial_Concept.pdf)
 
 
 ## Features
