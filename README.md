@@ -274,7 +274,46 @@ Used in the BaseClient() class. Using the load_dotenv() to read the key value of
 - ### [requests](https://pypi.org/project/requests/)
 Used in the BaseEndPoint() class to make requests to the API. 
 
-## Testing
+## Manual Testing
+
+The following manual testing is done in chronological order as a user progress through the app
+and the actions they take and what result they should see.
+
+| Test      | Outcome | Result  |
+| ----------- | ----------- | ----------- |
+| Load Application on Heroku     | Start screen displayed       | Pass    |
+| Up/Down Arrow Key   | Moves through menu        | Pass            |
+| Any other keyboard input   | Doesnt illicit any action        | Pass    |
+| Select Help option   | Help screen is shown        | Pass            |
+| Any keyboard input other than Enter   | Warning message is shown        | Pass   |
+| Enter key   | Navigate back to start menu        | Pass            |
+| Select About option   | About screen is displayed        | Pass    |
+| Any keyboard input other than Enter   | Warning message is shown        | Pass  |
+| Enter key   | Navigate back to start menu        | Pass            |
+| Select Start option   | League menu is displayed        | Pass     |
+| Up/Down Arrow Key   | Moves through menu        | Pass      |
+| Any other keyboard input   | Doesnt illicit any action        | Pass    |
+| Select any League option   | Show Seasons list        | Pass     |
+| Up/Down Arrow Key   | Moves through menu        | Pass    |
+| Any other keyboard input   | Doesnt illicit any action        | Pass  |
+| Select any Season option   | Show Main menu        | Pass   |
+| Up/Down Arrow Key   | Moves through menu        | Pass            |
+| Any other keyboard input   | Doesnt illicit any action        | Pass   |
+| Pressing Q or ESC when viewing Menu Screen   | Navigate back to the previous menu       | Pass    |
+| Select Show All Teams option   | Display the Teams data        | Pass    |
+| Select League Table option   | Display the League Table data        | Pass    |
+| Select Show All Fixtures/ Results option   | Display the Fixtures/Results data        | Pass   |
+| Select Show Teams Fixtures/ Results option   | Display the Teams Fixtures/results data        | Pass   |
+| Select Show Top 10 Goalscorers option   | Display the Top 10 Goalscorers data        | Pass   |
+| If no data is present in the API for a current season| Display a message sorry no data found        | Pass  |
+| When viewing data from the main menu on a paginated screen|-----------|
+| Any keyboard input other than Enter or Q  | Warning message is shown        | Pass  |
+| Enter keyboard input  | Display next page        | Pass   |
+| Q keyboard input  | Back to main menu        | Pass    |
+| When viewing data from the main menu on a non paginated screen| ----------- |
+| Any keyboard input other than Enter  | Warning message is shown        | Pass  |
+| Enter keyboard input  | Display next page        | Pass    |
+
 
 ## Deployment
 
